@@ -619,13 +619,13 @@ In brothels galore`
             const getCurrentStop = () => {
                 const now = new Date();
                 
-                // For testing: Check if it's November 4, 2025
+                // For testing: Check if it's November 6, 2025
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 
-                // Only activate on November 4, 2025
-                if (year !== 2025 || month !== 10 || day !== 4) {
+                // Only activate on November 6, 2025
+                if (year !== 2025 || month !== 10 || day !== 6) {
                     return null;
                 }
 
@@ -1351,6 +1351,32 @@ In brothels galore`
                         {activeTab === 'mailing' && <MailingListPage />}
                         {activeTab === 'afterparty' && <AfterPartyPage />}
                     </div>
+
+                    {/* Sticky Status Bar - Only shows during event when Santa is at a stop */}
+                    {currentStop && (
+                        <div className={`fixed left-0 right-0 ${currentStop.isLeavingSoon ? 'bg-orange-600' : 'bg-red-600'} text-white shadow-lg z-40`}
+                             style={{ bottom: '80px' }}>
+                            <div className="max-w-2xl mx-auto px-4 py-3">
+                                <div className="flex items-center justify-between text-sm">
+                                    <div className="flex items-center">
+                                        <i className="fas fa-map-marker-alt mr-2"></i>
+                                        <span className="font-bold">
+                                            {currentStop.isLeavingSoon ? '🎅 SANTA LEAVING SOON!' : '🎅 SANTA AT:'}
+                                        </span>
+                                        <span className="ml-2">{scheduleData[currentStop.index]?.title || scheduleData[currentStop.index]?.venue}</span>
+                                    </div>
+                                    <div className="flex items-center text-xs">
+                                        {currentStop.index < scheduleData.length - 1 && (
+                                            <>
+                                                <i className="fas fa-arrow-right mr-1"></i>
+                                                <span>Next: {scheduleData[currentStop.index + 1]?.title || scheduleData[currentStop.index + 1]?.venue}</span>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Bottom Navigation */}
                     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg">
