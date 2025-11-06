@@ -641,16 +641,6 @@ In brothels galore`
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, [activeTab]);
 
-            // Scroll to top when opening/closing accordion sections
-            useEffect(() => {
-                if (expandedAbout !== null) {
-                    // Small delay to let the accordion open, then scroll to top
-                    setTimeout(() => {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }, 100);
-                }
-            }, [expandedAbout]);
-
             const handleSubscribe = async (e) => {
                 e.preventDefault();
                 setSubscribeStatus('Subscribing...');
@@ -848,9 +838,16 @@ In brothels galore`
                     </div>
 
                     {/* What is SantaCon */}
-                    <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                    <div id="section-what" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                         <button
-                            onClick={() => setExpandedAbout(expandedAbout === 'what' ? null : 'what')}
+                            onClick={(e) => {
+                                setExpandedAbout(expandedAbout === 'what' ? null : 'what');
+                                if (expandedAbout !== 'what') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-what')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
                             className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex justify-between items-center">
@@ -885,9 +882,16 @@ In brothels galore`
                     </div>
 
                     {/* SantaCon's History */}
-                    <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                    <div id="section-history" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                         <button
-                            onClick={() => setExpandedAbout(expandedAbout === 'history' ? null : 'history')}
+                            onClick={() => {
+                                setExpandedAbout(expandedAbout === 'history' ? null : 'history');
+                                if (expandedAbout !== 'history') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-history')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
                             className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex justify-between items-center">
@@ -935,9 +939,16 @@ In brothels galore`
                     </div>
 
                     {/* Boulder's SantaCon */}
-                    <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                    <div id="section-boulder" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                         <button
-                            onClick={() => setExpandedAbout(expandedAbout === 'boulder' ? null : 'boulder')}
+                            onClick={() => {
+                                setExpandedAbout(expandedAbout === 'boulder' ? null : 'boulder');
+                                if (expandedAbout !== 'boulder') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-boulder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
                             className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex justify-between items-center">
@@ -976,9 +987,16 @@ In brothels galore`
                     </div>
 
                     {/* Santa's Rules */}
-                    <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                    <div id="section-rules" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                         <button
-                            onClick={() => setExpandedAbout(expandedAbout === 'rules' ? null : 'rules')}
+                            onClick={() => {
+                                setExpandedAbout(expandedAbout === 'rules' ? null : 'rules');
+                                if (expandedAbout !== 'rules') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-rules')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
                             className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex justify-between items-center">
