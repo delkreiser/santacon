@@ -636,6 +636,21 @@ In brothels galore`
                 return () => clearInterval(interval);
             }, []);
 
+            // Scroll to top when changing tabs
+            useEffect(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, [activeTab]);
+
+            // Scroll to top when opening/closing accordion sections
+            useEffect(() => {
+                if (expandedAbout !== null) {
+                    // Small delay to let the accordion open, then scroll to top
+                    setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 100);
+                }
+            }, [expandedAbout]);
+
             const handleSubscribe = async (e) => {
                 e.preventDefault();
                 setSubscribeStatus('Subscribing...');
