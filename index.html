@@ -1066,6 +1066,60 @@ In brothels galore`
                             </div>
                         )}
                     </div>
+
+                    {/* What to Bring? */}
+                    <div id="section-bring" className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                        <button
+                            onClick={() => {
+                                setExpandedAbout(expandedAbout === 'bring' ? null : 'bring');
+                                if (expandedAbout !== 'bring') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-bring')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
+                            className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
+                        >
+                            <div className="flex justify-between items-center">
+                                <div className="flex-1">
+                                    <h2 className="text-2xl font-bold text-red-700 mb-2">
+                                        <i className="fas fa-shopping-bag mr-2"></i>
+                                        What to Bring?
+                                    </h2>
+                                    <p className="text-gray-700">
+                                        Be prepared for Boulder SantaCon!
+                                    </p>
+                                </div>
+                                <i className={`fas fa-chevron-${expandedAbout === 'bring' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
+                            </div>
+                        </button>
+                        {expandedAbout === 'bring' && (
+                            <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
+                                <ul className="space-y-3 text-gray-700">
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>Valid ID</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>Cash (some bars get busy)</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>Gifts! Nice gifts for kids, "naughty" gifts for adults!</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>Layers, gloves, hand warmers, etc. Santa will be outside!</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>"Water" bottle</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        )}
+                    </div>
                 </div>
             );
 
