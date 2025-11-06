@@ -581,6 +581,39 @@ In brothels galore`
             const [expandedStop, setExpandedStop] = useState(null);
             const [currentStop, setCurrentStop] = useState(null);
             const [expandedAbout, setExpandedAbout] = useState(null);
+            const [countdown, setCountdown] = useState('');
+
+            // Calculate countdown to event
+            const calculateCountdown = () => {
+                const eventDate = new Date('2024-11-29T17:00:00'); // Nov 29, 2024, 5:00 PM
+                const now = new Date();
+                const diff = eventDate - now;
+
+                if (diff < 0) {
+                    return 'Event is happening NOW! 🎉';
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                if (days > 0) {
+                    return `In ${days} day${days !== 1 ? 's' : ''}`;
+                } else if (hours > 0) {
+                    return `Starting in ${hours} hour${hours !== 1 ? 's' : ''}!`;
+                } else {
+                    return 'Starting soon!';
+                }
+            };
+
+            // Update countdown every minute
+            useEffect(() => {
+                setCountdown(calculateCountdown());
+                const interval = setInterval(() => {
+                    setCountdown(calculateCountdown());
+                }, 60000); // Update every minute
+
+                return () => clearInterval(interval);
+            }, []);
 
             // Function to get current stop based on time
             const getCurrentStop = () => {
@@ -681,22 +714,65 @@ In brothels galore`
                             className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
                         />
                         
+                        {/* Countdown Timer */}
+                        <div className="mt-6 glass-effect rounded-lg shadow-xl p-4 max-w-md mx-auto">
+                            <div className="text-3xl font-bold text-red-700">
+                                🎅 {countdown} 🎅
+                            </div>
+                        </div>
+
+                        {/* Quick Info Banner */}
+                        <div className="mt-4 glass-effect rounded-lg shadow-xl p-4 max-w-2xl mx-auto">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+                                <div className="flex items-center">
+                                    <i className="fas fa-calendar-alt text-red-600 text-xl mr-3"></i>
+                                    <div>
+                                        <div className="font-bold text-gray-800 text-sm">Date</div>
+                                        <div className="text-gray-700">Friday, November 29, 2024</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center">
+                                    <i className="fas fa-clock text-red-600 text-xl mr-3"></i>
+                                    <div>
+                                        <div className="font-bold text-gray-800 text-sm">Time</div>
+                                        <div className="text-gray-700">5:00 PM - 1:00 AM</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center">
+                                    <i className="fas fa-map-marker-alt text-red-600 text-xl mr-3"></i>
+                                    <div>
+                                        <div className="font-bold text-gray-800 text-sm">Starting At</div>
+                                        <div className="text-gray-700">Avanti F&B</div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center">
+                                    <i className="fas fa-ticket-alt text-red-600 text-xl mr-3"></i>
+                                    <div>
+                                        <div className="font-bold text-gray-800 text-sm">Cost</div>
+                                        <div className="text-gray-700">FREE Crawl | $15-20 Party</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         {/* Social Media Buttons */}
-                        <div className="flex justify-center gap-4 mt-4">
+                        <div className="flex justify-center gap-4 mt-6">
                             <a 
                                 href="https://www.instagram.com/bouldersantacon" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="border-2 border-red-600 text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg"
+                                className="border-2 border-red-600 text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg flex items-center"
                             >
+                                <i className="fab fa-instagram mr-2"></i>
                                 Follow Santa
                             </a>
                             <a 
                                 href="https://www.facebook.com/events/1458481705240919" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="border-2 border-red-600 text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg"
+                                className="border-2 border-red-600 text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg flex items-center"
                             >
+                                <i className="fab fa-facebook-f mr-2"></i>
                                 RSVP
                             </a>
                         </div>
