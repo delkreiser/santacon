@@ -733,36 +733,9 @@ In brothels galore`
                             alt="Boulder SantaCon - The 19th Annual - Black Friday" 
                             className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
                         />
-
-                        {/* Quick Info Banner */}
-                        <div className="mt-6 glass-effect rounded-lg shadow-xl p-4 max-w-2xl mx-auto">
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
-                                <div className="flex items-center">
-                                    <i className="fas fa-calendar-alt text-red-600 text-xl mr-3"></i>
-                                    <div>
-                                        <div className="font-bold text-gray-800 text-sm">Date</div>
-                                        <div className="text-gray-700">Friday, November 29, 2025</div>
-                                    </div>
-                                </div>
-                                <div className="flex items-center">
-                                    <i className="fas fa-clock text-red-600 text-xl mr-3"></i>
-                                    <div>
-                                        <div className="font-bold text-gray-800 text-sm">Time</div>
-                                        <div className="text-gray-700">5:00 PM - 1:00 AM</div>
-                                    </div>
-                                </div>
-                                <div className="flex items-center">
-                                    <i className="fas fa-map-marker-alt text-red-600 text-xl mr-3"></i>
-                                    <div>
-                                        <div className="font-bold text-gray-800 text-sm">Starting At</div>
-                                        <div className="text-gray-700">Avanti F&B</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         
-                        {/* Social Media Buttons */}
-                        <div className="flex justify-center gap-4 mt-6">
+                        {/* Social Media & Calendar Buttons */}
+                        <div className="flex justify-center gap-3 mt-6 flex-wrap">
                             <a 
                                 href="https://www.instagram.com/bouldersantacon" 
                                 target="_blank" 
@@ -770,7 +743,7 @@ In brothels galore`
                                 className="border-2 border-red-600 text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg flex items-center"
                             >
                                 <i className="fab fa-instagram mr-2"></i>
-                                Follow Santa
+                                Follow
                             </a>
                             <a 
                                 href="https://www.facebook.com/events/1458481705240919" 
@@ -780,19 +753,6 @@ In brothels galore`
                             >
                                 RSVP
                             </a>
-                        </div>
-                    </div>
-
-                    <div className="glass-effect rounded-lg shadow-xl p-6">
-                        <h2 className="text-2xl font-bold text-red-700 mb-2 flex items-center">
-                            <i className="fas fa-calendar-alt mr-3"></i>
-                            Santa's Schedule
-                        </h2>
-                        <div className="flex items-center justify-between mb-4">
-                            <p className="text-gray-700">
-                                <i className="fas fa-calendar-day mr-2 text-red-600"></i>
-                                Friday, November 29, 2025
-                            </p>
                             <button
                                 onClick={() => {
                                     // Create .ics file content
@@ -802,8 +762,8 @@ PRODID:-//Boulder SantaCon//EN
 BEGIN:VEVENT
 UID:bouldersantacon2025@santarchy.app
 DTSTAMP:20251106T000000Z
-DTSTART:20251129T170000
-DTEND:20251130T010000
+DTSTART:20251128T170000
+DTEND:20251129T010000
 SUMMARY:Boulder SantaCon 2025
 DESCRIPTION:The 19th Annual Boulder SantaCon! Dress up as Santa and join us for a festive night through Boulder. Visit https://santarchy.app for schedule and details.
 LOCATION:Avanti F&B, 1401 Pearl St, Boulder, CO 80302
@@ -824,12 +784,23 @@ END:VCALENDAR`;
                                     document.body.removeChild(link);
                                     window.URL.revokeObjectURL(url);
                                 }}
-                                className="text-xs bg-red-600 text-white px-3 py-2 rounded-lg font-semibold hover:bg-red-700 transition flex items-center"
+                                className="border-2 border-red-600 text-red-600 px-6 py-3 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg flex items-center"
                             >
-                                <i className="fas fa-calendar-plus mr-1"></i>
-                                Add to Calendar
+                                <i className="fas fa-calendar-plus mr-2"></i>
+                                + Calendar
                             </button>
                         </div>
+                    </div>
+
+                    <div className="glass-effect rounded-lg shadow-xl p-6">
+                        <h2 className="text-2xl font-bold text-red-700 mb-2 flex items-center">
+                            <i className="fas fa-calendar-alt mr-3"></i>
+                            Santa's Schedule
+                        </h2>
+                        <p className="text-gray-700 mb-4">
+                            <i className="fas fa-calendar-day mr-2 text-red-600"></i>
+                            Friday, November 28, 2025
+                        </p>
                         <div className="space-y-3">
                             {scheduleData.map((stop, index) => {
                                 const isCurrentStopActive = currentStop?.index === index;
