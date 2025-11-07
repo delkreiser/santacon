@@ -191,10 +191,12 @@
         ];
 
         // Memoized ScheduleStop component to prevent re-renders from countdown
-        const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, setActiveTab, isCurrentStop, isLeavingSoon }) => (
+        const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, setActiveTab, isCurrentStop, isLeavingSoon, isPast, nextStop }) => (
             <div 
                 className={`rounded-lg border-2 overflow-hidden relative ${
+                    isCurrentStop && isLeavingSoon ? 'border-4 border-orange-400 shadow-2xl' :
                     isCurrentStop ? 'border-4 border-yellow-400 shadow-2xl' : 
+                    isPast ? 'border-gray-300' :
                     stop.isAfterParty ? 'border-red-500' : 'border-gray-200'
                 }`}
             >
@@ -209,7 +211,9 @@
                 <button
                     onClick={() => setExpandedStop(expandedStop === index ? null : index)}
                     className={`w-full p-4 text-left transition-colors ${
+                        isCurrentStop && isLeavingSoon ? 'bg-gradient-to-r from-orange-100 via-orange-200 to-orange-100' :
                         isCurrentStop ? 'bg-gradient-to-r from-yellow-100 via-yellow-200 to-yellow-100' :
+                        isPast ? 'bg-gray-100' :
                         stop.isAfterParty 
                             ? 'bg-gradient-to-r from-red-100 to-green-100' 
                             : 'bg-white hover:bg-gray-50'
@@ -217,18 +221,27 @@
                 >
                     <div className="flex justify-between items-center">
                         <div className="flex-1">
-                            <div className={`font-bold text-lg ${isCurrentStop ? 'text-red-700' : 'text-gray-800'}`}>
-                                {stop.time}
+                            {isPast && <i className="fas fa-check-circle text-green-600 mr-2"></i>}
+                            <div className={`font-bold text-lg ${
+                                isPast ? 'text-gray-500' :
+                                isCurrentStop && isLeavingSoon ? 'text-orange-700' :
+                                isCurrentStop ? 'text-red-700' : 'text-gray-800'
+                            }`}>
+                                {isPast ? '✓ ' : ''}{stop.time}
                             </div>
                             {stop.title ? (
                                 <>
                                     <div className={`${
+                                        isPast ? 'text-gray-500' :
+                                        isCurrentStop && isLeavingSoon ? 'text-orange-600 font-semibold' :
                                         isCurrentStop ? 'text-red-600 font-semibold' :
                                         stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-700 font-semibold'
                                     } mt-1`}>
                                         {stop.title}
                                     </div>
                                     <div className={`${
+                                        isPast ? 'text-gray-500' :
+                                        isCurrentStop && isLeavingSoon ? 'text-orange-600' :
                                         isCurrentStop ? 'text-red-600' :
                                         stop.isAfterParty ? 'text-red-700' : 'text-gray-600'
                                     } text-sm`}>
@@ -237,14 +250,21 @@
                                 </>
                             ) : (
                                 <div className={`${
+                                    isPast ? 'text-gray-500' :
+                                    isCurrentStop && isLeavingSoon ? 'text-orange-600 font-semibold' :
                                     isCurrentStop ? 'text-red-600 font-semibold' :
                                     stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-600'
                                 } mt-1`}>
                                     {stop.venue}
                                 </div>
                             )}
+                            {isCurrentStop && isLeavingSoon && nextStop && (
+                                <div className="mt-2 text-sm font-bold text-orange-700">
+                                    ⏰ LEAVING SOON! Next: {nextStop.title || nextStop.venue} ({nextStop.time.split(' - ')[0]})
+                                </div>
+                            )}
                         </div>
-                        <i className={`fas fa-chevron-${expandedStop === index ? 'up' : 'down'} text-gray-400 ml-2`}></i>
+                        <i className={`fas fa-chevron-${expandedStop === index ? 'up' : 'down'} ${isPast ? 'text-gray-400' : 'text-gray-400'} ml-2`}></i>
                     </div>
                 </button>
                 
@@ -619,13 +639,13 @@ In brothels galore`
             const getCurrentStop = () => {
                 const now = new Date();
                 
-                // For testing: Check if it's November 6, 2025
+                // For testing: Check if it's November 7, 2025
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 
-                // Only activate on November 6, 2025
-                if (year !== 2025 || month !== 10 || day !== 6) {
+                // Only activate on November 7, 2025
+                if (year !== 2025 || month !== 10 || day !== 7) {
                     return null;
                 }
 
@@ -764,23 +784,78 @@ In brothels galore`
                     </div>
 
                     <div className="glass-effect rounded-lg shadow-xl p-6">
-                        <h2 className="text-2xl font-bold text-red-700 mb-4 flex items-center">
+                        <h2 className="text-2xl font-bold text-red-700 mb-2 flex items-center">
                             <i className="fas fa-calendar-alt mr-3"></i>
                             Santa's Schedule
                         </h2>
+                        <div className="flex items-center justify-between mb-4">
+                            <p className="text-gray-700">
+                                <i className="fas fa-calendar-day mr-2 text-red-600"></i>
+                                Friday, November 29, 2025
+                            </p>
+                            <button
+                                onClick={() => {
+                                    // Create .ics file content
+                                    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Boulder SantaCon//EN
+BEGIN:VEVENT
+UID:bouldersantacon2025@santarchy.app
+DTSTAMP:20251106T000000Z
+DTSTART:20251129T170000
+DTEND:20251130T010000
+SUMMARY:Boulder SantaCon 2025
+DESCRIPTION:The 19th Annual Boulder SantaCon! Dress up as Santa and join us for a festive night through Boulder. Visit https://santarchy.app for schedule and details.
+LOCATION:Avanti F&B, 1401 Pearl St, Boulder, CO 80302
+URL:https://santarchy.app
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
+                                    
+                                    // Create blob and download
+                                    const blob = new Blob([icsContent], { type: 'text/calendar' });
+                                    const url = window.URL.createObjectURL(blob);
+                                    const link = document.createElement('a');
+                                    link.href = url;
+                                    link.download = 'boulder-santacon-2025.ics';
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                    window.URL.revokeObjectURL(url);
+                                }}
+                                className="text-xs bg-red-600 text-white px-3 py-2 rounded-lg font-semibold hover:bg-red-700 transition flex items-center"
+                            >
+                                <i className="fas fa-calendar-plus mr-1"></i>
+                                Add to Calendar
+                            </button>
+                        </div>
                         <div className="space-y-3">
-                            {scheduleData.map((stop, index) => (
-                                <ScheduleStop 
-                                    key={index}
-                                    stop={stop}
-                                    index={index}
-                                    expandedStop={expandedStop}
-                                    setExpandedStop={setExpandedStop}
-                                    setActiveTab={setActiveTab}
-                                    isCurrentStop={currentStop?.index === index}
-                                    isLeavingSoon={currentStop?.index === index && currentStop?.isLeavingSoon}
-                                />
-                            ))}
+                            {scheduleData.map((stop, index) => {
+                                const isCurrentStopActive = currentStop?.index === index;
+                                const isPastStop = currentStop && index < currentStop.index;
+                                const nextStopData = index < scheduleData.length - 1 ? scheduleData[index + 1] : null;
+                                
+                                // Auto-expand current stop
+                                if (isCurrentStopActive && expandedStop !== index) {
+                                    setTimeout(() => setExpandedStop(index), 100);
+                                }
+                                
+                                return (
+                                    <ScheduleStop 
+                                        key={index}
+                                        stop={stop}
+                                        index={index}
+                                        expandedStop={expandedStop}
+                                        setExpandedStop={setExpandedStop}
+                                        setActiveTab={setActiveTab}
+                                        isCurrentStop={isCurrentStopActive}
+                                        isLeavingSoon={currentStop?.index === index && currentStop?.isLeavingSoon}
+                                        isPast={isPastStop}
+                                        nextStop={nextStopData}
+                                    />
+                                );
+                            })}
                         </div>
                     </div>
 
@@ -1344,31 +1419,6 @@ In brothels galore`
                         {activeTab === 'mailing' && <MailingListPage />}
                         {activeTab === 'afterparty' && <AfterPartyPage />}
                     </div>
-
-                    {/* Sticky Status Bar - Only shows during event when Santa is at a stop */}
-                    {currentStop && (
-                        <div className={`fixed left-0 right-0 ${currentStop.isLeavingSoon ? 'bg-orange-600' : 'bg-red-600'} text-white shadow-lg z-40`}
-                             style={{ bottom: '80px' }}>
-                            <div className="max-w-2xl mx-auto px-4 py-3">
-                                <div className="flex items-center justify-between text-sm">
-                                    <div className="flex items-center">
-                                        <span className="font-bold">
-                                            {currentStop.isLeavingSoon ? '🎅🏻 SANTA LEAVING SOON!' : '🎅🏻 Santa @'}
-                                        </span>
-                                        <span className="ml-2">{scheduleData[currentStop.index]?.title || scheduleData[currentStop.index]?.venue}</span>
-                                    </div>
-                                    <div className="flex items-center text-xs">
-                                        {currentStop.index < scheduleData.length - 1 && (
-                                            <>
-                                                <i className="fas fa-arrow-right mr-1"></i>
-                                                <span>Next: {scheduleData[currentStop.index + 1]?.title || scheduleData[currentStop.index + 1]?.venue}</span>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
 
                     {/* Bottom Navigation */}
                     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg">
