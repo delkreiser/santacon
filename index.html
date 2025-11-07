@@ -713,16 +713,9 @@ In brothels galore`
                             alt="Boulder SantaCon - The 19th Annual - Black Friday" 
                             className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
                         />
-                        
-                        {/* Countdown Timer */}
-                        <div className="mt-6 glass-effect rounded-lg shadow-xl p-4 max-w-md mx-auto">
-                            <div className="text-3xl font-bold text-red-700">
-                                🎅 {countdown} 🎅
-                            </div>
-                        </div>
 
                         {/* Quick Info Banner */}
-                        <div className="mt-4 glass-effect rounded-lg shadow-xl p-4 max-w-2xl mx-auto">
+                        <div className="mt-6 glass-effect rounded-lg shadow-xl p-4 max-w-2xl mx-auto">
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
                                 <div className="flex items-center">
                                     <i className="fas fa-calendar-alt text-red-600 text-xl mr-3"></i>
@@ -1359,9 +1352,8 @@ In brothels galore`
                             <div className="max-w-2xl mx-auto px-4 py-3">
                                 <div className="flex items-center justify-between text-sm">
                                     <div className="flex items-center">
-                                        <i className="fas fa-map-marker-alt mr-2"></i>
                                         <span className="font-bold">
-                                            {currentStop.isLeavingSoon ? '🎅 SANTA LEAVING SOON!' : '🎅 SANTA AT:'}
+                                            {currentStop.isLeavingSoon ? '🎅🏻 SANTA LEAVING SOON!' : '🎅🏻 Santa @'}
                                         </span>
                                         <span className="ml-2">{scheduleData[currentStop.index]?.title || scheduleData[currentStop.index]?.venue}</span>
                                     </div>
