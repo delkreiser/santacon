@@ -227,13 +227,13 @@
                 >
                     <div className="flex justify-between items-center">
                         <div className="flex-1">
-                            {isPast && <i className="fas fa-check-circle text-green-600 mr-2"></i>}
-                            <div className={`font-bold text-lg ${
+                            <div className={`font-bold text-lg flex items-center ${
                                 isPast ? 'text-gray-500' :
                                 isCurrentStop && isLeavingSoon ? 'text-orange-700' :
                                 isCurrentStop ? 'text-red-700' : 'text-gray-800'
                             }`}>
-                                {isPast ? '✓ ' : ''}{stop.time}
+                                {isPast && <i className="fas fa-check-circle text-green-600 mr-2"></i>}
+                                {stop.time}
                             </div>
                             {stop.title ? (
                                 <>
@@ -701,6 +701,13 @@ In brothels galore`
                 return () => clearInterval(interval);
             }, []);
 
+            // Auto-expand current stop when it changes (but allow user to collapse/expand others)
+            useEffect(() => {
+                if (currentStop !== null) {
+                    setExpandedStop(currentStop.index);
+                }
+            }, [currentStop?.index]);
+
             // Scroll to top when changing tabs
             useEffect(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -747,7 +754,7 @@ In brothels galore`
                         />
                         
                         {/* Social Media & Calendar Buttons */}
-                        <div className="flex justify-center gap-3 mt-6 flex-wrap">
+                        <div className="flex justify-center gap-3 mt-6">
                             <a 
                                 href="https://www.instagram.com/bouldersantacon" 
                                 target="_blank" 
@@ -818,11 +825,6 @@ END:VCALENDAR`;
                                 const isCurrentStopActive = currentStop?.index === index;
                                 const isPastStop = currentStop && index < currentStop.index;
                                 const nextStopData = index < scheduleData.length - 1 ? scheduleData[index + 1] : null;
-                                
-                                // Auto-expand current stop
-                                if (isCurrentStopActive && expandedStop !== index) {
-                                    setTimeout(() => setExpandedStop(index), 100);
-                                }
                                 
                                 return (
                                     <ScheduleStop 
