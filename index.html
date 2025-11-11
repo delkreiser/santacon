@@ -614,6 +614,96 @@ In brothels galore`
             const [currentStop, setCurrentStop] = useState(null);
             const [expandedAbout, setExpandedAbout] = useState(null);
             const [countdown, setCountdown] = useState('');
+            
+            // Quest system state
+            const [badgeLegendExpanded, setBadgeLegendExpanded] = useState(false);
+            const [badges, setBadges] = useState(() => {
+                const saved = localStorage.getItem('santacon_badges');
+                return saved ? JSON.parse(saved) : {
+                    jollyLeader: false,
+                    giftGiver: false,
+                    paparazzi: false,
+                    marathonSanta: false,
+                    superSanta: false,
+                    boulderLegend: false
+                };
+            });
+            const [venueQuests, setVenueQuests] = useState(() => {
+                const saved = localStorage.getItem('santacon_venue_quests');
+                return saved ? JSON.parse(saved) : {
+                    hotelBoulderado: false,
+                    velvetElk: false,
+                    pizzaCalore: false,
+                    taco: false,
+                    jungle: false
+                };
+            });
+            const [challenges, setChallenges] = useState(() => {
+                const saved = localStorage.getItem('santacon_challenges');
+                return saved ? JSON.parse(saved) : {
+                    highFive10: false,
+                    groupPhoto: false,
+                    giveGift: false,
+                    findElf: false,
+                    singCarol: false,
+                    buyDrink: false,
+                    compliment5: false,
+                    congaLine: false,
+                    photoCop: false,
+                    visit3Stops: false,
+                    postSocial: false,
+                    boulderLegend: false
+                };
+            });
+
+            // Venue quest data
+            const venueQuestData = [
+                {
+                    id: 'hotelBoulderado',
+                    name: 'Hotel Boulderado',
+                    quest: '📷 Take your picture in front of the Christmas tree in the lobby',
+                    distance: '2 min. from the Courthouse',
+                    unlockTime: 18 * 60 + 30, // 6:30pm in minutes
+                    availableUntil: 19 * 60 + 30, // 7:30pm
+                    icon: '📷'
+                },
+                {
+                    id: 'velvetElk',
+                    name: 'The Velvet Elk',
+                    quest: '🍺 Grab a drink',
+                    distance: '1 min. from the Courthouse',
+                    unlockTime: 18 * 60 + 30, // 6:30pm
+                    availableUntil: 19 * 60 + 30, // 7:30pm
+                    icon: '🍺'
+                },
+                {
+                    id: 'pizzaCalore',
+                    name: 'Pizza Calore',
+                    quest: '🍕 Grab a slice between stops',
+                    distance: '1 min. from the Courthouse',
+                    unlockTime: 18 * 60 + 30, // 6:30pm
+                    availableUntil: 19 * 60 + 30, // 7:30pm
+                    icon: '🍕'
+                },
+                {
+                    id: 'taco',
+                    name: 'T|Aco',
+                    quest: '🍹 Get a margarita and some chips!',
+                    distance: '2 min. from The Spotted James',
+                    unlockTime: 19 * 60, // 7:00pm
+                    availableUntil: 20 * 60 + 30, // 8:30pm
+                    icon: '🍹'
+                },
+                {
+                    id: 'jungle',
+                    name: 'Jungle',
+                    quest: '🍹 Get a tiki drink!',
+                    distance: '5 min. from The Spotted James',
+                    unlockTime: 19 * 60, // 7:00pm
+                    availableUntil: 20 * 60 + 30, // 8:30pm
+                    icon: '🍹'
+                }
+            ];
 
             // Calculate countdown to event
             const calculateCountdown = () => {
@@ -651,13 +741,13 @@ In brothels galore`
             const getCurrentStop = () => {
                 const now = new Date();
                 
-                // For testing: Check if it's November 8, 2025
+                // For testing: Check if it's November 11, 2025
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 
-                // Only activate on November 8, 2025
-                if (year !== 2025 || month !== 10 || day !== 8) {
+                // Only activate on November 11, 2025
+                if (year !== 2025 || month !== 10 || day !== 11) {
                     return null;
                 }
 
@@ -712,6 +802,67 @@ In brothels galore`
             useEffect(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, [activeTab]);
+
+            // Save quest state to localStorage
+            useEffect(() => {
+                localStorage.setItem('santacon_badges', JSON.stringify(badges));
+            }, [badges]);
+
+            useEffect(() => {
+                localStorage.setItem('santacon_venue_quests', JSON.stringify(venueQuests));
+            }, [venueQuests]);
+
+            useEffect(() => {
+                localStorage.setItem('santacon_challenges', JSON.stringify(challenges));
+            }, [challenges]);
+
+            // Check badge unlocks
+            useEffect(() => {
+                const newBadges = { ...badges };
+                
+                // Jolly Leader: Sang a carol
+                if (challenges.singCarol && !badges.jollyLeader) {
+                    newBadges.jollyLeader = true;
+                }
+                
+                // Gift Giver: Bought drink OR gave gift
+                if ((challenges.buyDrink || challenges.giveGift) && !badges.giftGiver) {
+                    newBadges.giftGiver = true;
+                }
+                
+                // Paparazzi: 3+ photo challenges (group photo, cop photo, social post, boulderado tree)
+                const photoCount = [
+                    challenges.groupPhoto,
+                    challenges.photoCop,
+                    challenges.postSocial,
+                    venueQuests.hotelBoulderado
+                ].filter(Boolean).length;
+                if (photoCount >= 3 && !badges.paparazzi) {
+                    newBadges.paparazzi = true;
+                }
+                
+                // Marathon Santa: After St. Julien stop (stop index 3)
+                if (currentStop && currentStop.index >= 3 && !badges.marathonSanta) {
+                    newBadges.marathonSanta = true;
+                }
+                
+                // Super Santa: 1 venue quest + 5 challenge quests
+                const venueCount = Object.values(venueQuests).filter(Boolean).length;
+                const challengeCount = Object.values(challenges).filter(Boolean).length;
+                if (venueCount >= 1 && challengeCount >= 5 && !badges.superSanta) {
+                    newBadges.superSanta = true;
+                }
+                
+                // Boulder Legend: Manual checkbox
+                if (challenges.boulderLegend && !badges.boulderLegend) {
+                    newBadges.boulderLegend = true;
+                }
+                
+                // Update badges if any changed
+                if (JSON.stringify(newBadges) !== JSON.stringify(badges)) {
+                    setBadges(newBadges);
+                }
+            }, [challenges, venueQuests, currentStop, badges]);
 
             const handleSubscribe = async (e) => {
                 e.preventDefault();
@@ -816,10 +967,17 @@ END:VCALENDAR`;
                             <i className="fas fa-calendar-alt mr-3"></i>
                             Santa's Schedule
                         </h2>
-                        <p className="text-gray-700 mb-4">
+                        <p className="text-gray-700 mb-2">
                             <i className="fas fa-calendar-day mr-2 text-red-600"></i>
                             Black Friday, Nov. 28, 2025
                         </p>
+                        <button 
+                            onClick={() => setActiveTab('about')}
+                            className="text-sm text-blue-600 hover:text-blue-800 mb-4 flex items-center"
+                        >
+                            <i className="fas fa-info-circle mr-1"></i>
+                            New to SantaCon? Learn more
+                        </button>
                         <div className="space-y-3">
                             {scheduleData.map((stop, index) => {
                                 const isCurrentStopActive = currentStop?.index === index;
@@ -1375,6 +1533,301 @@ END:VCALENDAR`;
                 </div>
             ));
 
+            const QuestsPage = () => {
+                const now = new Date();
+                const currentTime = now.getHours() * 60 + now.getMinutes();
+                
+                // Count completed quests
+                const venueQuestCount = Object.values(venueQuests).filter(Boolean).length;
+                const challengeCount = Object.values(challenges).filter(Boolean).length;
+                const badgeCount = Object.values(badges).filter(Boolean).length;
+                
+                // Check which venue quests are unlocked
+                const getVenueQuestStatus = (quest) => {
+                    if (currentTime >= quest.unlockTime) {
+                        return 'unlocked';
+                    }
+                    return 'locked';
+                };
+                
+                // Get locked quests by unlock time
+                const lockedQuests = venueQuestData.filter(q => getVenueQuestStatus(q) === 'locked');
+                const unlockedQuests = venueQuestData.filter(q => getVenueQuestStatus(q) === 'unlocked');
+                
+                // Group locked quests by unlock time
+                const lockedGroups = lockedQuests.reduce((acc, quest) => {
+                    const time = quest.unlockTime;
+                    if (!acc[time]) acc[time] = [];
+                    acc[time].push(quest);
+                    return acc;
+                }, {});
+                
+                const formatTime = (minutes) => {
+                    const hours = Math.floor(minutes / 60);
+                    const mins = minutes % 60;
+                    const period = hours >= 12 ? 'pm' : 'am';
+                    const displayHour = hours > 12 ? hours - 12 : hours;
+                    return `${displayHour}:${mins.toString().padStart(2, '0')}${period}`;
+                };
+                
+                return (
+                    <div className="space-y-6">
+                        <div className="text-center mb-6">
+                            <h1 className="text-3xl font-bold text-red-700 mb-2">
+                                <i className="fas fa-trophy mr-2"></i>
+                                Santa's Side Quests
+                            </h1>
+                            <p className="text-gray-600">
+                                Ready to level up your SantaCon? Complete quests to earn badges!
+                            </p>
+                        </div>
+
+                        {/* Badge Section */}
+                        <div className="glass-effect rounded-lg shadow-xl p-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-xl font-bold text-gray-800">
+                                    🏆 Your Badges ({badgeCount}/6 Unlocked)
+                                </h2>
+                                <button
+                                    onClick={() => setBadgeLegendExpanded(!badgeLegendExpanded)}
+                                    className="text-2xl text-blue-600 hover:text-blue-800 transition"
+                                    title="Badge Legend"
+                                >
+                                    ℹ️
+                                </button>
+                            </div>
+                            
+                            <div className="flex justify-center gap-4 mb-2 text-4xl">
+                                <span>{badges.jollyLeader ? '🎅' : '🔒'}</span>
+                                <span>{badges.giftGiver ? '🎁' : '🔒'}</span>
+                                <span>{badges.paparazzi ? '📸' : '🔒'}</span>
+                                <span>{badges.marathonSanta ? '🏃' : '🔒'}</span>
+                                <span>{badges.superSanta ? '🌟' : '🔒'}</span>
+                                <span>{badges.boulderLegend ? '🎭' : '🔒'}</span>
+                            </div>
+                            
+                            <p className="text-center text-sm text-gray-600">Tap ℹ️ for badge details</p>
+                            
+                            {badgeLegendExpanded && (
+                                <div className="mt-4 pt-4 border-t-2 border-gray-200">
+                                    <h3 className="font-bold text-gray-800 mb-3">📖 BADGE LEGEND</h3>
+                                    <div className="space-y-3 text-sm">
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🎅 Jolly Leader {badges.jollyLeader && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600">Lead a carol sing-along</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🎁 Gift Giver {badges.giftGiver && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600">Buy someone a drink or give a gift</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                📸 Paparazzi {badges.paparazzi && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600">Complete 3+ photo challenges</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🏃 Marathon Santa {badges.marathonSanta && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600">Complete all official stops (Auto-unlocks after St. Julien)</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🌟 Super Santa {badges.superSanta && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600">Complete 1 venue quest + 5 challenges</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🎭 Boulder Legend {badges.boulderLegend && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600">Attend 3+ SantaCons</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Venue Quests Section */}
+                        <div className="glass-effect rounded-lg shadow-xl p-6">
+                            <h2 className="text-xl font-bold text-red-700 mb-4">
+                                <i className="fas fa-map-marker-alt mr-2"></i>
+                                NEARBY VENUE QUESTS ({venueQuestCount}/5)
+                            </h2>
+                            
+                            {unlockedQuests.length > 0 && (
+                                <div className="space-y-3 mb-4">
+                                    <div className="text-sm font-bold text-green-700">✨ Available Now!</div>
+                                    {unlockedQuests.map(quest => (
+                                        <div key={quest.id} className="border-2 border-green-500 rounded-lg p-4 bg-green-50">
+                                            <div className="flex items-start">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={venueQuests[quest.id]}
+                                                    onChange={(e) => setVenueQuests({...venueQuests, [quest.id]: e.target.checked})}
+                                                    className="mt-1 mr-3 w-5 h-5"
+                                                />
+                                                <div className="flex-1">
+                                                    <div className="font-bold text-gray-800">{quest.name}</div>
+                                                    <div className="text-sm text-gray-700">{quest.quest}</div>
+                                                    <div className="text-xs text-gray-600 mt-1">
+                                                        📍 {quest.distance}
+                                                    </div>
+                                                    <div className="text-xs text-gray-600">
+                                                        ⏰ Available: {formatTime(quest.unlockTime)} - {formatTime(quest.availableUntil)}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                            
+                            {Object.keys(lockedGroups).length > 0 && (
+                                <div className="space-y-2">
+                                    {Object.keys(lockedGroups).sort((a, b) => a - b).map(unlockTime => (
+                                        <div key={unlockTime} className="bg-gray-100 rounded-lg p-3">
+                                            <div className="text-sm font-bold text-gray-700 mb-1">
+                                                🔒 Unlocks at {formatTime(parseInt(unlockTime))}
+                                            </div>
+                                            <div className="text-sm text-gray-600">
+                                                {lockedGroups[unlockTime].map(q => q.name).join(', ')}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Challenges Section */}
+                        <div className="glass-effect rounded-lg shadow-xl p-6">
+                            <h2 className="text-xl font-bold text-red-700 mb-4">
+                                <i className="fas fa-star mr-2"></i>
+                                TONIGHT'S CHALLENGES ({challengeCount}/12)
+                            </h2>
+                            <p className="text-sm text-gray-600 mb-4">
+                                Complete these fun activities throughout the night:
+                            </p>
+                            <div className="space-y-2">
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.highFive10}
+                                        onChange={(e) => setChallenges({...challenges, highFive10: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>High-five 10 people</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.groupPhoto}
+                                        onChange={(e) => setChallenges({...challenges, groupPhoto: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Take a group Santa photo</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.giveGift}
+                                        onChange={(e) => setChallenges({...challenges, giveGift: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Give a naughty (or nice) gift to a stranger</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.findElf}
+                                        onChange={(e) => setChallenges({...challenges, findElf: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Find someone dressed as an elf</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.singCarol}
+                                        onChange={(e) => setChallenges({...challenges, singCarol: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Sing a carol in public</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.buyDrink}
+                                        onChange={(e) => setChallenges({...challenges, buyDrink: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Buy someone a drink</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.compliment5}
+                                        onChange={(e) => setChallenges({...challenges, compliment5: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Compliment 5 strangers</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.congaLine}
+                                        onChange={(e) => setChallenges({...challenges, congaLine: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Dance in a Santa conga line!</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.photoCop}
+                                        onChange={(e) => setChallenges({...challenges, photoCop: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Get a photo with a Boulder cop</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.visit3Stops}
+                                        onChange={(e) => setChallenges({...challenges, visit3Stops: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Visit 3+ official stops</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.postSocial}
+                                        onChange={(e) => setChallenges({...challenges, postSocial: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Post photo on Instagram/Facebook</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.boulderLegend}
+                                        onChange={(e) => setChallenges({...challenges, boulderLegend: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>This is my 3rd+ SantaCon</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
             useEffect(() => {
                 if (darkMode) {
                     document.body.classList.add('dark-mode');
@@ -1400,6 +1853,7 @@ END:VCALENDAR`;
                     <div className="max-w-2xl mx-auto px-4 py-6 pb-24">
                         {activeTab === 'home' && <HomePage />}
                         {activeTab === 'carols' && <CarolsPage />}
+                        {activeTab === 'quests' && <QuestsPage />}
                         {activeTab === 'about' && <AboutPage />}
                         {activeTab === 'mailing' && <MailingListPage />}
                         {activeTab === 'afterparty' && <AfterPartyPage />}
@@ -1428,13 +1882,13 @@ END:VCALENDAR`;
                                     <span className="text-xs font-semibold">Carols</span>
                                 </button>
                                 <button
-                                    onClick={() => setActiveTab('about')}
+                                    onClick={() => setActiveTab('quests')}
                                     className={`nav-button flex flex-col items-center py-2 px-4 rounded-lg ${
-                                        activeTab === 'about' ? 'active' : 'text-gray-600'
+                                        activeTab === 'quests' ? 'active' : 'text-gray-600'
                                     }`}
                                 >
-                                    <i className="fas fa-info-circle text-xl mb-1"></i>
-                                    <span className="text-xs font-semibold">About</span>
+                                    <i className="fas fa-trophy text-xl mb-1"></i>
+                                    <span className="text-xs font-semibold">Quests</span>
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('mailing')}
