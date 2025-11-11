@@ -1589,9 +1589,9 @@ END:VCALENDAR`;
                             >
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-xl font-bold text-gray-800">
-                                        🏆 Your Badges ({badgeCount}/6 Unlocked)
+                                        🏆 Your Badges ({badgeCount}/6)
                                     </h2>
-                                    <i className={`fas fa-chevron-${badgeLegendExpanded ? 'up' : 'down'} text-gray-400 text-xl`}></i>
+                                    <i className={`fas fa-chevron-down text-gray-400 text-xl ${badgeLegendExpanded ? 'rotate-180' : ''}`} style={{transition: 'transform 0.3s'}}></i>
                                 </div>
                                 
                                 <div className="flex justify-center gap-4 mb-2 text-4xl">
@@ -1603,48 +1603,50 @@ END:VCALENDAR`;
                                     <span>{badges.boulderLegend ? '🎭' : '🔒'}</span>
                                 </div>
                                 
-                                <p className="text-center text-sm text-gray-600">Badge details {badgeLegendExpanded ? '▲' : '▼'}</p>
+                                <p className="text-center text-sm text-gray-600">
+                                    Badge details <i className={`fas fa-chevron-down text-xs ${badgeLegendExpanded ? 'rotate-180' : ''}`} style={{transition: 'transform 0.3s'}}></i>
+                                </p>
                             </button>
                             
                             {badgeLegendExpanded && (
-                                <div className="mt-4 pt-4 border-t-2 border-gray-200">
+                                <div className="px-6 pb-6 pt-4 border-t-2 border-gray-200">
                                     <h3 className="font-bold text-gray-800 mb-3">📖 BADGE LEGEND</h3>
                                     <div className="space-y-3 text-sm">
                                         <div>
                                             <div className="font-semibold text-gray-800">
                                                 🎅 Jolly Leader {badges.jollyLeader && '- ✅ UNLOCKED'}
                                             </div>
-                                            <div className="text-gray-600">Lead a carol sing-along</div>
+                                            <div className="text-gray-600 ml-6">Rally the Santas with your carol skills</div>
                                         </div>
                                         <div>
                                             <div className="font-semibold text-gray-800">
                                                 🎁 Gift Giver {badges.giftGiver && '- ✅ UNLOCKED'}
                                             </div>
-                                            <div className="text-gray-600">Buy someone a drink or give a gift</div>
+                                            <div className="text-gray-600 ml-6">Buy a drink, earn Santa karma</div>
                                         </div>
                                         <div>
                                             <div className="font-semibold text-gray-800">
                                                 📸 Paparazzi {badges.paparazzi && '- ✅ UNLOCKED'}
                                             </div>
-                                            <div className="text-gray-600">Complete 3+ photo challenges</div>
+                                            <div className="text-gray-600 ml-6">Snap 3+ photos (proof you were here!)</div>
                                         </div>
                                         <div>
                                             <div className="font-semibold text-gray-800">
                                                 🏃 Marathon Santa {badges.marathonSanta && '- ✅ UNLOCKED'}
                                             </div>
-                                            <div className="text-gray-600">Complete all official stops (Auto-unlocks after St. Julien)</div>
+                                            <div className="text-gray-600 ml-6">Conquer all 5 official stops</div>
                                         </div>
                                         <div>
                                             <div className="font-semibold text-gray-800">
                                                 🌟 Super Santa {badges.superSanta && '- ✅ UNLOCKED'}
                                             </div>
-                                            <div className="text-gray-600">Complete 1 venue quest + 5 challenges</div>
+                                            <div className="text-gray-600 ml-6">3+ side quests? You overachiever!</div>
                                         </div>
                                         <div>
                                             <div className="font-semibold text-gray-800">
                                                 🎭 Boulder Legend {badges.boulderLegend && '- ✅ UNLOCKED'}
                                             </div>
-                                            <div className="text-gray-600">Attend 3+ SantaCons</div>
+                                            <div className="text-gray-600 ml-6">This is your 3rd+ SantaCon. Respect.</div>
                                         </div>
                                     </div>
                                 </div>
