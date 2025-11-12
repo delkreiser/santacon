@@ -107,6 +107,24 @@
                 transform: translateY(100vh) rotate(360deg);
             }
         }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -617,6 +635,19 @@ In brothels galore`
             
             // Quest system state
             const [badgeLegendExpanded, setBadgeLegendExpanded] = useState(false);
+            const [badgePopupQueue, setBadgePopupQueue] = useState([]);
+            const [showingBadgePopup, setShowingBadgePopup] = useState(false);
+            const [badgePopupsShown, setBadgePopupsShown] = useState(() => {
+                const saved = localStorage.getItem('santacon_badge_popups_shown');
+                return saved ? JSON.parse(saved) : {
+                    jollyLeader: false,
+                    giftGiver: false,
+                    paparazzi: false,
+                    marathonSanta: false,
+                    superSanta: false,
+                    boulderLegend: false
+                };
+            });
             const [badges, setBadges] = useState(() => {
                 const saved = localStorage.getItem('santacon_badges');
                 return saved ? JSON.parse(saved) : {
@@ -816,18 +847,59 @@ In brothels galore`
                 localStorage.setItem('santacon_challenges', JSON.stringify(challenges));
             }, [challenges]);
 
+            // Badge messages
+            const badgeMessages = {
+                jollyLeader: {
+                    emoji: '🎅',
+                    title: 'JOLLY LEADER',
+                    message: "Your golden voice carried all the off-key Santas! You should be on America's Got Talent!"
+                },
+                giftGiver: {
+                    emoji: '🎁',
+                    title: 'GIFT GIVER',
+                    message: "Santa's checking his list, and you're officially on the Nice list! Your heart grew 3 sizes!"
+                },
+                paparazzi: {
+                    emoji: '📸',
+                    title: 'PAPARAZZI',
+                    message: "You've documented this night better than TMZ! These pics will be legendary (or at least blackmail-worthy)."
+                },
+                marathonSanta: {
+                    emoji: '🏃',
+                    title: 'MARATHON SANTA',
+                    message: "You conquered all 5 stops! Your liver is a champion, and you need help! Legend status: achieved."
+                },
+                superSanta: {
+                    emoji: '🌟',
+                    title: 'SUPER SANTA',
+                    message: "Most people stick to the main route. You? You're an overachiever. We're impressed. Your mom is proud."
+                },
+                boulderLegend: {
+                    emoji: '🎭',
+                    title: 'BOULDER LEGEND',
+                    message: "Three years of SantaCon? You're basically Boulder SantaCon royalty! Put this on your resume."
+                }
+            };
+
             // Check badge unlocks
             useEffect(() => {
                 const newBadges = { ...badges };
+                const newlyUnlocked = [];
                 
                 // Jolly Leader: Sang a carol
                 if (challenges.singCarol && !badges.jollyLeader) {
                     newBadges.jollyLeader = true;
+                    if (!badgePopupsShown.jollyLeader) {
+                        newlyUnlocked.push('jollyLeader');
+                    }
                 }
                 
                 // Gift Giver: Bought drink OR gave gift
                 if ((challenges.buyDrink || challenges.giveGift) && !badges.giftGiver) {
                     newBadges.giftGiver = true;
+                    if (!badgePopupsShown.giftGiver) {
+                        newlyUnlocked.push('giftGiver');
+                    }
                 }
                 
                 // Paparazzi: 3+ photo challenges (group photo, cop photo, social post, boulderado tree)
@@ -839,11 +911,17 @@ In brothels galore`
                 ].filter(Boolean).length;
                 if (photoCount >= 3 && !badges.paparazzi) {
                     newBadges.paparazzi = true;
+                    if (!badgePopupsShown.paparazzi) {
+                        newlyUnlocked.push('paparazzi');
+                    }
                 }
                 
                 // Marathon Santa: After St. Julien stop (stop index 3)
                 if (currentStop && currentStop.index >= 3 && !badges.marathonSanta) {
                     newBadges.marathonSanta = true;
+                    if (!badgePopupsShown.marathonSanta) {
+                        newlyUnlocked.push('marathonSanta');
+                    }
                 }
                 
                 // Super Santa: 1 venue quest + 5 challenge quests
@@ -851,18 +929,55 @@ In brothels galore`
                 const challengeCount = Object.values(challenges).filter(Boolean).length;
                 if (venueCount >= 1 && challengeCount >= 5 && !badges.superSanta) {
                     newBadges.superSanta = true;
+                    if (!badgePopupsShown.superSanta) {
+                        newlyUnlocked.push('superSanta');
+                    }
                 }
                 
                 // Boulder Legend: Manual checkbox
                 if (challenges.boulderLegend && !badges.boulderLegend) {
                     newBadges.boulderLegend = true;
+                    if (!badgePopupsShown.boulderLegend) {
+                        newlyUnlocked.push('boulderLegend');
+                    }
                 }
                 
                 // Update badges if any changed
                 if (JSON.stringify(newBadges) !== JSON.stringify(badges)) {
                     setBadges(newBadges);
                 }
-            }, [challenges, venueQuests, currentStop, badges]);
+                
+                // Queue newly unlocked badge pop-ups
+                if (newlyUnlocked.length > 0) {
+                    setBadgePopupQueue(prev => [...prev, ...newlyUnlocked]);
+                }
+            }, [challenges, venueQuests, currentStop, badges, badgePopupsShown]);
+
+            // Handle badge popup queue
+            useEffect(() => {
+                if (badgePopupQueue.length > 0 && !showingBadgePopup) {
+                    setShowingBadgePopup(true);
+                }
+            }, [badgePopupQueue, showingBadgePopup]);
+
+            // Save badge popups shown to localStorage
+            useEffect(() => {
+                localStorage.setItem('santacon_badge_popups_shown', JSON.stringify(badgePopupsShown));
+            }, [badgePopupsShown]);
+
+            const handleBadgePopupClose = () => {
+                const [currentBadge, ...remaining] = badgePopupQueue;
+                
+                // Mark this badge popup as shown
+                setBadgePopupsShown(prev => ({
+                    ...prev,
+                    [currentBadge]: true
+                }));
+                
+                // Remove from queue
+                setBadgePopupQueue(remaining);
+                setShowingBadgePopup(false);
+            };
 
             const handleSubscribe = async (e) => {
                 e.preventDefault();
@@ -1861,6 +1976,37 @@ END:VCALENDAR`;
                         {activeTab === 'mailing' && <MailingListPage />}
                         {activeTab === 'afterparty' && <AfterPartyPage />}
                     </div>
+
+                    {/* Badge Unlock Popup */}
+                    {showingBadgePopup && badgePopupQueue.length > 0 && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+                             style={{animation: 'fadeIn 0.3s ease-in'}}>
+                            <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-8 text-center"
+                                 style={{animation: 'scaleIn 0.3s ease-out'}}>
+                                <div className="text-6xl mb-4 animate-bounce">
+                                    🎉 🎉 🎉
+                                </div>
+                                <h2 className="text-2xl font-bold text-red-700 mb-4">
+                                    BADGE UNLOCKED!
+                                </h2>
+                                <div className="text-7xl mb-4">
+                                    {badgeMessages[badgePopupQueue[0]].emoji}
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-800 mb-4">
+                                    {badgeMessages[badgePopupQueue[0]].title}
+                                </h3>
+                                <p className="text-gray-700 mb-6 leading-relaxed">
+                                    {badgeMessages[badgePopupQueue[0]].message}
+                                </p>
+                                <button
+                                    onClick={handleBadgePopupClose}
+                                    className="bg-red-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition text-lg"
+                                >
+                                    Awesome! ✓
+                                </button>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Bottom Navigation */}
                     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg">
