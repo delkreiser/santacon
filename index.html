@@ -852,32 +852,38 @@ In brothels galore`
                 jollyLeader: {
                     emoji: '🎅',
                     title: 'JOLLY LEADER',
-                    message: "Your golden voice carried all the off-key Santas! You should be on America's Got Talent!"
+                    message: "Your golden voice carried all the off-key Santas! You should be on America's Got Talent!",
+                    buttonText: 'High Five! 🙌'
                 },
                 giftGiver: {
                     emoji: '🎁',
                     title: 'GIFT GIVER',
-                    message: "Santa's checking his list, and you're officially on the Nice list! Your heart grew 3 sizes!"
+                    message: "Santa's checking his list, and you're officially on the Nice list! Your heart grew 3 sizes!",
+                    buttonText: 'Cheers! 🍻'
                 },
                 paparazzi: {
                     emoji: '📸',
                     title: 'PAPARAZZI',
-                    message: "You've documented this night better than TMZ! These pics will be legendary (or at least blackmail-worthy)."
+                    message: "You've documented this night better than TMZ! These pics will be legendary (or at least blackmail-worthy).",
+                    buttonText: 'Noice! 😎'
                 },
                 marathonSanta: {
                     emoji: '🏃',
                     title: 'MARATHON SANTA',
-                    message: "You conquered all 5 stops! Your liver is a champion, and you need help! Legend status: achieved."
+                    message: "You conquered all 5 stops! Your liver is a champion, and you need help! Legend status: achieved.",
+                    buttonText: "You're #1! 🥇"
                 },
                 superSanta: {
                     emoji: '🌟',
                     title: 'SUPER SANTA',
-                    message: "Most people stick to the main route. You? You're an overachiever. We're impressed. Your mom is proud."
+                    message: "Most people stick to the main route. You? You're an overachiever. We're impressed. Your mom is proud.",
+                    buttonText: 'Flex! 💪'
                 },
                 boulderLegend: {
                     emoji: '🎭',
                     title: 'BOULDER LEGEND',
-                    message: "Three years of SantaCon? You're basically Boulder SantaCon royalty! Put this on your resume."
+                    message: "Three years of SantaCon? You're basically Boulder SantaCon royalty! Put this on your resume.",
+                    buttonText: 'Respect! 🫡'
                 }
             };
 
@@ -2004,7 +2010,7 @@ END:VCALENDAR`;
                                     onClick={handleBadgePopupClose}
                                     className="bg-red-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition text-lg"
                                 >
-                                    Awesome! ✓
+                                    {badgeMessages[badgePopupQueue[0]].buttonText}
                                 </button>
                             </div>
                         </div>
