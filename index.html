@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <title>Boulder SantaCon 2024</title>
+    <title>Boulder SantaCon 2025</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://santarchy.app/">
+    <meta property="og:title" content="Boulder SantaCon 2025 - Black Friday">
+    <meta property="og:description" content="Join us for the 19th Annual Boulder SantaCon! Black Friday, November 29th, 2024. Dress up as Santa and celebrate the holidays Boulder-style!">
+    <meta property="og:image" content="https://santarchy.app/img/header.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://santarchy.app/">
+    <meta property="twitter:title" content="Boulder SantaCon 2025 - Black Friday">
+    <meta property="twitter:description" content="Join us for the 19th Annual Boulder SantaCon! Black Friday, November 29th, 2024. Dress up as Santa and celebrate the holidays Boulder-style!">
+    <meta property="twitter:image" content="https://santarchy.app/img/header.jpg">
+    
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -24,7 +39,7 @@
             color: #e0e0e0;
         }
         body.dark-mode .gradient-bg {
-            background: linear-gradient(135deg, #0d3d21 0%, #7a1a1c 100%);
+            background: linear-gradient(180deg, #0a0a0a 0%, #7a1a1c 100%);
         }
         body.dark-mode .text-gray-800 {
             color: #e0e0e0 !important;
@@ -45,7 +60,7 @@
             border-color: #404040 !important;
         }
         .gradient-bg {
-            background: linear-gradient(135deg, #165B33 0%, #BB2528 100%);
+            background: linear-gradient(180deg, #000000 0%, #BB2528 100%);
         }
         .glass-effect {
             background: rgba(255, 255, 255, 0.95);
@@ -92,38 +107,21 @@
                 transform: translateY(100vh) rotate(360deg);
             }
         }
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-        .modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: modalSlideIn 0.3s ease-out;
-        }
-        body.dark-mode .modal-content {
-            background: #2a2a2a;
-        }
-        @keyframes modalSlideIn {
+        @keyframes fadeIn {
             from {
-                transform: translateY(-50px);
                 opacity: 0;
             }
             to {
-                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
                 opacity: 1;
             }
         }
@@ -169,142 +167,77 @@
         const scheduleData = [
             { 
                 time: "5:00 - 6:30pm", 
-                venue: "Avanti F&B (roof top lounge)",
+                title: "Avanti F&B",
+                venue: "Roof top lounge",
+                text: "Meet Santa on the roof top lounge.",
                 mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1964.7278793680014!2d-105.27691744636638!3d40.0178103639815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bed2929560fbd%3A0xbe3c1820b8797eee!2sAvanti%20Food%20and%20Beverage%20Boulder!5e1!3m2!1sen!2sus!4v1762220992124!5m2!1sen!2sus",
                 mapLink: "https://maps.app.goo.gl/uXvk9P3sDBJoXFJVA",
-                notes: "When Santa is ready to leave, exit using the stairwell. We will gather the Santas and then make our way to the Mural alley for our Santa line up!"
+                notes: "When Santa is ready to leave, exit using the stairwell on the outdoor patio. We will gather the Santas and then head to \"Santa's Alley.\""
             },
             { 
                 time: "6:30 - 7:00pm", 
-                venue: "Pearl Street Caroling and Group Photo",
+                title: "Pearl Street Mall",
+                venue: "Caroling and Group Photo",
+                text: "After Santa's Alley, head east down the alley to 15th Street and loop around back onto Pearl St. by Illegal Pete's. We will continue to the Court House for a Group photo op and then sing a few carols.",
                 mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1118.6936876331285!2d-105.2780970909969!3d40.01849507885064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bed6384ffa061%3A0x12051a85a97cca48!2sBoulder%20County%20Historic%20Court%20House!5e1!3m2!1sen!2sus!4v1762221010590!5m2!1sen!2sus",
                 mapLink: "https://maps.app.goo.gl/2EEgyuTTbZWFPHFS6",
-                notes: "Santa will gather in front of the Court House on Pearl Street for our group photo and a few carols. We'll then walk down the Mall to the area by Boulder Books for another round of carols."
-            },
-            { 
-                time: "7:00 - 8:15pm", 
-                venue: "St. Julien Hotel",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7591.427428751109!2d-105.28521968514423!3d40.01584274961552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec26a391b9e9%3A0x86495a6b403f6317!2sSt%20Julien%20Hotel%20%26%20Spa!5e1!3m2!1sen!2sus!4v1762221047809!5m2!1sen!2sus",
-                mapLink: "https://maps.app.goo.gl/wQpMRekk78dy9B778",
                 notes: null
             },
             { 
-                time: "8:15 - 9:00pm", 
-                venue: "Choose your own Adventure! (The Velvet Elk / License No.1 / Boulderado)",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d474.4393082879971!2d-105.27947094109244!3d40.01942494891759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec27c75baec1%3A0x7c8592e2ed4b2ee8!2sLicense%20No.%201!5e1!3m2!1sen!2sus!4v1762221090080!5m2!1sen!2sus",
+                time: "7:00 - 7:45pm", 
+                title: "The Spotted James",
+                venue: "Formerly The Walrus",
+                text: "We haven't been to The James in a few years so we thought it's time to pay them a visit.",
+                drinkSpecials: "[Spotted James to provide]",
+                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3795.6656851569173!2d-105.2837285588913!3d40.01670627162523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bedbf881c8319%3A0x6ae46986776b8279!2sThe%20Spotted%20James!5e1!3m2!1sen!2sus!4v1762539907771!5m2!1sen!2sus",
                 mapLink: null,
-                notes: "We're going to head back down Pearl to go to either the Velvet Elk or License No. 1. Take your pick! If you go to License No.1, get there early before the crowds to get a drink. You can also go upstairs and get a drink at the Corner Bar."
+                notes: "If you're hungry, The Rio, T|aco, and Rosetta Hall are nearby."
+            },
+            { 
+                time: "7:45 - 9:00pm", 
+                title: "St. Julien Hotel",
+                venue: "T-Zero Bar and the Grand Lobby",
+                text: "This is Santa's favorite stop! The Julien won't say it publicly, but they LOVE when Santa visits them!",
+                music: "David Lawrence and the Spoonful",
+                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7591.427428751109!2d-105.28521968514423!3d40.01584274961552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec26a391b9e9%3A0x86495a6b403f6317!2sSt%20Julien%20Hotel%20%26%20Spa!5e1!3m2!1sen!2sus!4v1762221047809!5m2!1sen!2sus",
+                mapLink: "https://maps.app.goo.gl/wQpMRekk78dy9B778",
+                notes: "If the line for drinks is too long, head to Jill's around the corner to the left."
             },
             { 
                 time: "9:00 - 1:00am", 
-                venue: "The Santa Ball @ The Riverside", 
+                venue: "The Santa Ball @ The Riverside",
+                text: "This is our last stop and the official after party for SantaCon! Make sure to grab a ticket before it sells out!",
                 isAfterParty: true,
                 mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d474.47377773047225!2d-105.27881746029514!3d40.014467182362914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec258e8bfb7f%3A0xbf27b5a8462b87a6!2sThe%20Riverside%20Private%20%26%20Public%20Event%20Venue!5e1!3m2!1sen!2sus!4v1762220959898!5m2!1sen!2sus",
                 mapLink: "https://maps.app.goo.gl/M6BUwhF2ZvT6ZQ9A8",
-                notes: "This is our final stop! There is a cover charge for the event."
+                notes: null
             }
         ];
 
-        // Venue Quests data
-        const venueQuestsData = [
-            {
-                name: "Hotel Boulderado",
-                description: "Have a drink at this historic hotel",
-                unlockTime: 17 * 60, // 5:00pm in minutes
-                mapLink: "https://maps.app.goo.gl/example1"
-            },
-            {
-                name: "The Velvet Elk",
-                description: "Quick cocktail break",
-                unlockTime: 17 * 60, // 5:00pm
-                mapLink: "https://maps.app.goo.gl/example2"
-            },
-            {
-                name: "Pizza Calore",
-                description: "Grab a slice",
-                unlockTime: 17 * 60, // 5:00pm
-                mapLink: "https://maps.app.goo.gl/example3"
-            },
-            {
-                name: "T|Aco",
-                description: "Taco time with Santas",
-                unlockTime: 19 * 60, // 7:00pm
-                mapLink: "https://maps.app.goo.gl/example4"
-            },
-            {
-                name: "Jungle",
-                description: "Jungle juice break",
-                unlockTime: 19 * 60, // 7:00pm
-                mapLink: "https://maps.app.goo.gl/example5"
-            }
-        ];
-
-        // Badge definitions
-        const badgeDefinitions = [
-            {
-                id: 'jolly-leader',
-                emoji: '🎅',
-                name: 'Jolly Leader',
-                description: 'Lead a carol sing-along in public',
-                buttonText: 'High Five! 🙌'
-            },
-            {
-                id: 'gift-giver',
-                emoji: '🎁',
-                name: 'Gift Giver',
-                description: 'Buy a fellow Santa some holiday cheer',
-                buttonText: 'Cheers! 🍻'
-            },
-            {
-                id: 'paparazzi',
-                emoji: '📸',
-                name: 'Paparazzi',
-                description: 'Snap photos at 3+ locations',
-                buttonText: 'Noice! 😎'
-            },
-            {
-                id: 'marathon-santa',
-                emoji: '🏃',
-                name: 'Marathon Santa',
-                description: 'Complete all 4 official stops',
-                buttonText: "You're #1! 🥇"
-            },
-            {
-                id: 'super-santa',
-                emoji: '🌟',
-                name: 'Super Santa',
-                description: 'Crush 3+ side quests',
-                buttonText: 'Flex! 💪'
-            },
-            {
-                id: 'boulder-legend',
-                emoji: '🎭',
-                name: 'Boulder Legend',
-                description: 'Veteran of 3+ SantaCons',
-                buttonText: 'Respect! 🫡'
-            }
-        ];
-
-        // Memoized ScheduleStop component
-        const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, setActiveTab, isCurrentStop }) => (
+        // Memoized ScheduleStop component to prevent re-renders from countdown
+        const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, setActiveTab, isCurrentStop, isLeavingSoon, isPast, nextStop }) => (
             <div 
                 className={`rounded-lg border-2 overflow-hidden relative ${
+                    isCurrentStop && isLeavingSoon ? 'border-4 border-orange-400 shadow-2xl' :
                     isCurrentStop ? 'border-4 border-yellow-400 shadow-2xl' : 
+                    isPast ? 'border-gray-300' :
                     stop.isAfterParty ? 'border-red-500' : 'border-gray-200'
                 }`}
             >
                 {isCurrentStop && (
                     <div className="absolute top-2 right-2 z-10">
-                        <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center animate-bounce">
+                        <div className={`${isLeavingSoon ? 'bg-orange-600' : 'bg-red-600'} text-white px-3 py-1 rounded-full text-xs font-bold flex items-center animate-bounce`}>
                             <i className="fas fa-map-marker-alt mr-1"></i>
-                            Santa is Here!
+                            {isLeavingSoon ? "Santa's leaving soon!" : "Santa is Here!"}
                         </div>
                     </div>
                 )}
                 <button
                     onClick={() => setExpandedStop(expandedStop === index ? null : index)}
                     className={`w-full p-4 text-left transition-colors ${
+                        isCurrentStop && isLeavingSoon ? 'bg-gradient-to-r from-orange-100 via-orange-200 to-orange-100' :
                         isCurrentStop ? 'bg-gradient-to-r from-yellow-100 via-yellow-200 to-yellow-100' :
+                        isPast ? 'bg-gray-100' :
                         stop.isAfterParty 
                             ? 'bg-gradient-to-r from-red-100 to-green-100' 
                             : 'bg-white hover:bg-gray-50'
@@ -312,22 +245,72 @@
                 >
                     <div className="flex justify-between items-center">
                         <div className="flex-1">
-                            <div className={`font-bold text-lg ${isCurrentStop ? 'text-red-700' : 'text-gray-800'}`}>
+                            <div className={`font-bold text-lg flex items-center ${
+                                isPast ? 'text-gray-500' :
+                                isCurrentStop && isLeavingSoon ? 'text-orange-700' :
+                                isCurrentStop ? 'text-red-700' : 'text-gray-800'
+                            }`}>
+                                {isPast && <i className="fas fa-check-circle text-green-600 mr-2"></i>}
                                 {stop.time}
                             </div>
-                            <div className={`${
-                                isCurrentStop ? 'text-red-600 font-semibold' :
-                                stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-600'
-                            } mt-1`}>
-                                {stop.venue}
-                            </div>
+                            {stop.title ? (
+                                <>
+                                    <div className={`${
+                                        isPast ? 'text-gray-500' :
+                                        isCurrentStop && isLeavingSoon ? 'text-orange-600 font-semibold' :
+                                        isCurrentStop ? 'text-red-600 font-semibold' :
+                                        stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-700 font-semibold'
+                                    } mt-1`}>
+                                        {stop.title}
+                                    </div>
+                                    <div className={`${
+                                        isPast ? 'text-gray-500' :
+                                        isCurrentStop && isLeavingSoon ? 'text-orange-600' :
+                                        isCurrentStop ? 'text-red-600' :
+                                        stop.isAfterParty ? 'text-red-700' : 'text-gray-600'
+                                    } text-sm`}>
+                                        {stop.venue}
+                                    </div>
+                                </>
+                            ) : (
+                                <div className={`${
+                                    isPast ? 'text-gray-500' :
+                                    isCurrentStop && isLeavingSoon ? 'text-orange-600 font-semibold' :
+                                    isCurrentStop ? 'text-red-600 font-semibold' :
+                                    stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-600'
+                                } mt-1`}>
+                                    {stop.venue}
+                                </div>
+                            )}
+                            {isCurrentStop && isLeavingSoon && nextStop && (
+                                <div className="mt-2 text-sm font-bold text-orange-700">
+                                    ⏰ LEAVING SOON! Next: {nextStop.title || nextStop.venue} ({nextStop.time.split(' - ')[0]})
+                                </div>
+                            )}
                         </div>
-                        <i className={`fas fa-chevron-${expandedStop === index ? 'up' : 'down'} text-gray-400 ml-2`}></i>
+                        <i className={`fas fa-chevron-${expandedStop === index ? 'up' : 'down'} ${isPast ? 'text-gray-400' : 'text-gray-400'} ml-2`}></i>
                     </div>
                 </button>
                 
                 {expandedStop === index && (
                     <div className="p-4 bg-gray-50 border-t-2 border-gray-200">
+                        {stop.text && (
+                            <div className="mb-4 text-gray-700">
+                                <p>{stop.text}</p>
+                            </div>
+                        )}
+                        {stop.drinkSpecials && (
+                            <div className="bg-blue-50 border-l-4 border-blue-400 p-3 mb-4">
+                                <p className="text-sm font-bold text-blue-800 mb-1">Drink Specials:</p>
+                                <p className="text-sm text-gray-700">{stop.drinkSpecials}</p>
+                            </div>
+                        )}
+                        {stop.music && (
+                            <div className="bg-purple-50 border-l-4 border-purple-400 p-3 mb-4">
+                                <p className="text-sm font-bold text-purple-800 mb-1">Music:</p>
+                                <p className="text-sm text-gray-700">{stop.music}</p>
+                            </div>
+                        )}
                         {stop.notes && (
                             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4">
                                 <p className="text-sm text-gray-700">{stop.notes}</p>
@@ -360,7 +343,7 @@
             </div>
         ));
 
-        // Carol data
+        // Carol data - placeholder structure
         const carolsData = {
             nice: [
                 {
@@ -455,7 +438,7 @@ Rudolph the Red-Nosed Reindeer, (reindeer) You'll go down in history!`
                     lyrics: `Feliz Navidad 
 Feliz Navidad 
 Feliz Navidad 
-Prospero Año y Felicidad. 
+Prospero AÃ±o y Felicidad. 
 
 I wanna wish you a Merry Christmas 
 I wanna wish you a Merry Christmas 
@@ -479,6 +462,49 @@ Kiss her once for me
 Have a holly jolly Christmas 
 and in case you didn't hear 
 Oh by golly have a holly jolly Christmas this year`
+                },
+                {
+                    title: "We Wish you a Merry Christmas",
+                    lyrics: `We Wish you a Merry Christmas
+We Wish you a Merry Christmas
+We Wish you a Merry Christmas and a Happy New Year
+
+Good tidings we bring to you and your kin 
+Good tidings for Xmas and a Happy New Year
+
+Oh, bring us a figgy pudding 
+Oh, bring us a figgy pudding
+Oh, bring us a figgy pudding and a cup of good cheer 
+
+We won't go until we get some 
+We won't go until we get some
+We won't go until we get some, 
+so bring some out here:
+
+We Wish you a Merry Christmas
+We Wish you a Merry Christmas
+We Wish you a Merry Christmas 
+So bring some right here!`
+                },
+                {
+                    title: "Deck the Halls",
+                    lyrics: `Deck the halls with boughs of holly, Fala la la la, la la la 
+Tis the season to be jolly, Fala la lala, la la la
+
+Don we now our gay apparel, Fala la la la, la la la 
+Troll the ancient Yuletide carol, Fa la la la la, la la la
+
+See the blazing Yule before us, Falala la la, la la la 
+Strike the harp and join the chorus. Falala la la, la la la
+
+Follow me in merry measure, Fala la la la, la la la 
+While I tell of Yuletide treasure, Fa la la la la, la la la
+
+Fast away the old year passes, Fala la lala, la la la 
+Hail the new, ye lads and lasses, Fala la lala, la la la
+
+Sing we joyous, all together, Fala la la la, la la la 
+Heedless of the wind and weather, Fala lala la, la la`
                 }
             ],
             naughty: [
@@ -551,6 +577,46 @@ A Tab of Yellow Sunshine LSD
 10 Peyote Buttons 
 11 Magic Mushrooms 
 12 Pints a-dripping`
+                },
+                {
+                    title: "We Wish you a Merry Christmas",
+                    lyrics: `We wish you a merry Christmas 
+We wish you a merry Christmas 
+We wish you a merry Christmas 
+Now bring us some beer!
+
+We won't go until we get some 
+We won't go until we get some 
+We won't go until we get some`
+                },
+                {
+                    title: "Deck my Balls",
+                    lyrics: `Deck my balls with boughs of holly, Fa la la la la, la la la.
+Tap the keg, inflate the dolly, Fala la la la, la la la
+
+Don we now our rubber panties, Fa la la la la, la la la 
+We're a bunch of twisted Santies, Fala la la la, la la la
+
+Naughty girls are such a treasure, Fa la la la la, la la la 
+These North Poles were made for pleasure, Falala lala, lala la
+
+Fucked the elves, fucked all the reindeer, Fala la la la, la la la 
+Fuck the cookies, bring us COLD BEER! Fa la la la la, la la`
+                },
+                {
+                    title: "O Come all Ye Perverts",
+                    lyrics: `(tune of "O Come all Ye Faithful")
+
+O come all ye perverts
+Come and have an orgy
+O come ye, o cum ye
+In brothels galore
+Come and get plastered
+And let's find some ho-girls
+O come let us enjoy them
+O come let us enjoy them
+O come let us enjoy them
+In brothels galore`
                 }
             ]
         };
@@ -560,146 +626,358 @@ A Tab of Yellow Sunshine LSD
             const [carolType, setCarolType] = useState('nice');
             const [selectedCarol, setSelectedCarol] = useState(null);
             const [subscribeStatus, setSubscribeStatus] = useState('');
-            const [lyricsFontSize, setLyricsFontSize] = useState(1.1);
+            const [lyricsFontSize, setLyricsFontSize] = useState(1.1); // Default font size in rem
             const [darkMode, setDarkMode] = useState(false);
             const [expandedStop, setExpandedStop] = useState(null);
             const [currentStop, setCurrentStop] = useState(null);
             const [expandedAbout, setExpandedAbout] = useState(null);
+            const [countdown, setCountdown] = useState('');
             
-            // Quests state
-            const [expandedBadges, setExpandedBadges] = useState(false);
-            const [completedVenues, setCompletedVenues] = useState([]);
-            const [completedChallenges, setCompletedChallenges] = useState([]);
-            const [earnedBadges, setEarnedBadges] = useState([]);
-            const [showBadgeModal, setShowBadgeModal] = useState(null);
-            const [showMajorAward, setShowMajorAward] = useState(false);
-            const [showAllBadgesModal, setShowAllBadgesModal] = useState(false);
+            // Quest system state
+            const [badgeLegendExpanded, setBadgeLegendExpanded] = useState(false);
+            const [badgePopupQueue, setBadgePopupQueue] = useState([]);
+            const [showingBadgePopup, setShowingBadgePopup] = useState(false);
+            const [badgePopupsShown, setBadgePopupsShown] = useState(() => {
+                const saved = localStorage.getItem('santacon_badge_popups_shown');
+                return saved ? JSON.parse(saved) : {
+                    jollyLeader: false,
+                    giftGiver: false,
+                    paparazzi: false,
+                    marathonSanta: false,
+                    superSanta: false,
+                    boulderLegend: false
+                };
+            });
+            const [badges, setBadges] = useState(() => {
+                const saved = localStorage.getItem('santacon_badges');
+                return saved ? JSON.parse(saved) : {
+                    jollyLeader: false,
+                    giftGiver: false,
+                    paparazzi: false,
+                    marathonSanta: false,
+                    superSanta: false,
+                    boulderLegend: false
+                };
+            });
+            const [venueQuests, setVenueQuests] = useState(() => {
+                const saved = localStorage.getItem('santacon_venue_quests');
+                return saved ? JSON.parse(saved) : {
+                    hotelBoulderado: false,
+                    velvetElk: false,
+                    pizzaCalore: false,
+                    taco: false,
+                    jungle: false
+                };
+            });
+            const [challenges, setChallenges] = useState(() => {
+                const saved = localStorage.getItem('santacon_challenges');
+                return saved ? JSON.parse(saved) : {
+                    highFive10: false,
+                    groupPhoto: false,
+                    giveGift: false,
+                    findElf: false,
+                    singCarol: false,
+                    buyDrink: false,
+                    compliment5: false,
+                    congaLine: false,
+                    photoCop: false,
+                    visit3Stops: false,
+                    postSocial: false,
+                    boulderLegend: false
+                };
+            });
 
-            // Function to get current stop based on time - TESTING DATE SET TO 11/12/25
+            // Venue quest data
+            const venueQuestData = [
+                {
+                    id: 'hotelBoulderado',
+                    name: 'Hotel Boulderado',
+                    quest: '📷 Take your picture in front of the Christmas tree in the lobby',
+                    distance: '2 min. from the Courthouse',
+                    unlockTime: 17 * 60, // 5:00pm in minutes
+                    availableUntil: 19 * 60 + 30, // 7:30pm
+                    icon: '📷'
+                },
+                {
+                    id: 'velvetElk',
+                    name: 'The Velvet Elk',
+                    quest: '🍺 Grab a drink',
+                    distance: '1 min. from the Courthouse',
+                    unlockTime: 17 * 60, // 5:00pm
+                    availableUntil: 19 * 60 + 30, // 7:30pm
+                    icon: '🍺'
+                },
+                {
+                    id: 'pizzaCalore',
+                    name: 'Pizza Calore',
+                    quest: '🍕 Grab a slice between stops',
+                    distance: '1 min. from the Courthouse',
+                    unlockTime: 17 * 60, // 5:00pm
+                    availableUntil: 19 * 60 + 30, // 7:30pm
+                    icon: '🍕'
+                },
+                {
+                    id: 'taco',
+                    name: 'T|Aco',
+                    quest: '🍹 Get a margarita and some chips!',
+                    distance: '2 min. from The Spotted James',
+                    unlockTime: 19 * 60, // 7:00pm
+                    availableUntil: 20 * 60 + 30, // 8:30pm
+                    icon: '🍹'
+                },
+                {
+                    id: 'jungle',
+                    name: 'Jungle',
+                    quest: '🍹 Get a tiki drink!',
+                    distance: '5 min. from The Spotted James',
+                    unlockTime: 19 * 60, // 7:00pm
+                    availableUntil: 20 * 60 + 30, // 8:30pm
+                    icon: '🍹'
+                }
+            ];
+
+            // Calculate countdown to event
+            const calculateCountdown = () => {
+                const eventDate = new Date('2025-11-29T17:00:00'); // Nov 29, 2025, 5:00 PM
+                const now = new Date();
+                const diff = eventDate - now;
+
+                if (diff < 0) {
+                    return 'Event is happening NOW! 🎉';
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+                if (days > 0) {
+                    return `In ${days} day${days !== 1 ? 's' : ''}`;
+                } else if (hours > 0) {
+                    return `Starting in ${hours} hour${hours !== 1 ? 's' : ''}!`;
+                } else {
+                    return 'Starting soon!';
+                }
+            };
+
+            // Update countdown every minute
+            useEffect(() => {
+                setCountdown(calculateCountdown());
+                const interval = setInterval(() => {
+                    setCountdown(calculateCountdown());
+                }, 60000); // Update every minute
+
+                return () => clearInterval(interval);
+            }, []);
+
+            // Function to get current stop based on time
             const getCurrentStop = () => {
                 const now = new Date();
                 
-                // TESTING: Check if it's November 12, 2025
+                // For testing: Check if it's November 11, 2025
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 
-                // Only activate on November 12, 2025 (for testing)
-                if (year !== 2025 || month !== 10 || day !== 12) {
+                // Only activate on November 11, 2025
+                if (year !== 2025 || month !== 10 || day !== 11) {
                     return null;
                 }
 
                 const currentHour = now.getHours();
                 const currentMinute = now.getMinutes();
-                const currentTime = currentHour * 60 + currentMinute;
+                const currentTime = currentHour * 60 + currentMinute; // Convert to minutes from midnight
+                
+                console.log('Current time in minutes:', currentTime, `(${currentHour}:${currentMinute})`);
 
+                // Define time ranges for each stop (in minutes from midnight)
                 const stops = [
-                    { index: 0, start: 17 * 60, end: 18 * 60 + 30 }, // 5:00pm - 6:30pm
-                    { index: 1, start: 18 * 60 + 30, end: 19 * 60 }, // 6:30pm - 7:00pm
-                    { index: 2, start: 19 * 60, end: 20 * 60 + 15 }, // 7:00pm - 8:15pm
-                    { index: 3, start: 20 * 60 + 15, end: 21 * 60 }, // 8:15pm - 9:00pm
-                    { index: 4, start: 21 * 60, end: 25 * 60 } // 9:00pm - 1:00am
+                    { index: 0, start: 17 * 60, end: 18 * 60 + 30 }, // 5:00pm - 6:30pm (1020-1110 minutes) - Avanti
+                    { index: 1, start: 18 * 60 + 30, end: 19 * 60 }, // 6:30pm - 7:00pm (1110-1140) - Pearl Street
+                    { index: 2, start: 19 * 60, end: 19 * 60 + 45 }, // 7:00pm - 7:45pm (1140-1185) - Spotted James
+                    { index: 3, start: 19 * 60 + 45, end: 21 * 60 }, // 7:45pm - 9:00pm (1185-1260) - St. Julien
+                    { index: 4, start: 21 * 60, end: 25 * 60 } // 9:00pm - 1:00am (1260-1500) - Santa Ball
                 ];
 
                 for (let stop of stops) {
+                    console.log(`Checking stop ${stop.index}: ${stop.start} <= ${currentTime} < ${stop.end}`);
                     if (currentTime >= stop.start && currentTime < stop.end) {
-                        return stop.index;
+                        console.log('Match found! Stop index:', stop.index);
+                        // Check if we're in the last 15 minutes (but not for the final stop - Santa Ball)
+                        const timeUntilEnd = stop.end - currentTime;
+                        const isLeavingSoon = (timeUntilEnd <= 15) && (stop.index !== 4);
+                        return { index: stop.index, isLeavingSoon };
                     }
                 }
 
+                console.log('No matching stop found');
                 return null;
             };
-
-            // Get unlocked venue quests based on current time
-            const getUnlockedVenues = () => {
-                const now = new Date();
-                const year = now.getFullYear();
-                const month = now.getMonth();
-                const day = now.getDate();
-                
-                // Only work on November 12, 2025 (testing date)
-                if (year !== 2025 || month !== 10 || day !== 12) {
-                    return [];
-                }
-
-                const currentTime = now.getHours() * 60 + now.getMinutes();
-                return venueQuestsData.filter(venue => currentTime >= venue.unlockTime);
-            };
-
-            // Check for Marathon Santa badge auto-unlock at 8:15pm
-            useEffect(() => {
-                const now = new Date();
-                const year = now.getFullYear();
-                const month = now.getMonth();
-                const day = now.getDate();
-                
-                if (year === 2025 && month === 10 && day === 12) {
-                    const currentTime = now.getHours() * 60 + now.getMinutes();
-                    const marathonUnlockTime = 20 * 60 + 15; // 8:15pm
-                    
-                    if (currentTime >= marathonUnlockTime && !earnedBadges.includes('marathon-santa')) {
-                        setEarnedBadges(prev => [...prev, 'marathon-santa']);
-                        setShowBadgeModal('marathon-santa');
-                    }
-                }
-            }, [earnedBadges]);
-
-            // Check for badge unlocks based on completed quests
-            useEffect(() => {
-                // Super Santa: 3+ venue quests
-                if (completedVenues.length >= 3 && !earnedBadges.includes('super-santa')) {
-                    setEarnedBadges(prev => [...prev, 'super-santa']);
-                    setShowBadgeModal('super-santa');
-                }
-
-                // Paparazzi: marked as complete in challenges
-                const photoChallenge = completedChallenges.find(c => c.includes('photo'));
-                if (photoChallenge && !earnedBadges.includes('paparazzi')) {
-                    setEarnedBadges(prev => [...prev, 'paparazzi']);
-                    setShowBadgeModal('paparazzi');
-                }
-
-                // Gift Giver: marked as complete in challenges
-                const drinkChallenge = completedChallenges.find(c => c.includes('drink'));
-                if (drinkChallenge && !earnedBadges.includes('gift-giver')) {
-                    setEarnedBadges(prev => [...prev, 'gift-giver']);
-                    setShowBadgeModal('gift-giver');
-                }
-
-                // Jolly Leader: marked as complete in challenges
-                const carolChallenge = completedChallenges.find(c => c.includes('carol'));
-                if (carolChallenge && !earnedBadges.includes('jolly-leader')) {
-                    setEarnedBadges(prev => [...prev, 'jolly-leader']);
-                    setShowBadgeModal('jolly-leader');
-                }
-
-                // Boulder Legend: self-reported
-                const legendChallenge = completedChallenges.find(c => c.includes('3rd+'));
-                if (legendChallenge && !earnedBadges.includes('boulder-legend')) {
-                    setEarnedBadges(prev => [...prev, 'boulder-legend']);
-                    setShowBadgeModal('boulder-legend');
-                }
-
-                // Check for all badges complete
-                if (earnedBadges.length === 6 && !showAllBadgesModal) {
-                    setShowAllBadgesModal(true);
-                }
-            }, [completedVenues, completedChallenges, earnedBadges, showAllBadgesModal]);
 
             // Update current stop every minute
             useEffect(() => {
                 setCurrentStop(getCurrentStop());
                 const interval = setInterval(() => {
                     setCurrentStop(getCurrentStop());
-                }, 60000);
+                }, 60000); // Update every minute
 
                 return () => clearInterval(interval);
             }, []);
 
-            // Scroll to top when switching tabs
+            // Auto-expand current stop when it changes (but allow user to collapse/expand others)
+            useEffect(() => {
+                if (currentStop !== null) {
+                    setExpandedStop(currentStop.index);
+                }
+            }, [currentStop?.index]);
+
+            // Scroll to top when changing tabs
             useEffect(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, [activeTab]);
+
+            // Save quest state to localStorage
+            useEffect(() => {
+                localStorage.setItem('santacon_badges', JSON.stringify(badges));
+            }, [badges]);
+
+            useEffect(() => {
+                localStorage.setItem('santacon_venue_quests', JSON.stringify(venueQuests));
+            }, [venueQuests]);
+
+            useEffect(() => {
+                localStorage.setItem('santacon_challenges', JSON.stringify(challenges));
+            }, [challenges]);
+
+            // Badge messages
+            const badgeMessages = {
+                jollyLeader: {
+                    emoji: '🎅',
+                    title: 'JOLLY LEADER',
+                    message: "Your golden voice carried all the off-key Santas! You should be on America's Got Talent!"
+                },
+                giftGiver: {
+                    emoji: '🎁',
+                    title: 'GIFT GIVER',
+                    message: "Santa's checking his list, and you're officially on the Nice list! Your heart grew 3 sizes!"
+                },
+                paparazzi: {
+                    emoji: '📸',
+                    title: 'PAPARAZZI',
+                    message: "You've documented this night better than TMZ! These pics will be legendary (or at least blackmail-worthy)."
+                },
+                marathonSanta: {
+                    emoji: '🏃',
+                    title: 'MARATHON SANTA',
+                    message: "You conquered all 5 stops! Your liver is a champion, and you need help! Legend status: achieved."
+                },
+                superSanta: {
+                    emoji: '🌟',
+                    title: 'SUPER SANTA',
+                    message: "Most people stick to the main route. You? You're an overachiever. We're impressed. Your mom is proud."
+                },
+                boulderLegend: {
+                    emoji: '🎭',
+                    title: 'BOULDER LEGEND',
+                    message: "Three years of SantaCon? You're basically Boulder SantaCon royalty! Put this on your resume."
+                }
+            };
+
+            // Check badge unlocks
+            useEffect(() => {
+                const newBadges = { ...badges };
+                const newlyUnlocked = [];
+                
+                // Jolly Leader: Sang a carol
+                if (challenges.singCarol && !badges.jollyLeader) {
+                    newBadges.jollyLeader = true;
+                    if (!badgePopupsShown.jollyLeader) {
+                        newlyUnlocked.push('jollyLeader');
+                    }
+                }
+                
+                // Gift Giver: Bought drink OR gave gift
+                if ((challenges.buyDrink || challenges.giveGift) && !badges.giftGiver) {
+                    newBadges.giftGiver = true;
+                    if (!badgePopupsShown.giftGiver) {
+                        newlyUnlocked.push('giftGiver');
+                    }
+                }
+                
+                // Paparazzi: 3+ photo challenges (group photo, cop photo, social post, boulderado tree)
+                const photoCount = [
+                    challenges.groupPhoto,
+                    challenges.photoCop,
+                    challenges.postSocial,
+                    venueQuests.hotelBoulderado
+                ].filter(Boolean).length;
+                if (photoCount >= 3 && !badges.paparazzi) {
+                    newBadges.paparazzi = true;
+                    if (!badgePopupsShown.paparazzi) {
+                        newlyUnlocked.push('paparazzi');
+                    }
+                }
+                
+                // Marathon Santa: After St. Julien stop (stop index 3)
+                if (currentStop && currentStop.index >= 3 && !badges.marathonSanta) {
+                    newBadges.marathonSanta = true;
+                    if (!badgePopupsShown.marathonSanta) {
+                        newlyUnlocked.push('marathonSanta');
+                    }
+                }
+                
+                // Super Santa: 1 venue quest + 5 challenge quests
+                const venueCount = Object.values(venueQuests).filter(Boolean).length;
+                const challengeCount = Object.values(challenges).filter(Boolean).length;
+                if (venueCount >= 1 && challengeCount >= 5 && !badges.superSanta) {
+                    newBadges.superSanta = true;
+                    if (!badgePopupsShown.superSanta) {
+                        newlyUnlocked.push('superSanta');
+                    }
+                }
+                
+                // Boulder Legend: Manual checkbox
+                if (challenges.boulderLegend && !badges.boulderLegend) {
+                    newBadges.boulderLegend = true;
+                    if (!badgePopupsShown.boulderLegend) {
+                        newlyUnlocked.push('boulderLegend');
+                    }
+                }
+                
+                // Update badges if any changed
+                if (JSON.stringify(newBadges) !== JSON.stringify(badges)) {
+                    setBadges(newBadges);
+                }
+                
+                // Queue newly unlocked badge pop-ups
+                if (newlyUnlocked.length > 0) {
+                    setBadgePopupQueue(prev => [...prev, ...newlyUnlocked]);
+                }
+            }, [challenges, venueQuests, currentStop, badges, badgePopupsShown]);
+
+            // Handle badge popup queue
+            useEffect(() => {
+                if (badgePopupQueue.length > 0 && !showingBadgePopup) {
+                    setShowingBadgePopup(true);
+                }
+            }, [badgePopupQueue, showingBadgePopup]);
+
+            // Save badge popups shown to localStorage
+            useEffect(() => {
+                localStorage.setItem('santacon_badge_popups_shown', JSON.stringify(badgePopupsShown));
+            }, [badgePopupsShown]);
+
+            const handleBadgePopupClose = () => {
+                const [currentBadge, ...remaining] = badgePopupQueue;
+                
+                // Mark this badge popup as shown
+                setBadgePopupsShown(prev => ({
+                    ...prev,
+                    [currentBadge]: true
+                }));
+                
+                // Remove from queue
+                setBadgePopupQueue(remaining);
+                setShowingBadgePopup(false);
+            };
 
             const handleSubscribe = async (e) => {
                 e.preventDefault();
@@ -708,9 +986,11 @@ A Tab of Yellow Sunshine LSD
                 const emailInput = e.target.elements.email.value;
 
                 try {
+                    // Note: In production, this should go through a backend server to protect API keys
+                    // For now, using Mailchimp's JSONP endpoint
                     const formData = new FormData();
                     formData.append('EMAIL', emailInput);
-                    formData.append('b_2562f63497', '');
+                    formData.append('b_2562f63497', ''); // Bot honeypot
 
                     const response = await fetch(
                         'https://us7.list-manage.com/subscribe/post?u=97c79a453122b17d97b904bea&id=2562f63497',
@@ -721,7 +1001,7 @@ A Tab of Yellow Sunshine LSD
                         }
                     );
 
-                    setSubscribeStatus('Thanks for subscribing! 🎅');
+                    setSubscribeStatus('Thanks for subscribing! ðŸŽ…');
                     e.target.reset();
                     setTimeout(() => setSubscribeStatus(''), 3000);
                 } catch (error) {
@@ -733,50 +1013,106 @@ A Tab of Yellow Sunshine LSD
             const HomePage = () => (
                 <div className="space-y-6">
                     <div className="text-center mb-8">
-                        <div className="w-32 h-32 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-lg">
-                            <span className="text-6xl">🎅</span>
-                        </div>
-                        <h1 className="text-4xl font-bold text-red-700 mb-2">Boulder SantaCon</h1>
-                        <p className="text-xl text-green-700 font-semibold">19th Annual Event</p>
-                        <p className="text-lg text-gray-700 mt-2">Black Friday 2024</p>
+                        <img 
+                            src="img/header.jpg" 
+                            alt="Boulder SantaCon - The 19th Annual - Black Friday" 
+                            className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
+                        />
                         
-                        <div className="flex justify-center gap-4 mt-4">
+                        {/* Social Media & Calendar Buttons */}
+                        <div className="flex justify-center gap-3 mt-6">
                             <a 
                                 href="https://www.instagram.com/bouldersantacon" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="bg-gradient-to-br from-purple-500 to-pink-500 text-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                className="border-2 border-red-600 text-red-600 px-5 py-2.5 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg flex items-center"
                             >
-                                <i className="fab fa-instagram text-xl"></i>
+                                <i className="fab fa-instagram mr-2"></i>
+                                Follow
                             </a>
                             <a 
                                 href="https://www.facebook.com/events/1458481705240919" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                className="border-2 border-red-600 text-red-600 px-5 py-2.5 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg"
                             >
-                                <i className="fab fa-facebook-f text-xl"></i>
+                                RSVP
                             </a>
+                            <button
+                                onClick={() => {
+                                    // Create .ics file content
+                                    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Boulder SantaCon//EN
+BEGIN:VEVENT
+UID:bouldersantacon2025@santarchy.app
+DTSTAMP:20251106T000000Z
+DTSTART:20251128T170000
+DTEND:20251129T010000
+SUMMARY:Boulder SantaCon 2025
+DESCRIPTION:The 19th Annual Boulder SantaCon! Dress up as Santa and join us for a festive night through Boulder. Visit https://santarchy.app for schedule and details.
+LOCATION:Avanti F&B, 1401 Pearl St, Boulder, CO 80302
+URL:https://santarchy.app
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
+                                    
+                                    // Create blob and download
+                                    const blob = new Blob([icsContent], { type: 'text/calendar' });
+                                    const url = window.URL.createObjectURL(blob);
+                                    const link = document.createElement('a');
+                                    link.href = url;
+                                    link.download = 'boulder-santacon-2025.ics';
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                    window.URL.revokeObjectURL(url);
+                                }}
+                                className="border-2 border-red-600 text-red-600 px-5 py-2.5 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg flex items-center"
+                            >
+                                <i className="fas fa-calendar-plus mr-2"></i>
+                                Cal
+                            </button>
                         </div>
                     </div>
 
                     <div className="glass-effect rounded-lg shadow-xl p-6">
-                        <h2 className="text-2xl font-bold text-red-700 mb-4 flex items-center">
+                        <h2 className="text-2xl font-bold text-red-700 mb-2 flex items-center">
                             <i className="fas fa-calendar-alt mr-3"></i>
                             Santa's Schedule
                         </h2>
+                        <p className="text-gray-700 mb-2">
+                            Black Friday, Nov. 28, 2025
+                        </p>
+                        <button 
+                            onClick={() => setActiveTab('about')}
+                            className="text-sm text-red-600 hover:text-red-800 mb-4 flex items-center font-semibold"
+                        >
+                            <i className="fas fa-info-circle mr-1"></i>
+                            What is SantaCon?
+                        </button>
                         <div className="space-y-3">
-                            {scheduleData.map((stop, index) => (
-                                <ScheduleStop 
-                                    key={index}
-                                    stop={stop}
-                                    index={index}
-                                    expandedStop={expandedStop}
-                                    setExpandedStop={setExpandedStop}
-                                    setActiveTab={setActiveTab}
-                                    isCurrentStop={currentStop === index}
-                                />
-                            ))}
+                            {scheduleData.map((stop, index) => {
+                                const isCurrentStopActive = currentStop?.index === index;
+                                const isPastStop = currentStop && index < currentStop.index;
+                                const nextStopData = index < scheduleData.length - 1 ? scheduleData[index + 1] : null;
+                                
+                                return (
+                                    <ScheduleStop 
+                                        key={index}
+                                        stop={stop}
+                                        index={index}
+                                        expandedStop={expandedStop}
+                                        setExpandedStop={setExpandedStop}
+                                        setActiveTab={setActiveTab}
+                                        isCurrentStop={isCurrentStopActive}
+                                        isLeavingSoon={currentStop?.index === index && currentStop?.isLeavingSoon}
+                                        isPast={isPastStop}
+                                        nextStop={nextStopData}
+                                    />
+                                );
+                            })}
                         </div>
                     </div>
 
@@ -798,172 +1134,6 @@ A Tab of Yellow Sunshine LSD
                     </div>
                 </div>
             );
-
-            const QuestsPage = () => {
-                const unlockedVenues = getUnlockedVenues();
-                const nextUnlockTime = unlockedVenues.length < 3 ? "5:00pm" : unlockedVenues.length < 5 ? "7:00pm" : null;
-
-                return (
-                    <div className="space-y-6">
-                        <div className="text-center mb-6">
-                            <h1 className="text-3xl font-bold text-red-700 mb-2">
-                                <i className="fas fa-trophy mr-2"></i>
-                                Santa's Side Quests
-                            </h1>
-                            <p className="text-gray-600">Level up your SantaCon experience!</p>
-                        </div>
-
-                        {/* Your Badges */}
-                        <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
-                            <button
-                                onClick={() => setExpandedBadges(!expandedBadges)}
-                                className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
-                            >
-                                <div className="flex justify-between items-center">
-                                    <div>
-                                        <h2 className="text-2xl font-bold text-green-700">
-                                            🏆 Your Badges ({earnedBadges.length}/6)
-                                        </h2>
-                                        <p className="text-sm text-gray-600 mt-1">
-                                            Badge details <i className={`fas fa-chevron-${expandedBadges ? 'up' : 'down'} ml-1`}></i>
-                                        </p>
-                                    </div>
-                                </div>
-                            </button>
-                            
-                            {expandedBadges && (
-                                <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
-                                    <p className="text-gray-700 mb-4">
-                                        Unlock badges by completing challenges and side quests throughout the night:
-                                    </p>
-                                    <div className="space-y-3">
-                                        {badgeDefinitions.map(badge => (
-                                            <div key={badge.id} className={`flex items-start p-3 rounded-lg ${
-                                                earnedBadges.includes(badge.id) ? 'bg-green-50' : 'bg-gray-50'
-                                            }`}>
-                                                <span className="text-3xl mr-3">{badge.emoji}</span>
-                                                <div className="flex-1">
-                                                    <div className="font-bold text-gray-800">
-                                                        {badge.name}
-                                                        {earnedBadges.includes(badge.id) && (
-                                                            <span className="ml-2 text-green-600">✓</span>
-                                                        )}
-                                                    </div>
-                                                    <div className="text-sm text-gray-600">{badge.description}</div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Venue Quests */}
-                        <div className="glass-effect rounded-lg shadow-xl p-6">
-                            <h2 className="text-2xl font-bold text-red-700 mb-2">
-                                📍 Venue Quests ({completedVenues.length}/{venueQuestsData.length})
-                            </h2>
-                            <p className="text-gray-600 mb-4">
-                                Are you looking for more adventure? Try these side quests to add more fun to your SantaCon experience! Nearby venues unlock throughout the night, complete them to earn extra badges.
-                            </p>
-
-                            {unlockedVenues.length > 0 ? (
-                                <div className="space-y-3">
-                                    {unlockedVenues.map((venue, index) => (
-                                        <div key={index} className="border-2 border-gray-200 rounded-lg p-4">
-                                            <label className="flex items-start cursor-pointer">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={completedVenues.includes(venue.name)}
-                                                    onChange={(e) => {
-                                                        if (e.target.checked) {
-                                                            setCompletedVenues([...completedVenues, venue.name]);
-                                                        } else {
-                                                            setCompletedVenues(completedVenues.filter(v => v !== venue.name));
-                                                        }
-                                                    }}
-                                                    className="mt-1 mr-3 w-5 h-5"
-                                                />
-                                                <div className="flex-1">
-                                                    <div className="font-bold text-gray-800">{venue.name}</div>
-                                                    <div className="text-sm text-gray-600">{venue.description}</div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-6 text-center">
-                                    <i className="fas fa-lock text-4xl text-gray-400 mb-2"></i>
-                                    <p className="text-gray-600">
-                                        {nextUnlockTime ? `Venue quests unlock at ${nextUnlockTime}` : 'No venue quests available'}
-                                    </p>
-                                </div>
-                            )}
-
-                            {nextUnlockTime && unlockedVenues.length > 0 && (
-                                <div className="mt-4 text-center text-sm text-gray-500">
-                                    🔒 More venues unlock at {nextUnlockTime}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Challenges */}
-                        <div className="glass-effect rounded-lg shadow-xl p-6">
-                            <h2 className="text-2xl font-bold text-green-700 mb-2">
-                                🎯 Challenges ({completedChallenges.length}/9)
-                            </h2>
-                            <p className="text-gray-600 mb-4">
-                                Complete these challenges throughout the night to earn badges and show off your Santa spirit!
-                            </p>
-                            <div className="space-y-3">
-                                {[
-                                    "High-five 10 people",
-                                    "Take a group Santa photo",
-                                    "Sing a carol in public",
-                                    "Buy someone a drink",
-                                    "Find someone dressed as an elf and hug them",
-                                    "Post photo to Instagram/Facebook",
-                                    "Get photo with a Boulder cop",
-                                    "Complete a venue quest",
-                                    "This is my 3rd+ SantaCon"
-                                ].map((challenge, index) => (
-                                    <label key={index} className="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition">
-                                        <input
-                                            type="checkbox"
-                                            checked={completedChallenges.includes(challenge)}
-                                            onChange={(e) => {
-                                                if (e.target.checked) {
-                                                    setCompletedChallenges([...completedChallenges, challenge]);
-                                                } else {
-                                                    setCompletedChallenges(completedChallenges.filter(c => c !== challenge));
-                                                }
-                                            }}
-                                            className="mr-3 w-5 h-5"
-                                        />
-                                        <span className="text-gray-800">{challenge}</span>
-                                    </label>
-                                ))}
-                                <label className="flex items-center cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition">
-                                    <input
-                                        type="checkbox"
-                                        checked={completedChallenges.includes("Ask a stranger if they have been Nice (or Naughty) this year")}
-                                        onChange={(e) => {
-                                            if (e.target.checked) {
-                                                setCompletedChallenges([...completedChallenges, "Ask a stranger if they have been Nice (or Naughty) this year"]);
-                                            } else {
-                                                setCompletedChallenges(completedChallenges.filter(c => c !== "Ask a stranger if they have been Nice (or Naughty) this year"));
-                                            }
-                                        }}
-                                        className="mr-3 w-5 h-5"
-                                    />
-                                    <span className="text-gray-800">Ask a stranger if they have been Nice (or Naughty) this year</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                );
-            };
 
             const CarolsPage = () => (
                 <div className="space-y-6">
@@ -1060,16 +1230,24 @@ A Tab of Yellow Sunshine LSD
                         </h1>
                     </div>
 
-                    <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                    {/* What is SantaCon */}
+                    <div id="section-what" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                         <button
-                            onClick={() => setExpandedAbout(expandedAbout === 'what' ? null : 'what')}
+                            onClick={(e) => {
+                                setExpandedAbout(expandedAbout === 'what' ? null : 'what');
+                                if (expandedAbout !== 'what') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-what')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
                             className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex justify-between items-center">
                                 <div className="flex-1">
-                                    <h2 className="text-2xl font-bold text-green-700 mb-2">So what is SantaCon?</h2>
+                                    <h2 className="text-2xl font-bold text-red-700 mb-2">What is SantaCon?</h2>
                                     <p className="text-gray-700">
-                                        SantaCon takes place in major cities all over the world involving tens of thousands of Santa's.
+                                        It's not a pub crawl!
                                     </p>
                                 </div>
                                 <i className={`fas fa-chevron-${expandedAbout === 'what' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
@@ -1081,6 +1259,11 @@ A Tab of Yellow Sunshine LSD
                                     It is a non-profit, non-political, non-religious & non-sensical, non-logical celebration of 
                                     holiday cheer, goodwill, and fun.
                                 </p>
+                                <img 
+                                    src="img/group.jpg" 
+                                    alt="SantaCon" 
+                                    className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg"
+                                />
                                 <p className="text-gray-700">
                                     There is no good reason to dress up in cheap Santa suits, run around town, give gifts, sing songs, 
                                     have strangers sit on our laps, and decide who is naughty or nice, but it's a lot of fun so Santa 
@@ -1091,16 +1274,81 @@ A Tab of Yellow Sunshine LSD
                         )}
                     </div>
 
-                    <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                    {/* SantaCon's History */}
+                    <div id="section-history" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                         <button
-                            onClick={() => setExpandedAbout(expandedAbout === 'boulder' ? null : 'boulder')}
+                            onClick={() => {
+                                setExpandedAbout(expandedAbout === 'history' ? null : 'history');
+                                if (expandedAbout !== 'history') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-history')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
+                            className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
+                        >
+                            <div className="flex justify-between items-center">
+                                <div className="flex-1">
+                                    <h2 className="text-2xl font-bold text-green-700 mb-2">SantaCon's History</h2>
+                                    <p className="text-gray-700">
+                                        From Copenhagen to the world.
+                                    </p>
+                                </div>
+                                <i className={`fas fa-chevron-${expandedAbout === 'history' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
+                            </div>
+                        </button>
+                        {expandedAbout === 'history' && (
+                            <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
+                                <p className="text-gray-700 mb-4">
+                                    SantaCon began in San Francisco in 1994, inspired by a 1974 Danish activist theatre group called Solvognen, who gathered dozens of "Santas" in Copenhagen to hand out items from department store shelves as "presents" before being arrested.
+                                </p>
+                                <img 
+                                    src="img/sfsantacon.jpg" 
+                                    alt="San Francisco Cacophony Society SantaCon" 
+                                    className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg"
+                                />
+                                <p className="text-gray-700 mb-4">
+                                    Staged as street theater by the San Francisco Cacophony Society—a counterculture group focused on pranks and subversive art—the first event was called "Cheap Suit Santas" and aimed to make fun of Christmas consumerism. Originally influenced by the Surrealist movement and Discordianism, it wasn't intended to be a recurring event, but returned in 1995 with 100 participants.
+                                </p>
+                                <img 
+                                    src="img/hanging.jpg" 
+                                    alt="SantaCon History" 
+                                    className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg"
+                                />
+                                <p className="text-gray-700 mb-4">
+                                    SantaCon spread rapidly: Portland in 1996, Seattle in 1997, and Los Angeles and New York in 1998. The rise of the internet and the website Santarchy.com helped advertise the event, allowing people around the world to bring it to their cities. Today, SantaCon takes place in hundreds of cities globally, though it has evolved significantly from its countercultural roots into the festive pub crawl we know today.
+                                </p>
+                                <a 
+                                    href="https://journal.burningman.org/2022/12/opinion/shenanigans/meet-santa-zero/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-block bg-red-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-700 transition"
+                                >
+                                    <i className="fas fa-file-alt mr-2"></i>
+                                    Interview: Meet Santa Zero
+                                </a>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Boulder's SantaCon */}
+                    <div id="section-boulder" className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                        <button
+                            onClick={() => {
+                                setExpandedAbout(expandedAbout === 'boulder' ? null : 'boulder');
+                                if (expandedAbout !== 'boulder') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-boulder')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
                             className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex justify-between items-center">
                                 <div className="flex-1">
                                     <h2 className="text-2xl font-bold text-red-700 mb-2">Boulder's SantaCon</h2>
                                     <p className="text-gray-700">
-                                        Every city has a different flavor of SantaCon.
+                                        The free-range, organic, gluten-free SantaCon.
                                     </p>
                                 </div>
                                 <i className={`fas fa-chevron-${expandedAbout === 'boulder' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
@@ -1109,22 +1357,39 @@ A Tab of Yellow Sunshine LSD
                         {expandedAbout === 'boulder' && (
                             <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
                                 <p className="text-gray-700 mb-4">
-                                    The Boulder SantaCon is <strong>NOT</strong> a rowdy, 
-                                    drunken frat boy fest. If you're expecting that, you'll be disappointed. The Santas do like their 
-                                    good cheer, but we focus on having fun and making people laugh!
+                                    Boulder SantaCon launched in 2006 with a simple mission: instead of fighting crowds at the mall on Black Friday, why not dress up as Santa and celebrate the holidays in the most ridiculous way possible? It was a subtle protest against consumerism wrapped in cheap red suits and holiday cheer.
                                 </p>
+                                <img 
+                                    src="img/first-santacon.jpg" 
+                                    alt="First Boulder SantaCon" 
+                                    className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg"
+                                />
+                                <p className="text-gray-700 mb-4">
+                                    The first few years were beautifully chaotic. We started with about 20 Santas "shopping" at the 29th Street Mall, much to the confusion of mall security. We'd take the HOP bus downtown, which became known as "Santa's Sleigh." Dozens of Santas would cram in like festive sardines while bewildered commuters laughed and took photos. One year, a pop-up speakeasy called "Santa's Pub" appeared, serving cold PBR's, hot chocolate, and peppermint schnapps to thirsty Santas.
+                                </p>
+                                <img 
+                                    src="img/believe.jpg" 
+                                    alt="Boulder SantaCon Believe" 
+                                    className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg"
+                                />
                                 <p className="text-gray-700">
-                                    This Black Friday marks our <strong>19th annual</strong> Boulder SantaCon! SantaCon has become a 
-                                    Boulder tradition, our irreverent celebration of the holidays, where Santa suits, holiday cheer, 
-                                    and festive weirdness take over our beloved town.
+                                    This Black Friday marks our 19th annual event and it has become a Boulder tradition. Unlike the rowdy reputation SantaCon has earned in other cities, Boulder's version has always been about fun, not mayhem. Come join Santa!
                                 </p>
                             </div>
                         )}
                     </div>
 
-                    <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                    {/* Santa's Rules */}
+                    <div id="section-rules" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                         <button
-                            onClick={() => setExpandedAbout(expandedAbout === 'rules' ? null : 'rules')}
+                            onClick={() => {
+                                setExpandedAbout(expandedAbout === 'rules' ? null : 'rules');
+                                if (expandedAbout !== 'rules') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-rules')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
                             className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
                         >
                             <div className="flex justify-between items-center">
@@ -1134,7 +1399,7 @@ A Tab of Yellow Sunshine LSD
                                         Santa's Rules
                                     </h2>
                                     <p className="text-gray-700">
-                                        Santa looks like Santa.
+                                        Yes, SantaCon has a few rules.
                                     </p>
                                 </div>
                                 <i className={`fas fa-chevron-${expandedAbout === 'rules' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
@@ -1145,37 +1410,106 @@ A Tab of Yellow Sunshine LSD
                                 <div className="space-y-4">
                                     <div>
                                         <h3 className="font-bold text-lg text-gray-800 mb-2">1. Santa looks like Santa.</h3>
-                                        <p className="text-gray-700">
+                                        <p className="text-gray-700 mb-4">
                                             HOLIDAY APPAREL IS MANDATORY. A Santa hat is NOT ENOUGH. Dress as an elf, a reindeer, 
-                                            a christmas tree, Chanukah Harry, a lump of coal, etc. Local costume shops: Theatrical 
-                                            Costumes, Etc. and Trendy Boutique, The Ritz, Ragstock, and The Dollar Store (for $1 Santa hats).
+                                            a christmas tree, Hanukkah Harry, a lump of coal, etc. If you show up without a costume, you will wish that you had! SantaCon is more fun if everyone is participating!
                                         </p>
+                                        <img 
+                                            src="img/costumes.jpg" 
+                                            alt="Santa Costumes" 
+                                            className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
+                                        />
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-lg text-gray-800 mb-2">2. Address your fellow santa as "Santa."</h3>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg text-gray-800 mb-2">3. Q: Who's in Charge? A: Santa.</h3>
+                                        <h3 className="font-bold text-lg text-gray-800 mb-2">3. When Santa "ho, Ho, HO's," it's time to go, Go, GO!</h3>
                                         <p className="text-gray-700">
-                                            Memorize that phrase, and repeat it if anyone in authority asks you who the boss is. 
+                                            When you hear all the Santa's chant, "HO! HO! HO!" it means that we're getting ready to leave to the next stop.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-lg text-gray-800 mb-2">4. Who's in Charge?</h3>
+                                        <p className="text-gray-700">
+                                            Santa. Memorize that phrase, and repeat it if anyone in authority asks you who the boss is. 
                                             There will be a test.
                                         </p>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg text-gray-800 mb-2">4. Don't be "that" Santa</h3>
-                                        <p className="text-gray-700">
+                                        <h3 className="font-bold text-lg text-gray-800 mb-2">5. Don't be "that" Santa</h3>
+                                        <p className="text-gray-700 mb-4">
                                             Everybody loves the big guy, right? HOWEVER, Santa strongly encourages Santa to obey all 
                                             "requests" made by any security guards and police officers, to ensure that no one ends up 
                                             in the klink.
                                         </p>
+                                        <img 
+                                            src="img/lineup.jpg" 
+                                            alt="Santa Lineup" 
+                                            className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
+                                        />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg text-gray-800 mb-2">5. Santa is a good tipper!</h3>
+                                        <h3 className="font-bold text-lg text-gray-800 mb-2">6. Santa is a good tipper!</h3>
                                         <p className="text-gray-700">
                                             Remember to tip your bartenders and servers. They work hard to keep Santa jolly!
                                         </p>
                                     </div>
                                 </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* What to Bring? */}
+                    <div id="section-bring" className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                        <button
+                            onClick={() => {
+                                setExpandedAbout(expandedAbout === 'bring' ? null : 'bring');
+                                if (expandedAbout !== 'bring') {
+                                    setTimeout(() => {
+                                        document.getElementById('section-bring')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }, 100);
+                                }
+                            }}
+                            className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
+                        >
+                            <div className="flex justify-between items-center">
+                                <div className="flex-1">
+                                    <h2 className="text-2xl font-bold text-red-700 mb-2">
+                                        <i className="fas fa-shopping-bag mr-2"></i>
+                                        What to Bring?
+                                    </h2>
+                                    <p className="text-gray-700">
+                                        Be prepared for Boulder SantaCon!
+                                    </p>
+                                </div>
+                                <i className={`fas fa-chevron-${expandedAbout === 'bring' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
+                            </div>
+                        </button>
+                        {expandedAbout === 'bring' && (
+                            <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
+                                <ul className="space-y-3 text-gray-700">
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>Valid ID</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>Cash (some bars get busy)</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>Gifts! Nice gifts for kids, "naughty" gifts for adults!</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>Layers, gloves, hand warmers, etc. Santa will be outside!</span>
+                                    </li>
+                                    <li className="flex items-start">
+                                        <i className="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                                        <span>"Water" bottle</span>
+                                    </li>
+                                </ul>
                             </div>
                         )}
                     </div>
@@ -1195,7 +1529,7 @@ A Tab of Yellow Sunshine LSD
                         <div className="text-center mb-6">
                             <span className="text-6xl mb-4 block">🎄</span>
                             <h2 className="text-xl font-bold text-gray-800 mb-2">
-                                Santa's making a list and checking it twice. Sign up to stay up to date on Boulder SantaCon!
+                                Santa's making a list and checking it twice! Stay up to date on Boulder SantaCon.
                             </h2>
                         </div>
 
@@ -1243,19 +1577,27 @@ A Tab of Yellow Sunshine LSD
 
             const AfterPartyPage = React.memo(() => (
                 <div className="space-y-6">
-                    <div className="text-center mb-6">
-                        <h1 className="text-3xl font-bold text-red-700 mb-2">
-                            <i className="fas fa-glass-cheers mr-2"></i>
-                            The Santa Ball After Party!
-                        </h1>
+                    <div className="text-center mb-8">
+                        <img 
+                            src="img/santaballheader.jpg" 
+                            alt="The Santa Ball After Party!" 
+                            className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
+                        />
                     </div>
 
                     <div className="glass-effect rounded-lg shadow-xl p-6">
+                        <p className="text-gray-700 text-center mb-6">
+                            Please join us for the 3rd annual Santa Ball, the official after-party for Boulder SantaCon! If you've come to the Santa Ball either of the last 2 years, then you know how we throw down!
+                        </p>
+                        
                         <div className="text-center mb-6">
-                            <span className="text-7xl mb-4 block">🎉</span>
-                            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                                Keep the Party Going!
-                            </h2>
+                            <img src="img/santaball.jpg" alt="Santa Ball Party" class="w-[300px] h-[300px] mx-auto rounded-lg shadow-lg object-cover" />
+                        </div>
+
+                        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                            <p className="text-sm text-gray-700">
+                                As always, the SantaCon crawl is a FREE event, but the official after-party requires a ticket. We pay the venue, the DJ's, rent gear, etc. Thank you immensely for helping us "Keep Boulder Weird." This year the talent we have lined up is going to set your holiday off in the best way!
+                            </p>
                         </div>
 
                         <div className="space-y-4 mb-6">
@@ -1279,74 +1621,330 @@ A Tab of Yellow Sunshine LSD
                                 <i className="fas fa-music text-red-600 text-xl mr-4 mt-1"></i>
                                 <div>
                                     <div className="font-bold text-gray-800">Entertainment</div>
-                                    <div className="text-gray-700">DJ's, dancing, and holiday shenanigans!</div>
+                                    <div className="text-gray-700">DJs: Neffertiti, Little Giant, and SoLCAT, Photo Booth, Food/Drink/Cookies!</div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start">
+                                <i className="fas fa-ticket-alt text-red-600 text-xl mr-4 mt-1"></i>
+                                <div>
+                                    <div className="font-bold text-gray-800">Tickets</div>
+                                    <div className="text-gray-700">Early Bird pricing: $15, Day of: $20</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="mb-6 rounded-lg overflow-hidden" style={{ height: '300px' }}>
-                            <iframe
-                                key="afterparty-map"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d474.47377773047225!2d-105.27881746029514!3d40.014467182362914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec258e8bfb7f%3A0xbf27b5a8462b87a6!2sThe%20Riverside%20Private%20%26%20Public%20Event%20Venue!5e1!3m2!1sen!2sus!4v1762220959898!5m2!1sen!2sus"
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                allowFullScreen=""
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"
-                            ></iframe>
-                        </div>
-
-                        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
-                            <p className="text-sm text-yellow-800">
-                                <strong>Please Note:</strong> The Santa Ball has a cover charge. (Santa has to pay the DJ's and rent the venue!)
-                            </p>
-                        </div>
-
                         <a
-                            href="#"
+                            href="https://www.eventbrite.com/e/santa-ball-2025-the-boulder-santacon-official-after-party-tickets-1963688271481"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="block w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-4 rounded-lg font-bold text-center hover:from-red-700 hover:to-green-700 transition text-lg"
                         >
                             <i className="fas fa-ticket-alt mr-2"></i>
-                            Get Tickets (Link Coming Soon)
+                            Get Tickets
                         </a>
                     </div>
                 </div>
             ));
 
-            const MajorAwardPage = () => (
-                <div className="space-y-6">
-                    <div className="text-center mb-6">
-                        <h1 className="text-4xl font-bold text-red-700 mb-4">
-                            🏆 MAJOR AWARD! 🏆
-                        </h1>
-                        <p className="text-3xl font-bold text-gray-800 mb-2">FRAGILE</p>
-                        <p className="text-xl text-gray-600 mb-6">(Fra-gee-lay... must be Italian!)</p>
-                        
-                        <div className="bg-yellow-50 rounded-lg p-8 mb-6">
-                            <div className="text-8xl mb-4">🦵💡</div>
-                            <p className="text-sm text-gray-500 italic">(Imagine the glorious leg lamp here)</p>
+            const QuestsPage = () => {
+                const now = new Date();
+                const currentTime = now.getHours() * 60 + now.getMinutes();
+                
+                // Count completed quests
+                const venueQuestCount = Object.values(venueQuests).filter(Boolean).length;
+                const challengeCount = Object.values(challenges).filter(Boolean).length;
+                const badgeCount = Object.values(badges).filter(Boolean).length;
+                
+                // Check which venue quests are unlocked
+                const getVenueQuestStatus = (quest) => {
+                    if (currentTime >= quest.unlockTime) {
+                        return 'unlocked';
+                    }
+                    return 'locked';
+                };
+                
+                // Get locked quests by unlock time
+                const lockedQuests = venueQuestData.filter(q => getVenueQuestStatus(q) === 'locked');
+                const unlockedQuests = venueQuestData.filter(q => getVenueQuestStatus(q) === 'unlocked');
+                
+                // Group locked quests by unlock time
+                const lockedGroups = lockedQuests.reduce((acc, quest) => {
+                    const time = quest.unlockTime;
+                    if (!acc[time]) acc[time] = [];
+                    acc[time].push(quest);
+                    return acc;
+                }, {});
+                
+                const formatTime = (minutes) => {
+                    const hours = Math.floor(minutes / 60);
+                    const mins = minutes % 60;
+                    const period = hours >= 12 ? 'pm' : 'am';
+                    const displayHour = hours > 12 ? hours - 12 : hours;
+                    return `${displayHour}:${mins.toString().padStart(2, '0')}${period}`;
+                };
+                
+                return (
+                    <div className="space-y-6">
+                        <div className="text-center mb-6">
+                            <h1 className="text-3xl font-bold text-red-700 mb-2">
+                                <i className="fas fa-trophy mr-2"></i>
+                                Santa's Side Quests
+                            </h1>
+                            <p className="text-gray-600">
+                                Ready to level up your SantaCon? Complete Santa's Side Quests and earn badges!
+                            </p>
                         </div>
 
-                        <div className="glass-effect rounded-lg p-6 mb-6">
-                            <p className="text-xl font-bold text-gray-800 mb-4">
-                                You won it! Mind power, Santa!
-                            </p>
-                            <p className="text-lg text-gray-700">
-                                Nothing could drag you away from this soft glow of electric achievement gleaming in all its glory.
-                            </p>
+                        {/* Badge Section */}
+                        <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                            <button
+                                onClick={() => setBadgeLegendExpanded(!badgeLegendExpanded)}
+                                className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
+                            >
+                                <div className="flex items-center justify-between mb-4">
+                                    <h2 className="text-xl font-bold text-gray-800">
+                                        🏆 Your Badges ({badgeCount}/6)
+                                    </h2>
+                                    <i className={`fas fa-chevron-down text-gray-400 text-xl ${badgeLegendExpanded ? 'rotate-180' : ''}`} style={{transition: 'transform 0.3s'}}></i>
+                                </div>
+                                
+                                <div className="flex justify-center gap-4 mb-2 text-4xl">
+                                    <span>{badges.jollyLeader ? '🎅' : '🔒'}</span>
+                                    <span>{badges.giftGiver ? '🎁' : '🔒'}</span>
+                                    <span>{badges.paparazzi ? '📸' : '🔒'}</span>
+                                    <span>{badges.marathonSanta ? '🏃' : '🔒'}</span>
+                                    <span>{badges.superSanta ? '🌟' : '🔒'}</span>
+                                    <span>{badges.boulderLegend ? '🎭' : '🔒'}</span>
+                                </div>
+                                
+                                <p className="text-center text-sm text-gray-600">
+                                    Badge details <i className={`fas fa-chevron-down text-xs ${badgeLegendExpanded ? 'rotate-180' : ''}`} style={{transition: 'transform 0.3s'}}></i>
+                                </p>
+                            </button>
+                            
+                            {badgeLegendExpanded && (
+                                <div className="px-6 pb-6 pt-4 border-t-2 border-gray-200">
+                                    <h3 className="font-bold text-gray-800 mb-3">📖 BADGE LEGEND</h3>
+                                    <div className="space-y-3 text-sm">
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🎅 Jolly Leader {badges.jollyLeader && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600 ml-6">Rally the Santas with your carol skills</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🎁 Gift Giver {badges.giftGiver && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600 ml-6">Buy a drink, earn Santa karma</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                📸 Paparazzi {badges.paparazzi && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600 ml-6">Snap 3+ photos (proof you were here!)</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🏃 Marathon Santa {badges.marathonSanta && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600 ml-6">Conquer all 5 official stops</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🌟 Super Santa {badges.superSanta && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600 ml-6">3+ side quests? You overachiever!</div>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-gray-800">
+                                                🎭 Boulder Legend {badges.boulderLegend && '- ✅ UNLOCKED'}
+                                            </div>
+                                            <div className="text-gray-600 ml-6">This is your 3rd+ SantaCon. Respect.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
-                        <button
-                            onClick={() => setActiveTab('quests')}
-                            className="w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-6 rounded-lg font-bold hover:from-red-700 hover:to-green-700 transition text-lg"
-                        >
-                            <i className="fas fa-camera mr-2"></i>
-                            Screenshot This Glory!
-                        </button>
+                        {/* Venue Quests Section */}
+                        <div className="glass-effect rounded-lg shadow-xl p-6">
+                            <h2 className="text-xl font-bold text-red-700 mb-2">
+                                <i className="fas fa-map-marker-alt mr-2"></i>
+                                VENUE QUESTS ({venueQuestCount}/5)
+                            </h2>
+                            <p className="text-sm text-gray-600 mb-4">
+                                Are you looking for more adventure? Try these side quests to add more fun to your SantaCon experience! Nearby venues unlock throughout the night—complete them to earn extra badges.
+                            </p>
+                            
+                            {unlockedQuests.length > 0 && (
+                                <div className="space-y-3 mb-4">
+                                    <div className="text-sm font-bold text-green-700">✨ Available Now!</div>
+                                    {unlockedQuests.map(quest => (
+                                        <div key={quest.id} className="border-2 border-green-500 rounded-lg p-4 bg-green-50">
+                                            <div className="flex items-start">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={venueQuests[quest.id]}
+                                                    onChange={(e) => setVenueQuests({...venueQuests, [quest.id]: e.target.checked})}
+                                                    className="mt-1 mr-3 w-5 h-5"
+                                                />
+                                                <div className="flex-1">
+                                                    <div className="font-bold text-gray-800">{quest.name}</div>
+                                                    <div className="text-sm text-gray-700">{quest.quest}</div>
+                                                    <div className="text-xs text-gray-600 mt-1">
+                                                        📍 {quest.distance}
+                                                    </div>
+                                                    <div className="text-xs text-gray-600">
+                                                        ⏰ Available: {formatTime(quest.unlockTime)} - {formatTime(quest.availableUntil)}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                            
+                            {Object.keys(lockedGroups).length > 0 && (
+                                <div className="space-y-2">
+                                    {Object.keys(lockedGroups).sort((a, b) => a - b).map(unlockTime => (
+                                        <div key={unlockTime} className="bg-gray-100 rounded-lg p-3">
+                                            <div className="text-sm font-bold text-gray-700 mb-1">
+                                                🔒 Unlocks at {formatTime(parseInt(unlockTime))}
+                                            </div>
+                                            <div className="text-sm text-gray-600">
+                                                {lockedGroups[unlockTime].map(q => q.name).join(', ')}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Challenges Section */}
+                        <div className="glass-effect rounded-lg shadow-xl p-6">
+                            <h2 className="text-xl font-bold text-red-700 mb-4">
+                                <i className="fas fa-star mr-2"></i>
+                                CHALLENGES ({challengeCount}/12)
+                            </h2>
+                            <p className="text-sm text-gray-600 mb-4">
+                                Complete these fun activities throughout the night:
+                            </p>
+                            <div className="space-y-2">
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.highFive10}
+                                        onChange={(e) => setChallenges({...challenges, highFive10: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>High-five 10 people</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.groupPhoto}
+                                        onChange={(e) => setChallenges({...challenges, groupPhoto: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Take a group Santa photo</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.giveGift}
+                                        onChange={(e) => setChallenges({...challenges, giveGift: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Give a naughty (or nice) gift to a stranger</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.findElf}
+                                        onChange={(e) => setChallenges({...challenges, findElf: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Find someone dressed as an elf</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.singCarol}
+                                        onChange={(e) => setChallenges({...challenges, singCarol: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Sing a carol in public</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.buyDrink}
+                                        onChange={(e) => setChallenges({...challenges, buyDrink: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Buy someone a drink</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.compliment5}
+                                        onChange={(e) => setChallenges({...challenges, compliment5: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Compliment 5 strangers</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.congaLine}
+                                        onChange={(e) => setChallenges({...challenges, congaLine: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Dance in a Santa conga line!</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.photoCop}
+                                        onChange={(e) => setChallenges({...challenges, photoCop: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Get a photo with a Boulder cop</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.visit3Stops}
+                                        onChange={(e) => setChallenges({...challenges, visit3Stops: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Visit 3+ official stops</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.postSocial}
+                                        onChange={(e) => setChallenges({...challenges, postSocial: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Post photo on Instagram/Facebook</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.boulderLegend}
+                                        onChange={(e) => setChallenges({...challenges, boulderLegend: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>This is my 3rd+ SantaCon</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            );
+                );
+            };
 
             useEffect(() => {
                 if (darkMode) {
@@ -1356,61 +1954,11 @@ A Tab of Yellow Sunshine LSD
                 }
             }, [darkMode]);
 
-            // Badge Modal
-            const BadgeModal = ({ badgeId }) => {
-                const badge = badgeDefinitions.find(b => b.id === badgeId);
-                if (!badge) return null;
-
-                return (
-                    <div className="modal-overlay" onClick={() => setShowBadgeModal(null)}>
-                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                            <div className="text-center">
-                                <div className="text-6xl mb-4">{badge.emoji}</div>
-                                <h2 className="text-2xl font-bold text-gray-800 mb-2">Badge Earned!</h2>
-                                <h3 className="text-xl font-bold text-red-700 mb-4">{badge.name}</h3>
-                                <p className="text-gray-600 mb-6">{badge.description}</p>
-                                <button
-                                    onClick={() => setShowBadgeModal(null)}
-                                    className="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-bold hover:bg-red-700 transition text-lg"
-                                >
-                                    {badge.buttonText}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                );
-            };
-
-            // All Badges Complete Modal
-            const AllBadgesModal = () => (
-                <div className="modal-overlay" onClick={() => setShowAllBadgesModal(false)}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <div className="text-center">
-                            <div className="text-4xl mb-4">✨✨✨</div>
-                            <h2 className="text-3xl font-bold text-gray-800 mb-2">CONGRATULATIONS!</h2>
-                            <div className="text-5xl my-6">🏆</div>
-                            <h3 className="text-2xl font-bold text-red-700 mb-4">MAJOR AWARD UNLOCKED</h3>
-                            <p className="text-xl text-gray-700 mb-2">You've completed ALL 6 badges!</p>
-                            <p className="text-lg text-gray-600 mb-6">You've earned something... Fra-gee-lay!</p>
-                            <button
-                                onClick={() => {
-                                    setShowAllBadgesModal(false);
-                                    setShowMajorAward(true);
-                                    setActiveTab('major-award');
-                                }}
-                                className="w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-6 rounded-lg font-bold hover:from-red-700 hover:to-green-700 transition text-lg"
-                            >
-                                View Your Award →
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            );
-
             return (
                 <div className="min-h-screen gradient-bg">
                     <Snowflakes />
                     
+                    {/* Dark Mode Toggle - Fixed in top right */}
                     <button
                         onClick={() => setDarkMode(!darkMode)}
                         className="fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 text-gray-800 dark:text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
@@ -1419,19 +1967,48 @@ A Tab of Yellow Sunshine LSD
                         <i className={`fas fa-${darkMode ? 'sun' : 'moon'} text-xl`}></i>
                     </button>
                     
+                    {/* Main Content */}
                     <div className="max-w-2xl mx-auto px-4 py-6 pb-24">
                         {activeTab === 'home' && <HomePage />}
-                        {activeTab === 'quests' && <QuestsPage />}
                         {activeTab === 'carols' && <CarolsPage />}
+                        {activeTab === 'quests' && <QuestsPage />}
                         {activeTab === 'about' && <AboutPage />}
                         {activeTab === 'mailing' && <MailingListPage />}
                         {activeTab === 'afterparty' && <AfterPartyPage />}
-                        {activeTab === 'major-award' && <MajorAwardPage />}
                     </div>
 
-                    {showBadgeModal && <BadgeModal badgeId={showBadgeModal} />}
-                    {showAllBadgesModal && <AllBadgesModal />}
+                    {/* Badge Unlock Popup */}
+                    {showingBadgePopup && badgePopupQueue.length > 0 && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+                             style={{animation: 'fadeIn 0.3s ease-in'}}>
+                            <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-8 text-center"
+                                 style={{animation: 'scaleIn 0.3s ease-out'}}>
+                                <div className="text-6xl mb-4 animate-bounce">
+                                    🎉 🎉 🎉
+                                </div>
+                                <h2 className="text-2xl font-bold text-red-700 mb-4">
+                                    BADGE UNLOCKED!
+                                </h2>
+                                <div className="text-7xl mb-4">
+                                    {badgeMessages[badgePopupQueue[0]].emoji}
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-800 mb-4">
+                                    {badgeMessages[badgePopupQueue[0]].title}
+                                </h3>
+                                <p className="text-gray-700 mb-6 leading-relaxed">
+                                    {badgeMessages[badgePopupQueue[0]].message}
+                                </p>
+                                <button
+                                    onClick={handleBadgePopupClose}
+                                    className="bg-red-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition text-lg"
+                                >
+                                    Awesome! ✓
+                                </button>
+                            </div>
+                        </div>
+                    )}
 
+                    {/* Bottom Navigation */}
                     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-lg">
                         <div className="max-w-2xl mx-auto px-4">
                             <div className="flex justify-around py-2">
@@ -1445,15 +2022,6 @@ A Tab of Yellow Sunshine LSD
                                     <span className="text-xs font-semibold">Home</span>
                                 </button>
                                 <button
-                                    onClick={() => setActiveTab('quests')}
-                                    className={`nav-button flex flex-col items-center py-2 px-4 rounded-lg ${
-                                        activeTab === 'quests' ? 'active' : 'text-gray-600'
-                                    }`}
-                                >
-                                    <i className="fas fa-trophy text-xl mb-1"></i>
-                                    <span className="text-xs font-semibold">Quests</span>
-                                </button>
-                                <button
                                     onClick={() => setActiveTab('carols')}
                                     className={`nav-button flex flex-col items-center py-2 px-4 rounded-lg ${
                                         activeTab === 'carols' ? 'active' : 'text-gray-600'
@@ -1463,13 +2031,22 @@ A Tab of Yellow Sunshine LSD
                                     <span className="text-xs font-semibold">Carols</span>
                                 </button>
                                 <button
-                                    onClick={() => setActiveTab('about')}
+                                    onClick={() => setActiveTab('quests')}
                                     className={`nav-button flex flex-col items-center py-2 px-4 rounded-lg ${
-                                        activeTab === 'about' ? 'active' : 'text-gray-600'
+                                        activeTab === 'quests' ? 'active' : 'text-gray-600'
                                     }`}
                                 >
-                                    <i className="fas fa-info-circle text-xl mb-1"></i>
-                                    <span className="text-xs font-semibold">About</span>
+                                    <i className="fas fa-trophy text-xl mb-1"></i>
+                                    <span className="text-xs font-semibold">Quests</span>
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('mailing')}
+                                    className={`nav-button flex flex-col items-center py-2 px-4 rounded-lg ${
+                                        activeTab === 'mailing' ? 'active' : 'text-gray-600'
+                                    }`}
+                                >
+                                    <i className="fas fa-envelope text-xl mb-1"></i>
+                                    <span className="text-xs font-semibold">Join List</span>
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('afterparty')}
