@@ -125,6 +125,39 @@
                 opacity: 1;
             }
         }
+        .major-award-card {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            animation: bounceInCard 0.6s ease-out, pulseGlow 3s ease-in-out 0.6s infinite;
+            transition: all 0.3s ease;
+        }
+        .major-award-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 40px rgba(255, 215, 0, 0.8);
+        }
+        @keyframes bounceInCard {
+            0% {
+                transform: scale(0.3) translateY(-50px);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 4px 40px rgba(255, 215, 0, 0.8);
+            }
+        }
     </style>
 </head>
 <body>
@@ -632,6 +665,7 @@ In brothels galore`
             const [currentStop, setCurrentStop] = useState(null);
             const [expandedAbout, setExpandedAbout] = useState(null);
             const [countdown, setCountdown] = useState('');
+            const [showAllBadgesModal, setShowAllBadgesModal] = useState(false);
             
             // Quest system state
             const [badgeLegendExpanded, setBadgeLegendExpanded] = useState(false);
@@ -969,6 +1003,17 @@ In brothels galore`
                     setBadgePopupQueue(prev => [...prev, ...newlyUnlocked]);
                 }
             }, [challenges, venueQuests, currentStop, badges, badgePopupsShown]);
+
+            // Check if all badges are complete for Major Award
+            useEffect(() => {
+                const allBadgesComplete = Object.values(badges).every(badge => badge === true);
+                const alreadyShown = localStorage.getItem('santacon_major_award_shown');
+                
+                if (allBadgesComplete && !alreadyShown && !showAllBadgesModal) {
+                    setShowAllBadgesModal(true);
+                    localStorage.setItem('santacon_major_award_shown', 'true');
+                }
+            }, [badges, showAllBadgesModal]);
 
             // Handle badge popup queue
             useEffect(() => {
@@ -1664,6 +1709,54 @@ END:VCALENDAR`;
                 </div>
             ));
 
+            const MajorAwardPage = () => (
+                <div className="space-y-6">
+                    <div className="text-center mb-6">
+                        <h1 className="text-4xl font-bold text-red-700 mb-4">
+                            🏆 MAJOR AWARD! 🏆
+                        </h1>
+                        <p className="text-3xl font-bold text-gray-800 mb-2">FRAGILE</p>
+                        <p className="text-xl text-gray-600 mb-6">(Fra-gee-lay... must be Italian!)</p>
+                        
+                        <div className="mb-6">
+                            <img 
+                                src="img/leglamp.jpg" 
+                                alt="The Major Award - A Leg Lamp"
+                                className="mx-auto rounded-lg shadow-2xl"
+                                style={{ maxWidth: '350px', width: '100%', height: 'auto' }}
+                            />
+                        </div>
+
+                        <div className="glass-effect rounded-lg p-6 mb-6">
+                            <p className="text-xl font-bold text-gray-800 mb-4">
+                                You won it! Mind power, Santa!
+                            </p>
+                            <p className="text-lg text-gray-700">
+                                Nothing could drag you away from this soft glow of electric achievement gleaming in all its glory.
+                            </p>
+                        </div>
+
+                        <button
+                            onClick={() => {
+                                // Take a screenshot hint
+                                alert('📸 Screenshot this page to save your Major Award achievement!');
+                            }}
+                            className="w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-6 rounded-lg font-bold hover:from-red-700 hover:to-green-700 transition text-lg mb-4"
+                        >
+                            <i className="fas fa-camera mr-2"></i>
+                            Screenshot This Glory!
+                        </button>
+
+                        <button
+                            onClick={() => setActiveTab('quests')}
+                            className="w-full bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition"
+                        >
+                            Back to Quests
+                        </button>
+                    </div>
+                </div>
+            );
+
             const QuestsPage = () => {
                 const now = new Date();
                 const currentTime = now.getHours() * 60 + now.getMinutes();
@@ -1712,6 +1805,27 @@ END:VCALENDAR`;
                                 Ready to level up your SantaCon? Complete Santa's Side Quests and earn badges!
                             </p>
                         </div>
+
+                        {/* Major Award Card - Only shows when all badges complete */}
+                        {badgeCount === 6 && (
+                            <div 
+                                className="major-award-card rounded-lg shadow-xl p-6 cursor-pointer"
+                                onClick={() => setActiveTab('major-award')}
+                            >
+                                <div className="text-center">
+                                    <div className="text-3xl mb-2">✨ 🏆 MAJOR AWARD UNLOCKED! 🏆 ✨</div>
+                                    <p className="text-gray-800 font-bold text-lg mb-2">
+                                        Congratulations! You've completed all 6 badges!
+                                    </p>
+                                    <p className="text-gray-800 mb-4">
+                                        You are a TRUE Boulder SantaCon Legend!
+                                    </p>
+                                    <div className="inline-block bg-white bg-opacity-30 hover:bg-opacity-50 transition px-6 py-3 rounded-lg font-bold text-gray-800">
+                                        View Your Major Award →
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Badge Section */}
                         <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
@@ -1994,6 +2108,7 @@ END:VCALENDAR`;
                         {activeTab === 'about' && <AboutPage />}
                         {activeTab === 'mailing' && <MailingListPage />}
                         {activeTab === 'afterparty' && <AfterPartyPage />}
+                        {activeTab === 'major-award' && <MajorAwardPage />}
                     </div>
 
                     {/* Badge Unlock Popup */}
@@ -2022,6 +2137,31 @@ END:VCALENDAR`;
                                     className="bg-red-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition text-lg"
                                 >
                                     {badgeMessages[badgePopupQueue[0]].buttonText}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* All Badges Complete Modal */}
+                    {showAllBadgesModal && (
+                        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+                             style={{animation: 'fadeIn 0.3s ease-in'}}>
+                            <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-8 text-center"
+                                 style={{animation: 'scaleIn 0.3s ease-out'}}>
+                                <div className="text-4xl mb-4">✨✨✨</div>
+                                <h2 className="text-3xl font-bold text-gray-800 mb-2">CONGRATULATIONS!</h2>
+                                <div className="text-5xl my-6">🏆</div>
+                                <h3 className="text-2xl font-bold text-red-700 mb-4">MAJOR AWARD UNLOCKED</h3>
+                                <p className="text-xl text-gray-700 mb-2">You've completed ALL 6 badges!</p>
+                                <p className="text-lg text-gray-600 mb-6">You've earned something... Fra-gee-lay!</p>
+                                <button
+                                    onClick={() => {
+                                        setShowAllBadgesModal(false);
+                                        setActiveTab('major-award');
+                                    }}
+                                    className="w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-6 rounded-lg font-bold hover:from-red-700 hover:to-green-700 transition text-lg"
+                                >
+                                    View Your Award →
                                 </button>
                             </div>
                         </div>
