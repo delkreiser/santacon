@@ -772,13 +772,13 @@ In brothels galore`
             const getCurrentStop = () => {
                 const now = new Date();
                 
-                // For testing: Check if it's November 11, 2025
+                // For testing: Check if it's November 12, 2025
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 
-                // Only activate on November 11, 2025
-                if (year !== 2025 || month !== 10 || day !== 11) {
+                // Only activate on November 12, 2025
+                if (year !== 2025 || month !== 10 || day !== 12) {
                     return null;
                 }
 
@@ -922,11 +922,22 @@ In brothels galore`
                     }
                 }
                 
-                // Marathon Santa: After St. Julien stop (stop index 3)
-                if (currentStop && currentStop.index >= 3 && !badges.marathonSanta) {
-                    newBadges.marathonSanta = true;
-                    if (!badgePopupsShown.marathonSanta) {
-                        newlyUnlocked.push('marathonSanta');
+                // Marathon Santa: Auto-unlock at 8:15pm on event day
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = now.getMonth();
+                const day = now.getDate();
+                
+                // Check if it's November 12, 2025 (testing date)
+                if (year === 2025 && month === 10 && day === 12) {
+                    const currentTime = now.getHours() * 60 + now.getMinutes();
+                    const marathonUnlockTime = 20 * 60 + 15; // 8:15pm in minutes
+                    
+                    if (currentTime >= marathonUnlockTime && !badges.marathonSanta) {
+                        newBadges.marathonSanta = true;
+                        if (!badgePopupsShown.marathonSanta) {
+                            newlyUnlocked.push('marathonSanta');
+                        }
                     }
                 }
                 
@@ -1817,7 +1828,7 @@ END:VCALENDAR`;
                             {Object.keys(lockedGroups).length > 0 && (
                                 <div className="space-y-2">
                                     {Object.keys(lockedGroups).sort((a, b) => a - b).map(unlockTime => (
-                                        <div key={unlockTime} className="bg-gray-100 rounded-lg p-3">
+                                        <div key={unlockTime} className="bg-gray-100 border-2 border-gray-300 rounded-lg p-3">
                                             <div className="text-sm font-bold text-gray-700 mb-1">
                                                 🔒 Unlocks at {formatTime(parseInt(unlockTime))}
                                             </div>
