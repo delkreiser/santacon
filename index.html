@@ -1784,14 +1784,14 @@ END:VCALENDAR`;
                 const now = new Date();
                 const currentTime = now.getHours() * 60 + now.getMinutes();
                 
-                // Check if challenges are unlocked (Nov 12, 2025 at 5:00pm for testing)
+                // Check if challenges are unlocked (Nov 13, 2025 at 5:00pm for testing)
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 const challengesUnlockTime = 17 * 60; // 5:00pm in minutes
                 
-                const areChallengesUnlocked = (year === 2025 && month === 10 && day === 12 && currentTime >= challengesUnlockTime) || 
-                                              (year === 2025 && month === 10 && day > 12);
+                const areChallengesUnlocked = (year === 2025 && month === 10 && day === 13 && currentTime >= challengesUnlockTime) || 
+                                              (year === 2025 && month === 10 && day > 13);
                 
                 // Count completed quests
                 const venueQuestCount = Object.values(venueQuests).filter(Boolean).length;
