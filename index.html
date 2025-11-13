@@ -1178,6 +1178,29 @@ END:VCALENDAR`;
                         </div>
                     </div>
 
+                    {/* Side Quests Promo Card */}
+                    <div className="rounded-lg shadow-xl p-6 overflow-hidden" 
+                         style={{
+                             background: 'linear-gradient(to right, #fef3c7, #fde68a)',
+                             border: '3px solid #d97706'
+                         }}>
+                        <div className="text-center">
+                            <h2 className="text-2xl font-bold text-amber-600 mb-3">
+                                Santa's Side Quests!
+                            </h2>
+                            <p className="text-yellow-600 text-lg mb-4 leading-relaxed">
+                                Looking for more adventure, young Frodo? Explore bonus venues and earn badges!
+                            </p>
+                            <button
+                                onClick={() => setActiveTab('quests')}
+                                className="bg-amber-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-amber-600 transition-all shadow-lg text-lg"
+                            >
+                                <i className="fas fa-hat-wizard mr-2"></i>
+                                Adventure Awaits!
+                            </button>
+                        </div>
+                    </div>
+
                     <div className="glass-effect rounded-lg shadow-xl p-6">
                         <h2 className="text-2xl font-bold text-red-700 mb-4 flex items-center">
                             <i className="fas fa-play-circle mr-3"></i>
