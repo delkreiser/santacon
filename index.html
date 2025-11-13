@@ -962,8 +962,8 @@ In brothels galore`
                 const month = now.getMonth();
                 const day = now.getDate();
                 
-                // Check if it's November 12, 2025 (testing date)
-                if (year === 2025 && month === 10 && day === 12) {
+                // Check if it's November 13, 2025 (testing date)
+                if (year === 2025 && month === 10 && day === 13) {
                     const currentTime = now.getHours() * 60 + now.getMinutes();
                     const marathonUnlockTime = 20 * 60 + 15; // 8:15pm in minutes
                     
@@ -1005,15 +1005,22 @@ In brothels galore`
             }, [challenges, venueQuests, currentStop, badges, badgePopupsShown]);
 
             // Check if all badges are complete for Major Award
+            // Only trigger after all badge popups have been shown
             useEffect(() => {
                 const allBadgesComplete = Object.values(badges).every(badge => badge === true);
                 const alreadyShown = localStorage.getItem('santacon_major_award_shown');
                 
-                if (allBadgesComplete && !alreadyShown && !showAllBadgesModal) {
+                // Only show Major Award modal if:
+                // 1. All badges are complete
+                // 2. Haven't shown it before
+                // 3. Badge popup queue is empty (all badge popups have been shown)
+                // 4. Not currently showing a badge popup
+                if (allBadgesComplete && !alreadyShown && !showAllBadgesModal && 
+                    badgePopupQueue.length === 0 && !showingBadgePopup) {
                     setShowAllBadgesModal(true);
                     localStorage.setItem('santacon_major_award_shown', 'true');
                 }
-            }, [badges, showAllBadgesModal]);
+            }, [badges, showAllBadgesModal, badgePopupQueue, showingBadgePopup]);
 
             // Handle badge popup queue
             useEffect(() => {
