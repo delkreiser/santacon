@@ -1742,7 +1742,7 @@ END:VCALENDAR`;
             const MajorAwardPage = () => (
                 <div className="space-y-6">
                     <div className="text-center mb-6">
-                        <h1 className="text-4xl font-bold text-red-700 mb-4">
+                        <h1 className="text-2xl font-bold text-red-700 mb-4">
                             🏆 MAJOR AWARD! 🏆
                         </h1>
                         <p className="text-3xl font-bold text-gray-800 mb-2">FRAGILE</p>
@@ -1767,19 +1767,8 @@ END:VCALENDAR`;
                         </div>
 
                         <button
-                            onClick={() => {
-                                // Take a screenshot hint
-                                alert('📸 Screenshot this page to save your Major Award achievement!');
-                            }}
-                            className="w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-6 rounded-lg font-bold hover:from-red-700 hover:to-green-700 transition text-lg mb-4"
-                        >
-                            <i className="fas fa-camera mr-2"></i>
-                            Screenshot This Glory!
-                        </button>
-
-                        <button
                             onClick={() => setActiveTab('quests')}
-                            className="w-full bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition"
+                            className="w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-6 rounded-lg font-bold hover:from-red-700 hover:to-green-700 transition text-lg"
                         >
                             Back to Quests
                         </button>
@@ -2218,7 +2207,8 @@ END:VCALENDAR`;
                                 <div className="text-4xl mb-4">✨✨✨</div>
                                 <h2 className="text-3xl font-bold text-gray-800 mb-2">CONGRATULATIONS!</h2>
                                 <div className="text-5xl my-6">🏆</div>
-                                <h3 className="text-2xl font-bold text-red-700 mb-4">MAJOR AWARD UNLOCKED</h3>
+                                <h3 className="text-xl font-bold text-red-700 mb-2">🏆 MAJOR AWARD 🏆</h3>
+                                <h3 className="text-xl font-bold text-red-700 mb-4">UNLOCKED!</h3>
                                 <p className="text-xl text-gray-700 mb-2">You've completed ALL 6 badges!</p>
                                 <p className="text-lg text-gray-600 mb-6">You've earned something... Fra-gee-lay!</p>
                                 <button
