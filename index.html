@@ -1290,17 +1290,17 @@ END:VCALENDAR`;
                                 <div className="flex gap-2">
                                     <button
                                         onClick={() => setLyricsFontSize(Math.max(0.8, lyricsFontSize - 0.1))}
-                                        className="bg-gray-200 hover:bg-gray-300 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition"
+                                        className="bg-gray-200 hover:bg-gray-300 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition text-sm font-bold"
                                         title="Decrease text size"
                                     >
-                                        <i className="fas fa-minus"></i>
+                                        Aa
                                     </button>
                                     <button
                                         onClick={() => setLyricsFontSize(Math.min(2.0, lyricsFontSize + 0.1))}
-                                        className="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition"
+                                        className="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition text-lg font-bold"
                                         title="Increase text size"
                                     >
-                                        <i className="fas fa-plus"></i>
+                                        Aa
                                     </button>
                                 </div>
                             </div>
@@ -2150,10 +2150,10 @@ END:VCALENDAR`;
                     {/* Dark Mode Toggle - Fixed in top right */}
                     <button
                         onClick={() => setDarkMode(!darkMode)}
-                        className="fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 text-gray-800 dark:text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+                        className="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 text-gray-800 dark:text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
                         title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
                     >
-                        <i className={`fas fa-${darkMode ? 'sun' : 'moon'} text-xl`}></i>
+                        <i className={`fas fa-${darkMode ? 'sun' : 'moon'} text-lg`}></i>
                     </button>
                     
                     {/* Main Content */}
