@@ -806,13 +806,13 @@ In brothels galore`
             const getCurrentStop = () => {
                 const now = new Date();
                 
-                // For testing: Check if it's November 12, 2025
+                // For testing: Check if it's November 14, 2025
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 
-                // Only activate on November 12, 2025
-                if (year !== 2025 || month !== 10 || day !== 12) {
+                // Only activate on November 14, 2025
+                if (year !== 2025 || month !== 10 || day !== 14) {
                     return null;
                 }
 
@@ -962,8 +962,8 @@ In brothels galore`
                 const month = now.getMonth();
                 const day = now.getDate();
                 
-                // Check if it's November 13, 2025 (testing date)
-                if (year === 2025 && month === 10 && day === 13) {
+                // Check if it's November 14, 2025 (testing date)
+                if (year === 2025 && month === 10 && day === 14) {
                     const currentTime = now.getHours() * 60 + now.getMinutes();
                     const marathonUnlockTime = 20 * 60 + 15; // 8:15pm in minutes
                     
@@ -1780,14 +1780,16 @@ END:VCALENDAR`;
                 const now = new Date();
                 const currentTime = now.getHours() * 60 + now.getMinutes();
                 
-                // Check if challenges are unlocked (Nov 13, 2025 at 5:00pm for testing)
+                // Check if challenges are unlocked (Nov 14, 2025 at 5:00pm for testing)
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 const challengesUnlockTime = 17 * 60; // 5:00pm in minutes
                 
-                const areChallengesUnlocked = (year === 2025 && month === 10 && day === 13 && currentTime >= challengesUnlockTime) || 
-                                              (year === 2025 && month === 10 && day > 13);
+                // Unlock on event day at 5pm OR after event day (stays unlocked)
+                const areChallengesUnlocked = (year === 2025 && month === 10 && day === 14 && currentTime >= challengesUnlockTime) || 
+                                              (year === 2025 && month === 10 && day > 14) ||
+                                              (year > 2025);
                 
                 // Count completed quests
                 const venueQuestCount = Object.values(venueQuests).filter(Boolean).length;
@@ -1796,6 +1798,11 @@ END:VCALENDAR`;
                 
                 // Check which venue quests are unlocked
                 const getVenueQuestStatus = (quest) => {
+                    // After event day (Nov 14, 2025), keep all venue quests unlocked
+                    if ((year === 2025 && month === 10 && day > 14) || (year > 2025)) {
+                        return 'unlocked';
+                    }
+                    // During event day, use time-based unlocking
                     if (currentTime >= quest.unlockTime) {
                         return 'unlocked';
                     }
@@ -2002,7 +2009,7 @@ END:VCALENDAR`;
                         <div className="glass-effect rounded-lg shadow-xl p-6">
                             <h2 className="text-xl font-bold text-red-700 mb-4">
                                 <i className="fas fa-star mr-2"></i>
-                                CHALLENGES ({challengeCount}/11)
+                                CHALLENGES ({challengeCount}/12)
                             </h2>
                             
                             {!areChallengesUnlocked ? (
