@@ -884,7 +884,7 @@ In brothels galore`
             // Badge messages
             const badgeMessages = {
                 jollyLeader: {
-                    emoji: '🎅',
+                    emoji: '🎅🏻',
                     title: 'JOLLY LEADER',
                     message: "Your golden voice carried all the off-key Santas! You should be on America's Got Talent!",
                     buttonText: 'High Five! 🙌'
@@ -908,13 +908,13 @@ In brothels galore`
                     buttonText: "You're #1! 🥇"
                 },
                 superSanta: {
-                    emoji: '🌟',
+                    emoji: '💪🏻',
                     title: 'SUPER SANTA',
                     message: "Most people stick to the main route. You? You're an overachiever. We're impressed. Your mom is proud.",
                     buttonText: 'Flex! 💪'
                 },
                 boulderLegend: {
-                    emoji: '💪🏻',
+                    emoji: '🫡',
                     title: 'BOULDER LEGEND',
                     message: "Three years of SantaCon? You're basically Boulder SantaCon royalty! Put this on your resume.",
                     buttonText: 'Respect! 🫡'
@@ -1841,7 +1841,7 @@ END:VCALENDAR`;
                                 onClick={() => setActiveTab('major-award')}
                             >
                                 <div className="text-center">
-                                    <div className="text-2xl font-bold mb-1">✨ 🏆 MAJOR AWARD 🏆 ✨</div>
+                                    <div className="text-2xl font-bold mb-1">🏆 MAJOR AWARD 🏆</div>
                                     <div className="text-2xl font-bold mb-3">UNLOCKED!</div>
                                     <p className="text-gray-800 font-bold text-lg mb-2">
                                         Congratulations! You've completed all 6 badges!
@@ -1870,12 +1870,12 @@ END:VCALENDAR`;
                                 </div>
                                 
                                 <div className="flex justify-center gap-4 mb-2 text-4xl">
-                                    <span>{badges.jollyLeader ? '🎅' : '🔒'}</span>
+                                    <span>{badges.jollyLeader ? '🎅🏻' : '🔒'}</span>
                                     <span>{badges.giftGiver ? '🎁' : '🔒'}</span>
                                     <span>{badges.paparazzi ? '📸' : '🔒'}</span>
                                     <span>{badges.marathonSanta ? '🏃' : '🔒'}</span>
-                                    <span>{badges.superSanta ? '🌟' : '🔒'}</span>
-                                    <span>{badges.boulderLegend ? '🎭' : '🔒'}</span>
+                                    <span>{badges.superSanta ? '💪🏻' : '🔒'}</span>
+                                    <span>{badges.boulderLegend ? '🫡' : '🔒'}</span>
                                 </div>
                                 
                                 <p className="text-center text-sm text-gray-600">
@@ -1891,7 +1891,7 @@ END:VCALENDAR`;
                                     <div className="space-y-3 text-sm">
                                         <div>
                                             <div className="font-semibold text-gray-800">
-                                                🎅 Jolly Leader {badges.jollyLeader && '- ✅ UNLOCKED'}
+                                                🎅🏻 Jolly Leader {badges.jollyLeader && '- ✅ UNLOCKED'}
                                             </div>
                                             <div className="text-gray-600 ml-6">Lead a carol sing-along in public</div>
                                         </div>
@@ -1915,13 +1915,13 @@ END:VCALENDAR`;
                                         </div>
                                         <div>
                                             <div className="font-semibold text-gray-800">
-                                                🌟 Super Santa {badges.superSanta && '- ✅ UNLOCKED'}
+                                                💪🏻 Super Santa {badges.superSanta && '- ✅ UNLOCKED'}
                                             </div>
                                             <div className="text-gray-600 ml-6">Crush 3+ side quests</div>
                                         </div>
                                         <div>
                                             <div className="font-semibold text-gray-800">
-                                                💪🏻 Boulder Legend {badges.boulderLegend && '- ✅ UNLOCKED'}
+                                                🫡 Boulder Legend {badges.boulderLegend && '- ✅ UNLOCKED'}
                                             </div>
                                             <div className="text-gray-600 ml-6">Veteran of 3+ SantaCons</div>
                                         </div>
