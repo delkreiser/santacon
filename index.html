@@ -1798,8 +1798,8 @@ END:VCALENDAR`;
                 
                 // Check which venue quests are unlocked
                 const getVenueQuestStatus = (quest) => {
-                    // After event day (Nov 14, 2025), keep all venue quests unlocked
-                    if ((year === 2025 && month === 10 && day > 14) || (year > 2025)) {
+                    // After event day (Nov 28, 2025), keep all venue quests unlocked
+                    if ((year === 2025 && month === 10 && day > 28) || (year > 2025)) {
                         return 'unlocked';
                     }
                     // During event day, use time-based unlocking
