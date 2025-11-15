@@ -2038,11 +2038,11 @@ END:VCALENDAR`;
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
                                         type="checkbox"
-                                        checked={challenges.highFive10}
-                                        onChange={(e) => setChallenges({...challenges, highFive10: e.target.checked})}
+                                        checked={challenges.niceOrNaughty}
+                                        onChange={(e) => setChallenges({...challenges, niceOrNaughty: e.target.checked})}
                                         className="mt-1 mr-3 w-5 h-5"
                                     />
-                                    <span>High-five 10 people</span>
+                                    <span>Ask a stranger if they've been Nice (or Naughty) this year</span>
                                 </label>
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
@@ -2056,20 +2056,11 @@ END:VCALENDAR`;
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
                                         type="checkbox"
-                                        checked={challenges.giveGift}
-                                        onChange={(e) => setChallenges({...challenges, giveGift: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Give a naughty (or nice) gift to a stranger</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
                                         checked={challenges.findElf}
                                         onChange={(e) => setChallenges({...challenges, findElf: e.target.checked})}
                                         className="mt-1 mr-3 w-5 h-5"
                                     />
-                                    <span>Find someone dressed as an elf and hug them</span>
+                                    <span>Find someone dressed as an elf and tell them to get back to work</span>
                                 </label>
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
@@ -2083,11 +2074,11 @@ END:VCALENDAR`;
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
                                         type="checkbox"
-                                        checked={challenges.buyDrink}
-                                        onChange={(e) => setChallenges({...challenges, buyDrink: e.target.checked})}
+                                        checked={challenges.giveGift}
+                                        onChange={(e) => setChallenges({...challenges, giveGift: e.target.checked})}
                                         className="mt-1 mr-3 w-5 h-5"
                                     />
-                                    <span>Buy someone a drink</span>
+                                    <span>Give a naughty (or nice) gift to a stranger</span>
                                 </label>
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
@@ -2101,11 +2092,38 @@ END:VCALENDAR`;
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
                                         type="checkbox"
+                                        checked={challenges.buyDrink}
+                                        onChange={(e) => setChallenges({...challenges, buyDrink: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Buy someone a drink</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
                                         checked={challenges.congaLine}
                                         onChange={(e) => setChallenges({...challenges, congaLine: e.target.checked})}
                                         className="mt-1 mr-3 w-5 h-5"
                                     />
                                     <span>Dance in a Santa conga line!</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.postSocial}
+                                        onChange={(e) => setChallenges({...challenges, postSocial: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>Post a photo to your Insta/TikTok/FB account</span>
+                                </label>
+                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={challenges.highFive10}
+                                        onChange={(e) => setChallenges({...challenges, highFive10: e.target.checked})}
+                                        className="mt-1 mr-3 w-5 h-5"
+                                    />
+                                    <span>High-five 10 people</span>
                                 </label>
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
@@ -2119,29 +2137,11 @@ END:VCALENDAR`;
                                 <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
                                     <input
                                         type="checkbox"
-                                        checked={challenges.postSocial}
-                                        onChange={(e) => setChallenges({...challenges, postSocial: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Post photo on Instagram/Facebook</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
                                         checked={challenges.boulderLegend}
                                         onChange={(e) => setChallenges({...challenges, boulderLegend: e.target.checked})}
                                         className="mt-1 mr-3 w-5 h-5"
                                     />
-                                    <span>This is my 3rd+ SantaCon</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.niceOrNaughty}
-                                        onChange={(e) => setChallenges({...challenges, niceOrNaughty: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Ask a stranger if they have been Nice (or Naughty) this year</span>
+                                    <span>This is my 3rd+ SantaCon!</span>
                                 </label>
                             </div>
                                 </>
