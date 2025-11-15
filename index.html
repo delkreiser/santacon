@@ -806,13 +806,13 @@ In brothels galore`
             const getCurrentStop = () => {
                 const now = new Date();
                 
-                // For testing: Check if it's November 14, 2025
+                // Check if it's November 28, 2025 (Black Friday)
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 
-                // Only activate on November 14, 2025
-                if (year !== 2025 || month !== 10 || day !== 14) {
+                // Only activate on November 28, 2025
+                if (year !== 2025 || month !== 10 || day !== 28) {
                     return null;
                 }
 
@@ -962,8 +962,8 @@ In brothels galore`
                 const month = now.getMonth();
                 const day = now.getDate();
                 
-                // Check if it's November 14, 2025 (testing date)
-                if (year === 2025 && month === 10 && day === 14) {
+                // Check if it's November 28, 2025 (Black Friday)
+                if (year === 2025 && month === 10 && day === 28) {
                     const currentTime = now.getHours() * 60 + now.getMinutes();
                     const marathonUnlockTime = 20 * 60 + 15; // 8:15pm in minutes
                     
@@ -1780,15 +1780,15 @@ END:VCALENDAR`;
                 const now = new Date();
                 const currentTime = now.getHours() * 60 + now.getMinutes();
                 
-                // Check if challenges are unlocked (Nov 14, 2025 at 5:00pm for testing)
+                // Check if challenges are unlocked (Nov 28, 2025 at 5:00pm - Black Friday)
                 const year = now.getFullYear();
                 const month = now.getMonth(); // 0-11 (November is 10)
                 const day = now.getDate();
                 const challengesUnlockTime = 17 * 60; // 5:00pm in minutes
                 
                 // Unlock on event day at 5pm OR after event day (stays unlocked)
-                const areChallengesUnlocked = (year === 2025 && month === 10 && day === 14 && currentTime >= challengesUnlockTime) || 
-                                              (year === 2025 && month === 10 && day > 14) ||
+                const areChallengesUnlocked = (year === 2025 && month === 10 && day === 28 && currentTime >= challengesUnlockTime) || 
+                                              (year === 2025 && month === 10 && day > 28) ||
                                               (year > 2025);
                 
                 // Count completed quests
