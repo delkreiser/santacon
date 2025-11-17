@@ -1802,8 +1802,8 @@ END:VCALENDAR`;
                     if ((year === 2025 && month === 10 && day > 28) || (year > 2025)) {
                         return 'unlocked';
                     }
-                    // During event day, use time-based unlocking
-                    if (currentTime >= quest.unlockTime) {
+                    // During event day (Nov 28, 2025), use time-based unlocking
+                    if (year === 2025 && month === 10 && day === 28 && currentTime >= quest.unlockTime) {
                         return 'unlocked';
                     }
                     return 'locked';
