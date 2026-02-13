@@ -4,25 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <title>Boulder SantaCon 2025</title>
-    
+    <title>Boulder SantaCon 2026</title>
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    
+
+    <!-- Event Configuration (update config/event.js each year) -->
+    <script src="config/event.js"></script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://santarchy.app/">
-    <meta property="og:title" content="Boulder SantaCon 2025 - Black Friday">
-    <meta property="og:description" content="Join us for the 19th Annual Boulder SantaCon! Black Friday, November 29th, 2024. Dress up as Santa and celebrate the holidays Boulder-style!">
+    <meta property="og:title" content="Boulder SantaCon 2026 - Black Friday">
+    <meta property="og:description" content="Join us for the 20th Annual Boulder SantaCon! Black Friday, November 27th, 2026. Dress up as Santa and celebrate the holidays Boulder-style!">
     <meta property="og:image" content="https://santarchy.app/img/header.jpg">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://santarchy.app/">
-    <meta property="twitter:title" content="Boulder SantaCon 2025 - Black Friday">
-    <meta property="twitter:description" content="Join us for the 19th Annual Boulder SantaCon! Black Friday, November 29th, 2024. Dress up as Santa and celebrate the holidays Boulder-style!">
+    <meta property="twitter:title" content="Boulder SantaCon 2026 - Black Friday">
+    <meta property="twitter:description" content="Join us for the 20th Annual Boulder SantaCon! Black Friday, November 27th, 2026. Dress up as Santa and celebrate the holidays Boulder-style!">
     <meta property="twitter:image" content="https://santarchy.app/img/header.jpg">
-    
+
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -199,57 +202,8 @@
             );
         };
 
-        // Schedule data with detailed info
-        const scheduleData = [
-            { 
-                time: "5:00 - 6:30pm", 
-                title: "Avanti F&B",
-                venue: "Roof top lounge",
-                text: "Meet Santa on the roof top lounge.",
-                drinkSpecials: "Mule Tide: (Gin, Pomegranate liqueur, Allspice Dram, cinnamon hibiscus, rosemary, lime, ginger beer.) | Spiked Eggnog: (Bacardi Spiced, Amaro, eggnog)",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1964.7278793680014!2d-105.27691744636638!3d40.0178103639815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bed2929560fbd%3A0xbe3c1820b8797eee!2sAvanti%20Food%20and%20Beverage%20Boulder!5e1!3m2!1sen!2sus!4v1762220992124!5m2!1sen!2sus",
-                mapLink: "https://maps.app.goo.gl/uXvk9P3sDBJoXFJVA",
-                notes: "When Santa is ready to leave, exit using the stairwell on the outdoor patio. We will gather the Santas and then head to \"Santa's Alley.\""
-            },
-            { 
-                time: "6:30 - 7:00pm", 
-                title: "Pearl Street Mall",
-                venue: "Caroling and Group Photo",
-                text: "After Santa's Alley, head east down the alley to 15th Street and loop around back onto Pearl St. by Illegal Pete's. We will continue to the Court House for a Group photo op and then sing a few carols.",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1118.6936876331285!2d-105.2780970909969!3d40.01849507885064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bed6384ffa061%3A0x12051a85a97cca48!2sBoulder%20County%20Historic%20Court%20House!5e1!3m2!1sen!2sus!4v1762221010590!5m2!1sen!2sus",
-                mapLink: "https://maps.app.goo.gl/2EEgyuTTbZWFPHFS6",
-                notes: null
-            },
-            { 
-                time: "7:00 - 7:45pm", 
-                title: "The Spotted James",
-                venue: "Formerly The Walrus",
-                text: "We haven't been to The James in a few years so we thought it's time to pay them a visit.",
-                drinkSpecials: "Labatt draft + pickle shot for $8!",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3795.6656851569173!2d-105.2837285588913!3d40.01670627162523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bedbf881c8319%3A0x6ae46986776b8279!2sThe%20Spotted%20James!5e1!3m2!1sen!2sus!4v1762539907771!5m2!1sen!2sus",
-                mapLink: null,
-                notes: "If you're hungry, The Rio, T|aco, and Rosetta Hall are nearby."
-            },
-            { 
-                time: "7:45 - 9:00pm", 
-                title: "St. Julien Hotel",
-                venue: "T-Zero Bar and the Grand Lobby",
-                text: "This is Santa's favorite stop! The Julien won't say it publicly, but they LOVE when Santa visits them!",
-                music: "David Lawrence and the Spoonful",
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7591.427428751109!2d-105.28521968514423!3d40.01584274961552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec26a391b9e9%3A0x86495a6b403f6317!2sSt%20Julien%20Hotel%20%26%20Spa!5e1!3m2!1sen!2sus!4v1762221047809!5m2!1sen!2sus",
-                mapLink: "https://maps.app.goo.gl/wQpMRekk78dy9B778",
-                notes: "If the line for drinks is too long, head to Jill's around the corner to the left."
-            },
-            { 
-                time: "9:00 - 1:00am", 
-                venue: "The Santa Ball @ The Riverside",
-                text: "This is our last stop and the official after party for SantaCon! Make sure to grab a ticket before it sells out!",
-                isAfterParty: true,
-                mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d474.47377773047225!2d-105.27881746029514!3d40.014467182362914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec258e8bfb7f%3A0xbf27b5a8462b87a6!2sThe%20Riverside%20Private%20%26%20Public%20Event%20Venue!5e1!3m2!1sen!2sus!4v1762220959898!5m2!1sen!2sus",
-                mapLink: "https://maps.app.goo.gl/M6BUwhF2ZvT6ZQ9A8",
-                notes: null
-            }
-        ];
+        // Schedule data — sourced from config/event.js
+        const scheduleData = EVENT_CONFIG.schedule;
 
         // Memoized ScheduleStop component to prevent re-renders from countdown
         const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, setActiveTab, isCurrentStop, isLeavingSoon, isPast, nextStop }) => (
@@ -735,58 +689,12 @@ In brothels galore`
                 };
             });
 
-            // Venue quest data
-            const venueQuestData = [
-                {
-                    id: 'hotelBoulderado',
-                    name: 'Hotel Boulderado',
-                    quest: '📷 Take your picture in front of the Christmas tree in the lobby',
-                    distance: '2 min. from the Courthouse',
-                    unlockTime: 17 * 60, // 5:00pm in minutes
-                    availableUntil: 19 * 60 + 30, // 7:30pm
-                    icon: '📷'
-                },
-                {
-                    id: 'velvetElk',
-                    name: 'The Velvet Elk',
-                    quest: '🍺 Grab a drink',
-                    distance: '1 min. from the Courthouse',
-                    unlockTime: 17 * 60, // 5:00pm
-                    availableUntil: 19 * 60 + 30, // 7:30pm
-                    icon: '🍺'
-                },
-                {
-                    id: 'pizzaCalore',
-                    name: 'Pizza Calore',
-                    quest: '🍕 Grab a slice between stops',
-                    distance: '1 min. from the Courthouse',
-                    unlockTime: 17 * 60, // 5:00pm
-                    availableUntil: 19 * 60 + 30, // 7:30pm
-                    icon: '🍕'
-                },
-                {
-                    id: 'taco',
-                    name: 'T|Aco',
-                    quest: '🍹 Get a margarita and some chips!',
-                    distance: '2 min. from The Spotted James',
-                    unlockTime: 19 * 60, // 7:00pm
-                    availableUntil: 20 * 60 + 30, // 8:30pm
-                    icon: '🍹'
-                },
-                {
-                    id: 'jungle',
-                    name: 'Jungle',
-                    quest: '🍹 Get a tiki drink!',
-                    distance: '5 min. from The Spotted James',
-                    unlockTime: 19 * 60, // 7:00pm
-                    availableUntil: 20 * 60 + 30, // 8:30pm
-                    icon: '🍹'
-                }
-            ];
+            // Venue quest data — sourced from config/event.js
+            const venueQuestData = EVENT_CONFIG.venueQuests;
 
             // Calculate countdown to event
             const calculateCountdown = () => {
-                const eventDate = new Date('2025-11-28T17:00:00'); // Nov 28, 2025, 5:00 PM
+                const eventDate = new Date(`${EVENT_CONFIG.date}T${EVENT_CONFIG.startTime}:00`);
                 const now = new Date();
                 const diff = eventDate - now;
 
@@ -816,47 +724,44 @@ In brothels galore`
                 return () => clearInterval(interval);
             }, []);
 
+            // Helper: parse EVENT_CONFIG.date into year/month/day
+            const eventDateParts = EVENT_CONFIG.date.split('-').map(Number); // [YYYY, MM, DD]
+            const eventYear = eventDateParts[0];
+            const eventMonth = eventDateParts[1] - 1; // JS months are 0-indexed
+            const eventDay = eventDateParts[2];
+
+            const isEventDay = (d) => d.getFullYear() === eventYear && d.getMonth() === eventMonth && d.getDate() === eventDay;
+            const isAfterEventDay = (d) => {
+                if (d.getFullYear() > eventYear) return true;
+                if (d.getFullYear() === eventYear && d.getMonth() > eventMonth) return true;
+                if (d.getFullYear() === eventYear && d.getMonth() === eventMonth && d.getDate() > eventDay) return true;
+                return false;
+            };
+
             // Function to get current stop based on time
             const getCurrentStop = () => {
                 const now = new Date();
-                
-                // Check if it's November 28, 2025 (Black Friday)
-                const year = now.getFullYear();
-                const month = now.getMonth(); // 0-11 (November is 10)
-                const day = now.getDate();
-                
-                // Only activate on November 28, 2025
-                if (year !== 2025 || month !== 10 || day !== 28) {
+
+                // Only activate on event day
+                if (!isEventDay(now)) {
                     return null;
                 }
 
                 const currentHour = now.getHours();
                 const currentMinute = now.getMinutes();
-                const currentTime = currentHour * 60 + currentMinute; // Convert to minutes from midnight
-                
-                console.log('Current time in minutes:', currentTime, `(${currentHour}:${currentMinute})`);
+                const currentTime = currentHour * 60 + currentMinute;
 
-                // Define time ranges for each stop (in minutes from midnight)
-                const stops = [
-                    { index: 0, start: 17 * 60, end: 18 * 60 + 30 }, // 5:00pm - 6:30pm (1020-1110 minutes) - Avanti
-                    { index: 1, start: 18 * 60 + 30, end: 19 * 60 }, // 6:30pm - 7:00pm (1110-1140) - Pearl Street
-                    { index: 2, start: 19 * 60, end: 19 * 60 + 45 }, // 7:00pm - 7:45pm (1140-1185) - Spotted James
-                    { index: 3, start: 19 * 60 + 45, end: 21 * 60 }, // 7:45pm - 9:00pm (1185-1260) - St. Julien
-                    { index: 4, start: 21 * 60, end: 25 * 60 } // 9:00pm - 1:00am (1260-1500) - Santa Ball
-                ];
+                // Build time ranges from config schedule
+                const stops = scheduleData.map((s, i) => ({ index: i, start: s.startMinutes, end: s.endMinutes }));
 
                 for (let stop of stops) {
-                    console.log(`Checking stop ${stop.index}: ${stop.start} <= ${currentTime} < ${stop.end}`);
                     if (currentTime >= stop.start && currentTime < stop.end) {
-                        console.log('Match found! Stop index:', stop.index);
-                        // Check if we're in the last 15 minutes (but not for the final stop - Santa Ball)
                         const timeUntilEnd = stop.end - currentTime;
-                        const isLeavingSoon = (timeUntilEnd <= 15) && (stop.index !== 4);
+                        const isLeavingSoon = (timeUntilEnd <= 15) && (stop.index !== stops.length - 1);
                         return { index: stop.index, isLeavingSoon };
                     }
                 }
 
-                console.log('No matching stop found');
                 return null;
             };
 
@@ -895,45 +800,15 @@ In brothels galore`
                 localStorage.setItem('santacon_challenges', JSON.stringify(challenges));
             }, [challenges]);
 
-            // Badge messages
-            const badgeMessages = {
-                jollyLeader: {
-                    emoji: '🎅🏻',
-                    title: 'JOLLY LEADER',
-                    message: "Your golden voice carried all the off-key Santas! You should be on America's Got Talent!",
-                    buttonText: 'High Five! 🙌'
-                },
-                giftGiver: {
-                    emoji: '🎁',
-                    title: 'GIFT GIVER',
-                    message: "Santa's checking his list, and you're officially on the Nice list! Your heart grew 3 sizes!",
-                    buttonText: 'Cheers! 🍻'
-                },
-                paparazzi: {
-                    emoji: '📸',
-                    title: 'PAPARAZZI',
-                    message: "You've documented this night better than TMZ! These pics will be legendary (or at least blackmail-worthy).",
-                    buttonText: 'Noice! 😎'
-                },
-                marathonSanta: {
-                    emoji: '🏃',
-                    title: 'MARATHON SANTA',
-                    message: "You conquered all 5 stops! Your liver is a champion, and you need help! Legend status: achieved.",
-                    buttonText: "You're #1! 🥇"
-                },
-                superSanta: {
-                    emoji: '💪🏻',
-                    title: 'SUPER SANTA',
-                    message: "Most people stick to the main route. You? You're an overachiever. We're impressed. Your mom is proud.",
-                    buttonText: 'Flex! 💪'
-                },
-                boulderLegend: {
-                    emoji: '🫡',
-                    title: 'BOULDER LEGEND',
-                    message: "Three years of SantaCon? You're basically Boulder SantaCon royalty! Put this on your resume.",
-                    buttonText: 'Respect! 🫡'
-                }
-            };
+            // Badge messages — sourced from config/event.js
+            const badgeMessages = Object.fromEntries(
+                Object.entries(EVENT_CONFIG.badges).map(([key, b]) => [key, {
+                    emoji: b.emoji,
+                    title: b.title,
+                    message: b.popupMessage,
+                    buttonText: b.popupButton,
+                }])
+            );
 
             // Check badge unlocks
             useEffect(() => {
@@ -970,17 +845,13 @@ In brothels galore`
                     }
                 }
                 
-                // Marathon Santa: Auto-unlock at 8:15pm on event day
+                // Marathon Santa: Auto-unlock at configured time on event day
                 const now = new Date();
-                const year = now.getFullYear();
-                const month = now.getMonth();
-                const day = now.getDate();
-                
-                // Check if it's November 28, 2025 (Black Friday)
-                if (year === 2025 && month === 10 && day === 28) {
+
+                if (isEventDay(now)) {
                     const currentTime = now.getHours() * 60 + now.getMinutes();
-                    const marathonUnlockTime = 20 * 60 + 15; // 8:15pm in minutes
-                    
+                    const marathonUnlockTime = EVENT_CONFIG.badges.marathonSanta.autoUnlockMinutes;
+
                     if (currentTime >= marathonUnlockTime && !badges.marathonSanta) {
                         newBadges.marathonSanta = true;
                         if (!badgePopupsShown.marathonSanta) {
@@ -1023,18 +894,17 @@ In brothels galore`
             useEffect(() => {
                 const allBadgesComplete = Object.values(badges).every(badge => badge === true);
                 const alreadyShown = localStorage.getItem('santacon_major_award_shown');
-                
-                // Date check: Only allow Major Award on or after event day (Nov 28, 2025)
+
+                // Date check: Only allow Major Award on or after event day
                 const now = new Date();
-                const eventDate = new Date('2025-11-28T00:00:00'); // Nov 28, 2025
-                const isEventDayOrLater = now >= eventDate;
+                const isEventDayOrLater = isEventDay(now) || isAfterEventDay(now);
                 
                 // Only show Major Award modal if:
                 // 1. All badges are complete
                 // 2. Haven't shown it before
                 // 3. Badge popup queue is empty (all badge popups have been shown)
                 // 4. Not currently showing a badge popup
-                // 5. It's on or after the event day (Nov 28, 2025)
+                // 5. It's on or after the event day
                 if (allBadgesComplete && !alreadyShown && !showAllBadgesModal && 
                     badgePopupQueue.length === 0 && !showingBadgePopup && isEventDayOrLater) {
                     setShowAllBadgesModal(true);
@@ -1076,13 +946,12 @@ In brothels galore`
 
                 try {
                     // Note: In production, this should go through a backend server to protect API keys
-                    // For now, using Mailchimp's JSONP endpoint
                     const formData = new FormData();
                     formData.append('EMAIL', emailInput);
-                    formData.append('b_2562f63497', ''); // Bot honeypot
+                    formData.append(EVENT_CONFIG.mailchimp.honeypotField, ''); // Bot honeypot
 
                     const response = await fetch(
-                        'https://us7.list-manage.com/subscribe/post?u=97c79a453122b17d97b904bea&id=2562f63497',
+                        EVENT_CONFIG.mailchimp.actionUrl,
                         {
                             method: 'POST',
                             body: formData,
@@ -1102,26 +971,26 @@ In brothels galore`
             const HomePage = () => (
                 <div className="space-y-6">
                     <div className="text-center mb-8">
-                        <img 
-                            src="img/header.jpg" 
-                            alt="Boulder SantaCon - The 19th Annual - Black Friday" 
+                        <img
+                            src="img/header.jpg"
+                            alt={`${EVENT_CONFIG.name} - The ${EVENT_CONFIG.edition} - ${EVENT_CONFIG.tagline}`}
                             className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
                         />
-                        
+
                         {/* Social Media & Calendar Buttons */}
                         <div className="flex justify-center gap-3 mt-6">
-                            <a 
-                                href="https://www.instagram.com/bouldersantacon" 
-                                target="_blank" 
+                            <a
+                                href={EVENT_CONFIG.social.instagram}
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="border-2 border-red-600 text-red-600 px-5 py-2.5 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg flex items-center"
                             >
                                 <i className="fab fa-instagram mr-2"></i>
                                 Follow
                             </a>
-                            <a 
-                                href="https://www.facebook.com/events/1458481705240919" 
-                                target="_blank" 
+                            <a
+                                href={EVENT_CONFIG.social.facebookEvent}
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="border-2 border-red-600 text-red-600 px-5 py-2.5 rounded-lg font-semibold hover:bg-red-600 hover:text-white transition-all shadow-lg"
                             >
@@ -1129,30 +998,29 @@ In brothels galore`
                             </a>
                             <button
                                 onClick={() => {
-                                    // Create .ics file content
+                                    const cal = EVENT_CONFIG.calendar;
                                     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Boulder SantaCon//EN
 BEGIN:VEVENT
-UID:bouldersantacon2025@santarchy.app
-DTSTAMP:20251106T000000Z
-DTSTART:20251128T170000
-DTEND:20251129T010000
-SUMMARY:Boulder SantaCon 2025
-DESCRIPTION:The 19th Annual Boulder SantaCon! Dress up as Santa and join us for a festive night through Boulder. Visit https://santarchy.app for schedule and details.
-LOCATION:Avanti F&B, 1401 Pearl St, Boulder, CO 80302
-URL:https://santarchy.app
+UID:${cal.uid}
+DTSTAMP:${cal.dtstamp}
+DTSTART:${cal.dtstart}
+DTEND:${cal.dtend}
+SUMMARY:${cal.summary}
+DESCRIPTION:${cal.description}
+LOCATION:${cal.location}
+URL:${EVENT_CONFIG.url}
 STATUS:CONFIRMED
 SEQUENCE:0
 END:VEVENT
 END:VCALENDAR`;
-                                    
-                                    // Create blob and download
+
                                     const blob = new Blob([icsContent], { type: 'text/calendar' });
                                     const url = window.URL.createObjectURL(blob);
                                     const link = document.createElement('a');
                                     link.href = url;
-                                    link.download = 'boulder-santacon-2025.ics';
+                                    link.download = cal.filename;
                                     document.body.appendChild(link);
                                     link.click();
                                     document.body.removeChild(link);
@@ -1172,7 +1040,7 @@ END:VCALENDAR`;
                             Santa's Schedule
                         </h2>
                         <p className="text-gray-700 mb-2">
-                            Black Friday, Nov. 28, 2025
+                            {EVENT_CONFIG.displayDate}
                         </p>
                         <button 
                             onClick={() => setActiveTab('about')}
@@ -1236,7 +1104,7 @@ END:VCALENDAR`;
                         <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                             <iframe
                                 className="absolute top-0 left-0 w-full h-full rounded-lg"
-                                src="https://www.youtube.com/embed/-QGoHJ2Izwo?origin=https://boulder-santacon.com"
+                                src={EVENT_CONFIG.social.youtubeEmbed}
                                 title="Boulder SantaCon Song"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1485,7 +1353,7 @@ END:VCALENDAR`;
                                     className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg"
                                 />
                                 <p className="text-gray-700">
-                                    This Black Friday marks our 19th annual event and it has become a Boulder tradition. Unlike the rowdy reputation SantaCon has earned in other cities, Boulder's version has always been about fun, not mayhem. Come join Santa!
+                                    This Black Friday marks our {EVENT_CONFIG.edition.toLowerCase()} event and it has become a Boulder tradition. Unlike the rowdy reputation SantaCon has earned in other cities, Boulder's version has always been about fun, not mayhem. Come join Santa!
                                 </p>
                             </div>
                         )}
@@ -1687,23 +1555,25 @@ END:VCALENDAR`;
                 </div>
             );
 
-            const AfterPartyPage = React.memo(() => (
+            const AfterPartyPage = React.memo(() => {
+                const ap = EVENT_CONFIG.afterParty;
+                return (
                 <div className="space-y-6">
                     <div className="text-center mb-8">
-                        <img 
-                            src="img/santaballheader.jpg" 
-                            alt="The Santa Ball After Party!" 
+                        <img
+                            src={ap.headerImage}
+                            alt={`${ap.name} After Party!`}
                             className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
                         />
                     </div>
 
                     <div className="glass-effect rounded-lg shadow-xl p-6">
                         <p className="text-gray-700 text-center mb-6">
-                            Please join us for the 3rd annual Santa Ball, the official after-party for Boulder SantaCon! If you've come to the Santa Ball either of the last 2 years, then you know how we throw down!
+                            {ap.blurb}
                         </p>
-                        
+
                         <div className="text-center mb-6">
-                            <img src="img/santaball.jpg" alt="Santa Ball Party" class="w-[300px] h-[300px] mx-auto rounded-lg shadow-lg object-cover" />
+                            <img src="img/santaball.jpg" alt="Santa Ball Party" className="w-[300px] h-[300px] mx-auto rounded-lg shadow-lg object-cover" />
                         </div>
 
                         <div className="space-y-4 mb-6">
@@ -1711,7 +1581,7 @@ END:VCALENDAR`;
                                 <i className="fas fa-map-marker-alt text-red-600 text-xl mr-4 mt-1"></i>
                                 <div>
                                     <div className="font-bold text-gray-800">Location</div>
-                                    <div className="text-gray-700">The Riverside</div>
+                                    <div className="text-gray-700">{ap.venue}</div>
                                 </div>
                             </div>
 
@@ -1719,7 +1589,7 @@ END:VCALENDAR`;
                                 <i className="fas fa-clock text-red-600 text-xl mr-4 mt-1"></i>
                                 <div>
                                     <div className="font-bold text-gray-800">Time</div>
-                                    <div className="text-gray-700">9:00 PM - 1:00 AM</div>
+                                    <div className="text-gray-700">{ap.time}</div>
                                 </div>
                             </div>
 
@@ -1727,9 +1597,8 @@ END:VCALENDAR`;
                                 <i className="fas fa-music text-red-600 text-xl mr-4 mt-1"></i>
                                 <div>
                                     <div className="font-bold text-gray-800">Entertainment</div>
-                                    <div className="text-gray-700">DJs: Flaming Olive, Ignyte, Bounce, Secret Santa!</div>
-                                    <div className="text-gray-700">Photo Booth, Food/Drink/Cookies!</div>
-
+                                    <div className="text-gray-700">DJs: {ap.djs.join(', ')}!</div>
+                                    <div className="text-gray-700">{ap.extras}</div>
                                 </div>
                             </div>
 
@@ -1737,19 +1606,19 @@ END:VCALENDAR`;
                                 <i className="fas fa-ticket-alt text-red-600 text-xl mr-4 mt-1"></i>
                                 <div>
                                     <div className="font-bold text-gray-800">Tickets</div>
-                                    <div className="text-gray-700">$20</div>
+                                    <div className="text-gray-700">{ap.price}</div>
                                 </div>
                             </div>
                         </div>
 
                         <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
                             <p className="text-sm text-gray-700">
-                                As always, the SantaCon crawl is a FREE event, but the official after-party requires a ticket. We pay the venue, the DJ's, rent gear, etc. Thank you immensely for helping us "Keep Boulder Weird."
+                                {ap.fundingNote}
                             </p>
                         </div>
 
                         <a
-                            href="https://www.eventbrite.com/e/santa-ball-2025-the-boulder-santacon-official-after-party-tickets-1963688271481"
+                            href={ap.ticketUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="block w-full bg-gradient-to-r from-red-600 to-green-600 text-white py-4 px-4 rounded-lg font-bold text-center hover:from-red-700 hover:to-green-700 transition text-lg"
@@ -1759,7 +1628,8 @@ END:VCALENDAR`;
                         </a>
                     </div>
                 </div>
-            ));
+                );
+            });
 
             const MajorAwardPage = () => (
                 <div className="space-y-6">
@@ -1801,17 +1671,11 @@ END:VCALENDAR`;
             const QuestsPage = () => {
                 const now = new Date();
                 const currentTime = now.getHours() * 60 + now.getMinutes();
-                
-                // Check if challenges are unlocked (Nov 28, 2025 at 5:00pm - Black Friday)
-                const year = now.getFullYear();
-                const month = now.getMonth(); // 0-11 (November is 10)
-                const day = now.getDate();
-                const challengesUnlockTime = 17 * 60; // 5:00pm in minutes
-                
-                // Unlock on event day at 5pm OR after event day (stays unlocked)
-                const areChallengesUnlocked = (year === 2025 && month === 10 && day === 28 && currentTime >= challengesUnlockTime) || 
-                                              (year === 2025 && month === 10 && day > 28) ||
-                                              (year > 2025);
+
+                // Challenges unlock at event start time on event day (stays unlocked after)
+                const challengesUnlockTime = parseInt(EVENT_CONFIG.startTime.split(':')[0]) * 60;
+                const areChallengesUnlocked = (isEventDay(now) && currentTime >= challengesUnlockTime) ||
+                                              isAfterEventDay(now);
                 
                 // Count completed quests
                 const venueQuestCount = Object.values(venueQuests).filter(Boolean).length;
@@ -1820,14 +1684,8 @@ END:VCALENDAR`;
                 
                 // Check which venue quests are unlocked
                 const getVenueQuestStatus = (quest) => {
-                    // After event day (Nov 28, 2025), keep all venue quests unlocked
-                    if ((year === 2025 && month === 10 && day > 28) || (year > 2025)) {
-                        return 'unlocked';
-                    }
-                    // During event day (Nov 28, 2025), use time-based unlocking
-                    if (year === 2025 && month === 10 && day === 28 && currentTime >= quest.unlockTime) {
-                        return 'unlocked';
-                    }
+                    if (isAfterEventDay(now)) return 'unlocked';
+                    if (isEventDay(now) && currentTime >= quest.unlockTime) return 'unlocked';
                     return 'locked';
                 };
                 
@@ -1864,11 +1722,7 @@ END:VCALENDAR`;
                         </div>
 
                         {/* Major Award Card - Only shows when all badges complete AND on/after event day */}
-                        {badgeCount === 6 && (() => {
-                            const now = new Date();
-                            const eventDate = new Date('2025-11-28T00:00:00');
-                            return now >= eventDate;
-                        })() && (
+                        {badgeCount === Object.keys(EVENT_CONFIG.badges).length && (isEventDay(now) || isAfterEventDay(now)) && (
                             <div 
                                 className="major-award-card rounded-lg shadow-xl p-6 cursor-pointer"
                                 onClick={() => setActiveTab('major-award')}
@@ -1897,18 +1751,15 @@ END:VCALENDAR`;
                             >
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-xl font-bold text-gray-800">
-                                        🏆 Your Badges ({badgeCount}/6)
+                                        🏆 Your Badges ({badgeCount}/{Object.keys(EVENT_CONFIG.badges).length})
                                     </h2>
                                     <i className={`fas fa-chevron-down text-gray-400 text-xl ${badgeLegendExpanded ? 'rotate-180' : ''}`} style={{transition: 'transform 0.3s'}}></i>
                                 </div>
                                 
                                 <div className="flex justify-center gap-4 mb-2 text-4xl">
-                                    <span>{badges.jollyLeader ? '🎅🏻' : '🔒'}</span>
-                                    <span>{badges.giftGiver ? '🎁' : '🔒'}</span>
-                                    <span>{badges.paparazzi ? '📸' : '🔒'}</span>
-                                    <span>{badges.marathonSanta ? '🏃' : '🔒'}</span>
-                                    <span>{badges.superSanta ? '💪🏻' : '🔒'}</span>
-                                    <span>{badges.boulderLegend ? '🫡' : '🔒'}</span>
+                                    {Object.entries(EVENT_CONFIG.badges).map(([key, b]) => (
+                                        <span key={key}>{badges[key] ? b.emoji : '🔒'}</span>
+                                    ))}
                                 </div>
                                 
                                 <p className="text-center text-sm text-gray-600">
@@ -1922,42 +1773,14 @@ END:VCALENDAR`;
                                         Unlock badges by completing challenges and side quests throughout the night:
                                     </p>
                                     <div className="space-y-3 text-sm">
-                                        <div>
-                                            <div className="font-semibold text-gray-800">
-                                                🎅🏻 Jolly Leader {badges.jollyLeader && '- ✅ UNLOCKED'}
+                                        {Object.entries(EVENT_CONFIG.badges).map(([key, b]) => (
+                                            <div key={key}>
+                                                <div className="font-semibold text-gray-800">
+                                                    {b.emoji} {b.title} {badges[key] && '- ✅ UNLOCKED'}
+                                                </div>
+                                                <div className="text-gray-600 ml-6">{b.shortDescription}</div>
                                             </div>
-                                            <div className="text-gray-600 ml-6">Lead a carol sing-along in public</div>
-                                        </div>
-                                        <div>
-                                            <div className="font-semibold text-gray-800">
-                                                🎁 Gift Giver {badges.giftGiver && '- ✅ UNLOCKED'}
-                                            </div>
-                                            <div className="text-gray-600 ml-6">Buy a fellow Santa some holiday cheer</div>
-                                        </div>
-                                        <div>
-                                            <div className="font-semibold text-gray-800">
-                                                📸 Paparazzi {badges.paparazzi && '- ✅ UNLOCKED'}
-                                            </div>
-                                            <div className="text-gray-600 ml-6">Snap photos at 3+ locations</div>
-                                        </div>
-                                        <div>
-                                            <div className="font-semibold text-gray-800">
-                                                🏃 Marathon Santa {badges.marathonSanta && '- ✅ UNLOCKED'}
-                                            </div>
-                                            <div className="text-gray-600 ml-6">Complete all 4 official stops</div>
-                                        </div>
-                                        <div>
-                                            <div className="font-semibold text-gray-800">
-                                                💪🏻 Super Santa {badges.superSanta && '- ✅ UNLOCKED'}
-                                            </div>
-                                            <div className="text-gray-600 ml-6">Crush 3+ side quests</div>
-                                        </div>
-                                        <div>
-                                            <div className="font-semibold text-gray-800">
-                                                🫡 Boulder Legend {badges.boulderLegend && '- ✅ UNLOCKED'}
-                                            </div>
-                                            <div className="text-gray-600 ml-6">Veteran of 3+ SantaCons</div>
-                                        </div>
+                                        ))}
                                     </div>
                                 </div>
                             )}
@@ -1967,7 +1790,7 @@ END:VCALENDAR`;
                         <div className="glass-effect rounded-lg shadow-xl p-6">
                             <h2 className="text-xl font-bold text-red-700 mb-2">
                                 <i className="fas fa-map-marker-alt mr-2"></i>
-                                VENUE QUESTS ({venueQuestCount}/5)
+                                VENUE QUESTS ({venueQuestCount}/{EVENT_CONFIG.venueQuests.length})
                             </h2>
                             <p className="text-sm text-gray-600 mb-4">
                                 Are you looking for more adventure? Try these side quests to add more fun to your SantaCon experience! Nearby venues unlock throughout the night, complete them to earn extra badges.
@@ -2005,22 +1828,10 @@ END:VCALENDAR`;
                                 <div className="space-y-2">
                                     {Object.keys(lockedGroups).sort((a, b) => a - b).map(unlockTime => {
                                         const time = parseInt(unlockTime);
-                                        let teaserText = '';
-                                        
-                                        // 5:00pm unlock (17 * 60 = 1020 minutes)
-                                        if (time === 1020) {
-                                            teaserText = '3 nearby venues ready to explore—snap photos, grab drinks, and refuel!';
-                                        }
-                                        // 7:00pm unlock (19 * 60 = 1140 minutes)
-                                        else if (time === 1140) {
-                                            teaserText = '2 drink destinations with tropical vibes await!';
-                                        }
-                                        
-                                        // Show "on Black Friday" if before Nov 28, 2025
-                                        const isBeforeEventDay = (year < 2025) || 
-                                                                  (year === 2025 && month < 10) || 
-                                                                  (year === 2025 && month === 10 && day < 28);
-                                        const timeText = isBeforeEventDay 
+                                        const teaserText = EVENT_CONFIG.lockedQuestTeasers[time] || '';
+
+                                        const beforeEvent = !isEventDay(now) && !isAfterEventDay(now);
+                                        const timeText = beforeEvent
                                             ? `${formatTime(time)} on Black Friday`
                                             : formatTime(time);
                                         
@@ -2043,13 +1854,13 @@ END:VCALENDAR`;
                         <div className="glass-effect rounded-lg shadow-xl p-6">
                             <h2 className="text-xl font-bold text-red-700 mb-4">
                                 <i className="fas fa-star mr-2"></i>
-                                CHALLENGES ({challengeCount}/12)
+                                CHALLENGES ({challengeCount}/{EVENT_CONFIG.challenges.length})
                             </h2>
                             
                             {!areChallengesUnlocked ? (
                                 <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-3">
                                     <div className="text-sm font-bold text-gray-700 mb-1">
-                                        🔒 Unlocks at 5:00pm{((year < 2025) || (year === 2025 && month < 10) || (year === 2025 && month === 10 && day < 28)) ? ' on Black Friday' : ''}
+                                        🔒 Unlocks at 5:00pm{(!isEventDay(now) && !isAfterEventDay(now)) ? ' on Black Friday' : ''}
                                     </div>
                                     <div className="text-sm text-gray-600">
                                         The fun's about to begin! Complete challenges as you crawl through Boulder to earn badges and legendary Santa status!
@@ -2061,114 +1872,17 @@ END:VCALENDAR`;
                                         Complete these challenges throughout the night to earn badges and show off your Santa spirit!
                                     </p>
                                     <div className="space-y-2">
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.niceOrNaughty}
-                                        onChange={(e) => setChallenges({...challenges, niceOrNaughty: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Ask a stranger if they've been Nice (or Naughty) this year</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.groupPhoto}
-                                        onChange={(e) => setChallenges({...challenges, groupPhoto: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Take a group Santa photo</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.findElf}
-                                        onChange={(e) => setChallenges({...challenges, findElf: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Find someone dressed as an elf and tell them to get back to work</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.singCarol}
-                                        onChange={(e) => setChallenges({...challenges, singCarol: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Sing a carol in public</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.giveGift}
-                                        onChange={(e) => setChallenges({...challenges, giveGift: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Give a naughty (or nice) gift to a stranger</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.compliment5}
-                                        onChange={(e) => setChallenges({...challenges, compliment5: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Compliment 5 strangers</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.buyDrink}
-                                        onChange={(e) => setChallenges({...challenges, buyDrink: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Buy someone a drink</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.congaLine}
-                                        onChange={(e) => setChallenges({...challenges, congaLine: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Dance in a Santa conga line!</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.postSocial}
-                                        onChange={(e) => setChallenges({...challenges, postSocial: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Post a photo to your Insta/TikTok/FB account</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.highFive10}
-                                        onChange={(e) => setChallenges({...challenges, highFive10: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>High-five 10 people</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.photoCop}
-                                        onChange={(e) => setChallenges({...challenges, photoCop: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>Get a photo with a Boulder cop</span>
-                                </label>
-                                <label className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input
-                                        type="checkbox"
-                                        checked={challenges.boulderLegend}
-                                        onChange={(e) => setChallenges({...challenges, boulderLegend: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <span>This is my 3rd+ SantaCon!</span>
-                                </label>
+                                {EVENT_CONFIG.challenges.map(ch => (
+                                    <label key={ch.id} className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                        <input
+                                            type="checkbox"
+                                            checked={challenges[ch.id]}
+                                            onChange={(e) => setChallenges({...challenges, [ch.id]: e.target.checked})}
+                                            className="mt-1 mr-3 w-5 h-5"
+                                        />
+                                        <span>{ch.label}</span>
+                                    </label>
+                                ))}
                             </div>
                                 </>
                             )}
