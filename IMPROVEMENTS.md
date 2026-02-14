@@ -195,13 +195,14 @@ Nice-to-have improvements for polish and accessibility.
 ---
 
 ### 14. Add PWA support
-`[ ]`
+`[x]` — Done. Full PWA with installability and offline caching.
 
-The app is used during a live event where connectivity may be spotty:
-- Add a `manifest.json` for "Add to Home Screen"
-- Add a service worker for offline caching of the app shell and images
-- Cache carol lyrics, schedule, and quest data for offline use
-- This would make the app work reliably in crowded venues with poor cell signal
+- ~~Add a `manifest.json` for "Add to Home Screen"~~ ✅ `public/manifest.json` with app name, icons (192, 512, 512-maskable), standalone display, theme color
+- ~~Add a service worker for offline caching~~ ✅ `public/sw.js` with three strategies: cache-first for same-origin assets, network-first for navigation (falls back to cached `/`), stale-while-revalidate for CDN resources (Font Awesome)
+- ~~Cache carol lyrics, schedule, and quest data for offline use~~ ✅ All JS bundles (which contain carol, schedule, and quest data) are cache-first after first load
+- ~~Make the app work reliably in crowded venues~~ ✅ Pre-caches index.html, icons, and header image at install time
+- Added `<link rel="apple-touch-icon">`, `<meta name="theme-color">`, and `apple-mobile-web-app-capable` for iOS support
+- Service worker registered in `main.jsx` after page load to avoid blocking initial render
 
 ---
 
