@@ -1,15 +1,17 @@
 import React from 'react';
 import EVENT_CONFIG from '../config/event.js';
+import OptimizedImage from './OptimizedImage.jsx';
 
 const AfterPartyPage = React.memo(() => {
     const ap = EVENT_CONFIG.afterParty;
     return (
         <div className="space-y-6">
             <div className="text-center mb-8">
-                <img
+                <OptimizedImage
                     src={ap.headerImage}
                     alt={`${ap.name} After Party!`}
                     className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
+                    lazy={false}
                 />
             </div>
 
@@ -19,7 +21,7 @@ const AfterPartyPage = React.memo(() => {
                 </p>
 
                 <div className="text-center mb-6">
-                    <img src="img/santaball.jpg" alt="Santa Ball Party" className="w-[300px] h-[300px] mx-auto rounded-lg shadow-lg object-cover" />
+                    <OptimizedImage src="img/santaball.jpg" alt="Santa Ball Party" className="w-[300px] h-[300px] mx-auto rounded-lg shadow-lg object-cover" />
                 </div>
 
                 <div className="space-y-4 mb-6">

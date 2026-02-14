@@ -50,7 +50,8 @@ const EVENT_CONFIG = {
     // Mailchimp Newsletter
     // -------------------------------------------------------------------------
     mailchimp: {
-        actionUrl: "https://us7.list-manage.com/subscribe/post?u=97c79a453122b17d97b904bea&id=2562f63497",
+        // JSONP endpoint for client-side submission (avoids CORS, allows reading response)
+        actionUrl: "https://us7.list-manage.com/subscribe/post-json?u=97c79a453122b17d97b904bea&id=2562f63497",
         honeypotField: "b_2562f63497",
     },
 

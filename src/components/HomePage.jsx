@@ -1,14 +1,16 @@
 import React from 'react';
 import EVENT_CONFIG from '../config/event.js';
 import ScheduleStop from './ScheduleStop.jsx';
+import OptimizedImage from './OptimizedImage.jsx';
 
 const HomePage = ({ scheduleData, currentStop, expandedStop, setExpandedStop, setActiveTab }) => (
     <div className="space-y-6">
         <div className="text-center mb-8">
-            <img
+            <OptimizedImage
                 src="img/header.jpg"
                 alt={`${EVENT_CONFIG.name} - The ${EVENT_CONFIG.edition} - ${EVENT_CONFIG.tagline}`}
                 className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
+                lazy={false}
             />
 
             {/* Social Media & Calendar Buttons */}

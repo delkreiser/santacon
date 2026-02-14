@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import EVENT_CONFIG from './config/event.js';
-import { isEventDay, isAfterEventDay, calculateCountdown, getCurrentStop } from './utils/dateUtils.js';
+import { isEventDay, isAfterEventDay, getCurrentStop } from './utils/dateUtils.js';
 import Snowflakes from './components/Snowflakes.jsx';
 import Navigation from './components/Navigation.jsx';
 import HomePage from './components/HomePage.jsx';
@@ -14,7 +14,73 @@ import BadgePopup, { MajorAwardModal } from './components/BadgePopup.jsx';
 
 const scheduleData = EVENT_CONFIG.schedule;
 
+// Quest system reducer — consolidates badges, venue quests, challenges, and popup state
+const defaultQuestState = {
+    badges: {
+        jollyLeader: false, giftGiver: false, paparazzi: false,
+        marathonSanta: false, superSanta: false, boulderLegend: false
+    },
+    badgePopupsShown: {
+        jollyLeader: false, giftGiver: false, paparazzi: false,
+        marathonSanta: false, superSanta: false, boulderLegend: false
+    },
+    venueQuests: {
+        hotelBoulderado: false, velvetElk: false, pizzaCalore: false,
+        taco: false, jungle: false
+    },
+    challenges: {
+        highFive10: false, groupPhoto: false, giveGift: false, findElf: false,
+        singCarol: false, buyDrink: false, compliment5: false, congaLine: false,
+        photoCop: false, postSocial: false, boulderLegend: false, niceOrNaughty: false
+    },
+    badgePopupQueue: [],
+    showingBadgePopup: false,
+};
+
+function loadQuestState() {
+    const load = (key, fallback) => {
+        try {
+            const saved = localStorage.getItem(key);
+            return saved ? JSON.parse(saved) : fallback;
+        } catch { return fallback; }
+    };
+    return {
+        ...defaultQuestState,
+        badges: load('santacon_badges', defaultQuestState.badges),
+        badgePopupsShown: load('santacon_badge_popups_shown', defaultQuestState.badgePopupsShown),
+        venueQuests: load('santacon_venue_quests', defaultQuestState.venueQuests),
+        challenges: load('santacon_challenges', defaultQuestState.challenges),
+    };
+}
+
+function questReducer(state, action) {
+    switch (action.type) {
+        case 'SET_BADGES':
+            return { ...state, badges: action.payload };
+        case 'SET_VENUE_QUESTS':
+            return { ...state, venueQuests: action.payload };
+        case 'SET_CHALLENGES':
+            return { ...state, challenges: action.payload };
+        case 'QUEUE_BADGE_POPUPS':
+            return { ...state, badgePopupQueue: [...state.badgePopupQueue, ...action.payload] };
+        case 'SHOW_BADGE_POPUP':
+            return { ...state, showingBadgePopup: true };
+        case 'CLOSE_BADGE_POPUP': {
+            const [closedBadge, ...remaining] = state.badgePopupQueue;
+            return {
+                ...state,
+                badgePopupsShown: { ...state.badgePopupsShown, [closedBadge]: true },
+                badgePopupQueue: remaining,
+                showingBadgePopup: false,
+            };
+        }
+        default:
+            return state;
+    }
+}
+
 function App() {
+    // UI state
     const [activeTab, setActiveTab] = useState('home');
     const [carolType, setCarolType] = useState('nice');
     const [selectedCarol, setSelectedCarol] = useState(null);
@@ -24,71 +90,11 @@ function App() {
     const [expandedStop, setExpandedStop] = useState(null);
     const [currentStop, setCurrentStop] = useState(null);
     const [expandedAbout, setExpandedAbout] = useState(null);
-    const [countdown, setCountdown] = useState('');
     const [showAllBadgesModal, setShowAllBadgesModal] = useState(false);
-
-    // Quest system state
     const [badgeLegendExpanded, setBadgeLegendExpanded] = useState(false);
-    const [badgePopupQueue, setBadgePopupQueue] = useState([]);
-    const [showingBadgePopup, setShowingBadgePopup] = useState(false);
-    const [badgePopupsShown, setBadgePopupsShown] = useState(() => {
-        const saved = localStorage.getItem('santacon_badge_popups_shown');
-        return saved ? JSON.parse(saved) : {
-            jollyLeader: false,
-            giftGiver: false,
-            paparazzi: false,
-            marathonSanta: false,
-            superSanta: false,
-            boulderLegend: false
-        };
-    });
-    const [badges, setBadges] = useState(() => {
-        const saved = localStorage.getItem('santacon_badges');
-        return saved ? JSON.parse(saved) : {
-            jollyLeader: false,
-            giftGiver: false,
-            paparazzi: false,
-            marathonSanta: false,
-            superSanta: false,
-            boulderLegend: false
-        };
-    });
-    const [venueQuests, setVenueQuests] = useState(() => {
-        const saved = localStorage.getItem('santacon_venue_quests');
-        return saved ? JSON.parse(saved) : {
-            hotelBoulderado: false,
-            velvetElk: false,
-            pizzaCalore: false,
-            taco: false,
-            jungle: false
-        };
-    });
-    const [challenges, setChallenges] = useState(() => {
-        const saved = localStorage.getItem('santacon_challenges');
-        return saved ? JSON.parse(saved) : {
-            highFive10: false,
-            groupPhoto: false,
-            giveGift: false,
-            findElf: false,
-            singCarol: false,
-            buyDrink: false,
-            compliment5: false,
-            congaLine: false,
-            photoCop: false,
-            postSocial: false,
-            boulderLegend: false,
-            niceOrNaughty: false
-        };
-    });
 
-    // Update countdown every minute
-    useEffect(() => {
-        setCountdown(calculateCountdown());
-        const interval = setInterval(() => {
-            setCountdown(calculateCountdown());
-        }, 60000);
-        return () => clearInterval(interval);
-    }, []);
+    // Quest system — single reducer for all gamification state
+    const [quest, questDispatch] = useReducer(questReducer, null, loadQuestState);
 
     // Update current stop every minute
     useEffect(() => {
@@ -111,21 +117,26 @@ function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [activeTab]);
 
-    // Save quest state to localStorage
+    // Persist quest state to localStorage
     useEffect(() => {
-        localStorage.setItem('santacon_badges', JSON.stringify(badges));
-    }, [badges]);
+        localStorage.setItem('santacon_badges', JSON.stringify(quest.badges));
+    }, [quest.badges]);
 
     useEffect(() => {
-        localStorage.setItem('santacon_venue_quests', JSON.stringify(venueQuests));
-    }, [venueQuests]);
+        localStorage.setItem('santacon_venue_quests', JSON.stringify(quest.venueQuests));
+    }, [quest.venueQuests]);
 
     useEffect(() => {
-        localStorage.setItem('santacon_challenges', JSON.stringify(challenges));
-    }, [challenges]);
+        localStorage.setItem('santacon_challenges', JSON.stringify(quest.challenges));
+    }, [quest.challenges]);
+
+    useEffect(() => {
+        localStorage.setItem('santacon_badge_popups_shown', JSON.stringify(quest.badgePopupsShown));
+    }, [quest.badgePopupsShown]);
 
     // Check badge unlocks
     useEffect(() => {
+        const { badges, challenges, venueQuests, badgePopupsShown } = quest;
         const newBadges = { ...badges };
         const newlyUnlocked = [];
 
@@ -173,70 +184,76 @@ function App() {
         }
 
         if (JSON.stringify(newBadges) !== JSON.stringify(badges)) {
-            setBadges(newBadges);
+            questDispatch({ type: 'SET_BADGES', payload: newBadges });
         }
 
         if (newlyUnlocked.length > 0) {
-            setBadgePopupQueue(prev => [...prev, ...newlyUnlocked]);
+            questDispatch({ type: 'QUEUE_BADGE_POPUPS', payload: newlyUnlocked });
         }
-    }, [challenges, venueQuests, currentStop, badges, badgePopupsShown]);
+    }, [quest.challenges, quest.venueQuests, currentStop, quest.badges, quest.badgePopupsShown]);
 
     // Major Award check
     useEffect(() => {
-        const allBadgesComplete = Object.values(badges).every(badge => badge === true);
+        const allBadgesComplete = Object.values(quest.badges).every(badge => badge === true);
         const alreadyShown = localStorage.getItem('santacon_major_award_shown');
         const now = new Date();
         const isEventDayOrLater = isEventDay(now) || isAfterEventDay(now);
 
         if (allBadgesComplete && !alreadyShown && !showAllBadgesModal &&
-            badgePopupQueue.length === 0 && !showingBadgePopup && isEventDayOrLater) {
+            quest.badgePopupQueue.length === 0 && !quest.showingBadgePopup && isEventDayOrLater) {
             setShowAllBadgesModal(true);
             localStorage.setItem('santacon_major_award_shown', 'true');
         }
-    }, [badges, showAllBadgesModal, badgePopupQueue, showingBadgePopup]);
+    }, [quest.badges, showAllBadgesModal, quest.badgePopupQueue, quest.showingBadgePopup]);
 
     // Handle badge popup queue
     useEffect(() => {
-        if (badgePopupQueue.length > 0 && !showingBadgePopup) {
-            setShowingBadgePopup(true);
+        if (quest.badgePopupQueue.length > 0 && !quest.showingBadgePopup) {
+            questDispatch({ type: 'SHOW_BADGE_POPUP' });
         }
-    }, [badgePopupQueue, showingBadgePopup]);
-
-    // Save badge popups shown to localStorage
-    useEffect(() => {
-        localStorage.setItem('santacon_badge_popups_shown', JSON.stringify(badgePopupsShown));
-    }, [badgePopupsShown]);
+    }, [quest.badgePopupQueue, quest.showingBadgePopup]);
 
     const handleBadgePopupClose = () => {
-        const [currentBadge, ...remaining] = badgePopupQueue;
-        setBadgePopupsShown(prev => ({ ...prev, [currentBadge]: true }));
-        setBadgePopupQueue(remaining);
-        setShowingBadgePopup(false);
+        questDispatch({ type: 'CLOSE_BADGE_POPUP' });
     };
 
-    const handleSubscribe = async (e) => {
+    const handleSubscribe = (e) => {
         e.preventDefault();
         setSubscribeStatus('Subscribing...');
         const emailInput = e.target.elements.email.value;
+        const form = e.target;
 
-        try {
-            const formData = new FormData();
-            formData.append('EMAIL', emailInput);
-            formData.append(EVENT_CONFIG.mailchimp.honeypotField, '');
+        // Use JSONP to call Mailchimp's post-json endpoint (avoids CORS entirely)
+        const callbackName = `mc_callback_${Date.now()}`;
+        const url = `${EVENT_CONFIG.mailchimp.actionUrl}&EMAIL=${encodeURIComponent(emailInput)}&${EVENT_CONFIG.mailchimp.honeypotField}=&c=${callbackName}`;
 
-            await fetch(EVENT_CONFIG.mailchimp.actionUrl, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors'
-            });
+        window[callbackName] = (data) => {
+            // Clean up
+            delete window[callbackName];
+            document.getElementById(callbackName)?.remove();
 
-            setSubscribeStatus('Thanks for subscribing! 🎅');
-            e.target.reset();
-            setTimeout(() => setSubscribeStatus(''), 3000);
-        } catch (error) {
+            if (data.result === 'success') {
+                setSubscribeStatus('Thanks for subscribing! 🎅');
+                form.reset();
+            } else if (data.msg?.includes('already subscribed')) {
+                setSubscribeStatus("You're already on Santa's list! 🎅");
+            } else {
+                setSubscribeStatus(data.msg || 'Oops! Please try again.');
+            }
+            setTimeout(() => setSubscribeStatus(''), 4000);
+        };
+
+        // Inject JSONP script tag
+        const script = document.createElement('script');
+        script.id = callbackName;
+        script.src = url;
+        script.onerror = () => {
+            delete window[callbackName];
+            script.remove();
             setSubscribeStatus('Oops! Please try again.');
             setTimeout(() => setSubscribeStatus(''), 3000);
-        }
+        };
+        document.body.appendChild(script);
     };
 
     useEffect(() => {
@@ -264,7 +281,7 @@ function App() {
             <div className="max-w-2xl mx-auto px-4 py-6 pb-24">
                 {activeTab === 'home' && <HomePage scheduleData={scheduleData} currentStop={currentStop} expandedStop={expandedStop} setExpandedStop={setExpandedStop} setActiveTab={setActiveTab} />}
                 {activeTab === 'carols' && <CarolsPage carolType={carolType} setCarolType={setCarolType} selectedCarol={selectedCarol} setSelectedCarol={setSelectedCarol} lyricsFontSize={lyricsFontSize} setLyricsFontSize={setLyricsFontSize} />}
-                {activeTab === 'quests' && <QuestsPage badges={badges} venueQuests={venueQuests} setVenueQuests={setVenueQuests} challenges={challenges} setChallenges={setChallenges} setActiveTab={setActiveTab} badgeLegendExpanded={badgeLegendExpanded} setBadgeLegendExpanded={setBadgeLegendExpanded} />}
+                {activeTab === 'quests' && <QuestsPage badges={quest.badges} venueQuests={quest.venueQuests} setVenueQuests={(v) => questDispatch({ type: 'SET_VENUE_QUESTS', payload: v })} challenges={quest.challenges} setChallenges={(c) => questDispatch({ type: 'SET_CHALLENGES', payload: c })} setActiveTab={setActiveTab} badgeLegendExpanded={badgeLegendExpanded} setBadgeLegendExpanded={setBadgeLegendExpanded} />}
                 {activeTab === 'about' && <AboutPage expandedAbout={expandedAbout} setExpandedAbout={setExpandedAbout} />}
                 {activeTab === 'mailing' && <MailingListPage subscribeStatus={subscribeStatus} handleSubscribe={handleSubscribe} />}
                 {activeTab === 'afterparty' && <AfterPartyPage />}
@@ -272,8 +289,8 @@ function App() {
             </div>
 
             {/* Badge Unlock Popup */}
-            {showingBadgePopup && badgePopupQueue.length > 0 && (
-                <BadgePopup badgePopupQueue={badgePopupQueue} onClose={handleBadgePopupClose} />
+            {quest.showingBadgePopup && quest.badgePopupQueue.length > 0 && (
+                <BadgePopup badgePopupQueue={quest.badgePopupQueue} onClose={handleBadgePopupClose} />
             )}
 
             {/* All Badges Complete Modal */}

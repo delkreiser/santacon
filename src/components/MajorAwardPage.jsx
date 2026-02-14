@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage.jsx';
 
 const MajorAwardPage = ({ setActiveTab }) => (
     <div className="space-y-6">
@@ -10,7 +11,7 @@ const MajorAwardPage = ({ setActiveTab }) => (
             <p className="text-xl text-gray-600 mb-6">(Fra-gee-lay... must be Italian!)</p>
 
             <div className="mb-6">
-                <img
+                <OptimizedImage
                     src="img/leglamp.jpg"
                     alt="The Major Award - A Leg Lamp"
                     className="mx-auto rounded-lg shadow-2xl"

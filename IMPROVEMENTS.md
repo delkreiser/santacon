@@ -96,11 +96,11 @@ santacon/
 ---
 
 ### 5. Modernize React patterns
-`[~]` — Partially done. `createRoot()` API migration completed as part of #3/#4. Remaining: useReducer consolidation and countdown isolation.
+`[x]` — Done.
 
 - ~~Replace deprecated `ReactDOM.render()` with `createRoot()` API~~ ✅ Done in `src/main.jsx`
-- Consolidate 12+ `useState` calls in `App` into `useReducer` or a context provider
-- The countdown `setInterval` triggers re-renders of the entire app every 60 seconds — isolate countdown state into its own component to prevent unnecessary re-renders of all child components
+- ~~Consolidate quest state into `useReducer`~~ ✅ Moved badges, venueQuests, challenges, and badge popup state into a single `questReducer` with typed actions (`SET_BADGES`, `SET_VENUE_QUESTS`, `SET_CHALLENGES`, `QUEUE_BADGE_POPUPS`, `SHOW_BADGE_POPUP`, `CLOSE_BADGE_POPUP`). Reduced 7 `useState` calls to 1 `useReducer`.
+- ~~Remove unused countdown timer causing unnecessary re-renders~~ ✅ The `countdown` state was computed every 60 seconds but never rendered. Removed the state and `setInterval` entirely, eliminating a full-app re-render every minute.
 
 ---
 
@@ -109,25 +109,24 @@ santacon/
 Important improvements for UX, performance, and code quality.
 
 ### 6. Fix the Mailchimp integration
-`[ ]`
+`[x]` — Done. Replaced `no-cors` fetch with Mailchimp's JSONP `post-json` endpoint.
 
-Current issue: the Mailchimp API endpoint is called client-side with `no-cors` mode. The code itself comments that this should go through a backend.
-
-Options:
-- **Serverless function** (Cloudflare Workers / Netlify Functions / Vercel Edge) to proxy the Mailchimp API call
-- **Embedded Mailchimp form** (simpler, no backend needed — Mailchimp hosts the submission)
-- Either way, remove the exposed API endpoint from client-side code
+- Switched from `fetch()` with `mode: 'no-cors'` (couldn't read response) to JSONP callback pattern
+- Now reads actual Mailchimp response: shows success, "already subscribed", or specific error messages
+- No backend/serverless function needed — JSONP avoids CORS entirely
+- Honeypot bot protection field still included
 
 ---
 
 ### 7. Optimize image loading
-`[ ]`
+`[x]` — Done. Created `OptimizedImage` component with WebP, lazy loading, and CLS prevention.
 
-- No images use lazy loading — add `loading="lazy"` to all non-hero images
-- No responsive images — add `srcset` for different viewport sizes
-- Convert JPEGs to WebP/AVIF with JPEG fallback for older browsers
-- Several images are oversized for their display size (e.g., `mohawk.jpg` is 1000x1309px but displayed small)
-- Add explicit `width`/`height` attributes to prevent layout shift (CLS)
+- Created `src/components/OptimizedImage.jsx` — reusable component handling all image optimizations
+- Converted 11 of 14 JPEGs to WebP (3 skipped where WebP was larger). Total savings: ~500KB across all images
+- Uses `<picture>` element with WebP source + JPEG fallback for broad browser support
+- All non-hero images have `loading="lazy"` (hero images on Home and After-Party use `lazy={false}`)
+- All images include `width`/`height` attributes to prevent cumulative layout shift (CLS)
+- JPEG originals preserved for browsers without WebP support
 
 ---
 
