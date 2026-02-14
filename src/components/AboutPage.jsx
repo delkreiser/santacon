@@ -1,6 +1,53 @@
 import React from 'react';
 import EVENT_CONFIG from '../config/event.js';
+import aboutSections from '../data/about.js';
 import OptimizedImage from './OptimizedImage.jsx';
+
+const TITLE_COLORS = {
+    red: 'text-red-700',
+    green: 'text-green-700',
+};
+
+/** Render a single content block (text, image, or link) */
+const ContentBlock = ({ block }) => {
+    switch (block.type) {
+        case 'text': {
+            let text = block.value;
+            if (block.interpolate) {
+                // Replace {edition} etc. with EVENT_CONFIG values
+                for (const [key, expr] of Object.entries(block.interpolate)) {
+                    const value = expr === 'edition.toLowerCase()'
+                        ? EVENT_CONFIG.edition.toLowerCase()
+                        : EVENT_CONFIG[key];
+                    text = text.replace(`{${key}}`, value);
+                }
+            }
+            return <p className="text-gray-700 mb-4">{text}</p>;
+        }
+        case 'image':
+            return (
+                <OptimizedImage
+                    src={block.src}
+                    alt={block.alt}
+                    className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg"
+                />
+            );
+        case 'link':
+            return (
+                <a
+                    href={block.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-red-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-700 transition"
+                >
+                    {block.icon && <i className={`${block.icon} mr-2`}></i>}
+                    {block.label}
+                </a>
+            );
+        default:
+            return null;
+    }
+};
 
 const AboutPage = ({ expandedAbout, setExpandedAbout }) => {
     const toggleSection = (section) => {
@@ -21,100 +68,32 @@ const AboutPage = ({ expandedAbout, setExpandedAbout }) => {
                 </h1>
             </div>
 
-            {/* What is SantaCon */}
-            <div id="section-what" className="glass-effect rounded-lg shadow-xl overflow-hidden">
-                <button onClick={() => toggleSection('what')} className="w-full p-6 text-left hover:bg-gray-50 transition-colors">
-                    <div className="flex justify-between items-center">
-                        <div className="flex-1">
-                            <h2 className="text-2xl font-bold text-red-700 mb-2">What is SantaCon?</h2>
-                            <p className="text-gray-700">It's not a pub crawl!</p>
+            {/* Data-driven sections (What, History, Boulder) */}
+            {aboutSections.map((section) => (
+                <div key={section.id} id={`section-${section.id}`} className="glass-effect rounded-lg shadow-xl overflow-hidden">
+                    <button onClick={() => toggleSection(section.id)} className="w-full p-6 text-left hover:bg-gray-50 transition-colors">
+                        <div className="flex justify-between items-center">
+                            <div className="flex-1">
+                                <h2 className={`text-2xl font-bold ${TITLE_COLORS[section.titleColor] || 'text-red-700'} mb-2`}>
+                                    {section.icon && <i className={`${section.icon} mr-2`}></i>}
+                                    {section.title}
+                                </h2>
+                                <p className="text-gray-700">{section.subtitle}</p>
+                            </div>
+                            <i className={`fas fa-chevron-${expandedAbout === section.id ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
                         </div>
-                        <i className={`fas fa-chevron-${expandedAbout === 'what' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
-                    </div>
-                </button>
-                {expandedAbout === 'what' && (
-                    <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
-                        <p className="text-gray-700 mb-4">
-                            It is a non-profit, non-political, non-religious & non-sensical, non-logical celebration of
-                            holiday cheer, goodwill, and fun.
-                        </p>
-                        <OptimizedImage src="img/group.jpg" alt="SantaCon" className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg" />
-                        <p className="text-gray-700">
-                            There is no good reason to dress up in cheap Santa suits, run around town, give gifts, sing songs,
-                            have strangers sit on our laps, and decide who is naughty or nice, but it's a lot of fun so Santa
-                            does it anyway. Everyone loves Santa and Santa loves everyone! SantaCon is your chance to be Santa,
-                            so step up and be jolly.
-                        </p>
-                    </div>
-                )}
-            </div>
-
-            {/* SantaCon's History */}
-            <div id="section-history" className="glass-effect rounded-lg shadow-xl overflow-hidden">
-                <button onClick={() => toggleSection('history')} className="w-full p-6 text-left hover:bg-gray-50 transition-colors">
-                    <div className="flex justify-between items-center">
-                        <div className="flex-1">
-                            <h2 className="text-2xl font-bold text-green-700 mb-2">SantaCon's History</h2>
-                            <p className="text-gray-700">From Copenhagen to the world.</p>
+                    </button>
+                    {expandedAbout === section.id && (
+                        <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
+                            {section.content.map((block, i) => (
+                                <ContentBlock key={i} block={block} />
+                            ))}
                         </div>
-                        <i className={`fas fa-chevron-${expandedAbout === 'history' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
-                    </div>
-                </button>
-                {expandedAbout === 'history' && (
-                    <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
-                        <p className="text-gray-700 mb-4">
-                            SantaCon began in San Francisco in 1994, inspired by a 1974 Danish activist theatre group called Solvognen, who gathered dozens of "Santas" in Copenhagen to hand out items from department store shelves as "presents" before being arrested.
-                        </p>
-                        <OptimizedImage src="img/sfsantacon.jpg" alt="San Francisco Cacophony Society SantaCon" className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg" />
-                        <p className="text-gray-700 mb-4">
-                            Staged as street theater by the San Francisco Cacophony Society—a counterculture group focused on pranks and subversive art—the first event was called "Cheap Suit Santas" and aimed to make fun of Christmas consumerism. Originally influenced by the Surrealist movement and Discordianism, it wasn't intended to be a recurring event, but returned in 1995 with 100 participants.
-                        </p>
-                        <OptimizedImage src="img/hanging.jpg" alt="SantaCon History" className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg" />
-                        <p className="text-gray-700 mb-4">
-                            SantaCon spread rapidly: Portland in 1996, Seattle in 1997, and Los Angeles and New York in 1998. The rise of the internet and the website Santarchy.com helped advertise the event, allowing people around the world to bring it to their cities. Today, SantaCon takes place in hundreds of cities globally, though it has evolved significantly from its countercultural roots into the festive pub crawl we know today.
-                        </p>
-                        <a
-                            href="https://journal.burningman.org/2022/12/opinion/shenanigans/meet-santa-zero/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block bg-red-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-700 transition"
-                        >
-                            <i className="fas fa-file-alt mr-2"></i>
-                            Interview: Meet Santa Zero
-                        </a>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
+            ))}
 
-            {/* Boulder's SantaCon */}
-            <div id="section-boulder" className="glass-effect rounded-lg shadow-xl overflow-hidden">
-                <button onClick={() => toggleSection('boulder')} className="w-full p-6 text-left hover:bg-gray-50 transition-colors">
-                    <div className="flex justify-between items-center">
-                        <div className="flex-1">
-                            <h2 className="text-2xl font-bold text-red-700 mb-2">Boulder's SantaCon</h2>
-                            <p className="text-gray-700">The free-range, organic, gluten-free SantaCon.</p>
-                        </div>
-                        <i className={`fas fa-chevron-${expandedAbout === 'boulder' ? 'up' : 'down'} text-gray-400 ml-4 text-xl`}></i>
-                    </div>
-                </button>
-                {expandedAbout === 'boulder' && (
-                    <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
-                        <p className="text-gray-700 mb-4">
-                            Boulder SantaCon launched in 2006 with a simple mission: instead of fighting crowds at the mall on Black Friday, why not dress up as Santa and celebrate the holidays in the most ridiculous way possible? It was a subtle protest against consumerism wrapped in cheap red suits and holiday cheer.
-                        </p>
-                        <OptimizedImage src="img/first-santacon.jpg" alt="First Boulder SantaCon" className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg" />
-                        <p className="text-gray-700 mb-4">
-                            The first few years were beautifully chaotic. We started with about 20 Santas "shopping" at the 29th Street Mall, much to the confusion of mall security. We'd take the HOP bus downtown, which became known as "Santa's Sleigh." Dozens of Santas would cram in like festive sardines while bewildered commuters laughed and took photos. One year, a pop-up speakeasy called "Santa's Pub" appeared, serving cold PBR's, hot chocolate, and peppermint schnapps to thirsty Santas.
-                        </p>
-                        <OptimizedImage src="img/believe.jpg" alt="Boulder SantaCon Believe" className="w-full max-w-lg mx-auto mb-4 rounded-lg shadow-lg" />
-                        <p className="text-gray-700">
-                            This Black Friday marks our {EVENT_CONFIG.edition.toLowerCase()} event and it has become a Boulder tradition. Unlike the rowdy reputation SantaCon has earned in other cities, Boulder's version has always been about fun, not mayhem. Come join Santa!
-                        </p>
-                    </div>
-                )}
-            </div>
-
-            {/* Santa's Rules */}
+            {/* Santa's Rules — driven by EVENT_CONFIG.rules */}
             <div id="section-rules" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                 <button onClick={() => toggleSection('rules')} className="w-full p-6 text-left hover:bg-gray-50 transition-colors">
                     <div className="flex justify-between items-center">
@@ -131,51 +110,29 @@ const AboutPage = ({ expandedAbout, setExpandedAbout }) => {
                 {expandedAbout === 'rules' && (
                     <div className="px-6 pb-6 border-t-2 border-gray-200 pt-4">
                         <div className="space-y-4">
-                            <div>
-                                <h3 className="font-bold text-lg text-gray-800 mb-2">1. Santa looks like Santa.</h3>
-                                <p className="text-gray-700 mb-4">
-                                    HOLIDAY APPAREL IS MANDATORY. A Santa hat is NOT ENOUGH. Dress as an elf, a reindeer,
-                                    a christmas tree, Hanukkah Harry, a lump of coal, etc. If you show up without a costume, you will wish that you had! SantaCon is more fun if everyone is participating!
-                                </p>
-                                <OptimizedImage src="img/costumes.jpg" alt="Santa Costumes" className="w-full max-w-lg mx-auto rounded-lg shadow-lg" />
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-lg text-gray-800 mb-2">2. Address your fellow santa as "Santa."</h3>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-lg text-gray-800 mb-2">3. When Santa "ho, Ho, HO's," it's time to go, Go, GO!</h3>
-                                <p className="text-gray-700">
-                                    When you hear all the Santa's chant, "HO! HO! HO!" it means that we're getting ready to leave to the next stop.
-                                </p>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-lg text-gray-800 mb-2">4. Who's in Charge?</h3>
-                                <p className="text-gray-700">
-                                    Santa. Memorize that phrase, and repeat it if anyone in authority asks you who the boss is.
-                                    There will be a test.
-                                </p>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-lg text-gray-800 mb-2">5. Don't be "that" Santa</h3>
-                                <p className="text-gray-700 mb-4">
-                                    Everybody loves the big guy, right? HOWEVER, Santa strongly encourages Santa to obey all
-                                    "requests" made by any security guards and police officers, to ensure that no one ends up
-                                    in the klink.
-                                </p>
-                                <OptimizedImage src="img/lineup.jpg" alt="Santa Lineup" className="w-full max-w-lg mx-auto rounded-lg shadow-lg" />
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-lg text-gray-800 mb-2">6. Santa is a good tipper!</h3>
-                                <p className="text-gray-700">
-                                    Remember to tip your bartenders and servers. They work hard to keep Santa jolly!
-                                </p>
-                            </div>
+                            {EVENT_CONFIG.rules.map((rule, i) => (
+                                <div key={i}>
+                                    <h3 className="font-bold text-lg text-gray-800 mb-2">{rule.title}</h3>
+                                    {rule.text && (
+                                        <p className={`text-gray-700${rule.image ? ' mb-4' : ''}`}>
+                                            {rule.text}
+                                        </p>
+                                    )}
+                                    {rule.image && (
+                                        <OptimizedImage
+                                            src={rule.image}
+                                            alt={rule.title}
+                                            className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
+                                        />
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 )}
             </div>
 
-            {/* What to Bring? */}
+            {/* What to Bring — driven by EVENT_CONFIG.whatToBring */}
             <div id="section-bring" className="glass-effect rounded-lg shadow-xl overflow-hidden">
                 <button onClick={() => toggleSection('bring')} className="w-full p-6 text-left hover:bg-gray-50 transition-colors">
                     <div className="flex justify-between items-center">

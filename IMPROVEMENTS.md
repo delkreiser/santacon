@@ -131,9 +131,7 @@ Important improvements for UX, performance, and code quality.
 ---
 
 ### 8. Lazy-load Google Maps iframes
-`[ ]`
-
-5 Google Maps iframes are embedded in the schedule. Currently they all load even when collapsed. Only load the iframe when the user expands a schedule stop (the `expandedStop` state already tracks this — just conditionally render the iframe).
+`[x]` — Already done. The `ScheduleStop` component conditionally renders iframes only when `expandedStop === index`, so maps are never loaded until a user expands. The iframe also has `loading="lazy"` as an extra safeguard.
 
 ---
 
@@ -189,13 +187,15 @@ Nice-to-have improvements for polish and accessibility.
 ---
 
 ### 13. Move About page content to a content file
-`[ ]`
+`[x]` — Done. Extracted all About page prose into `src/data/about.js` data file.
 
-The About page contains long hardcoded paragraphs of history and rules. Extract to:
-- A markdown file (`content/about.md`) parsed at build time, or
-- A JS data file (`config/about-content.js`) with structured sections
-
-Makes yearly copy updates easier without touching component code.
+- Created `src/data/about.js` with structured section objects (id, title, titleColor, subtitle, content blocks)
+- Each content block is typed: `text`, `image`, or `link` — rendered by a generic `ContentBlock` component
+- Supports `{edition}` interpolation for dynamic text (e.g., "our 20th annual event")
+- Santa's Rules section now renders from `EVENT_CONFIG.rules` (already extracted in event.js)
+- What to Bring section already used `EVENT_CONFIG.whatToBring`
+- `AboutPage.jsx` reduced from 209 lines of hardcoded JSX to 167 lines of data-driven rendering
+- To update copy for 2027: edit `src/data/about.js` and `src/config/event.js` — no component changes needed
 
 ---
 
