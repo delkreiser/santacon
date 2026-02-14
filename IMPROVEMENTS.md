@@ -206,7 +206,7 @@ The app is used during a live event where connectivity may be spotty:
 ---
 
 ### 15. Add basic analytics
-`[ ]`
+`[—]` — Skipped. Not needed for a one-day event; can revisit if usage data becomes useful for planning.
 
 No tracking exists currently. Consider lightweight, privacy-respecting analytics:
 - Simple page view tracking (which tabs are most visited)
