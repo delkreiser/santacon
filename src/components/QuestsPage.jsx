@@ -62,7 +62,7 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                         <p className="text-gray-800 mb-4">
                             You are a TRUE Boulder SantaCon Legend!
                         </p>
-                        <div className="inline-block bg-white bg-opacity-30 hover:bg-opacity-50 transition px-6 py-3 rounded-lg font-bold text-gray-800">
+                        <div className="inline-block bg-white/30 hover:bg-white/50 transition px-6 py-3 rounded-lg font-bold text-gray-800">
                             View Your Major Award →
                         </div>
                     </div>

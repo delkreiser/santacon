@@ -61,7 +61,7 @@ const BadgePopup = ({ badgePopupQueue, onClose }) => {
     const badge = badgeMessages[badgePopupQueue[0]];
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
              style={{animation: 'fadeIn 0.3s ease-in'}}>
             <div ref={dialogRef}
                  role="dialog"
@@ -103,7 +103,7 @@ export const MajorAwardModal = ({ onClose, setActiveTab }) => {
     const dialogRef = useDialogA11y(onClose);
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
              style={{animation: 'fadeIn 0.3s ease-in'}}>
             <div ref={dialogRef}
                  role="dialog"
