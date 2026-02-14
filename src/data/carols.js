@@ -92,7 +92,7 @@ Rudolph the Red-Nosed Reindeer, (reindeer) You'll go down in history!`
         lyrics: `Feliz Navidad 
 Feliz Navidad 
 Feliz Navidad 
-Prospero AÃ±o y Felicidad. 
+Prospero Año y Felicidad. 
 
 I wanna wish you a Merry Christmas 
 I wanna wish you a Merry Christmas 
