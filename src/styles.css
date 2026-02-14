@@ -1,44 +1,25 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode: toggled by .dark on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 body {
     font-family: 'Arial', sans-serif;
     transition: background-color 0.3s, color 0.3s;
 }
-body.dark-mode {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-}
-body.dark-mode .glass-effect {
-    background: rgba(40, 40, 40, 0.95);
-    color: #e0e0e0;
-}
-body.dark-mode .gradient-bg {
-    background: linear-gradient(180deg, #0a0a0a 0%, #7a1a1c 100%);
-}
-body.dark-mode .text-gray-800 {
-    color: #e0e0e0 !important;
-}
-body.dark-mode .text-gray-700 {
-    color: #b0b0b0 !important;
-}
-body.dark-mode .text-gray-600 {
-    color: #909090 !important;
-}
-body.dark-mode .bg-white {
-    background-color: #2a2a2a !important;
-}
-body.dark-mode .bg-gray-50 {
-    background-color: #1f1f1f !important;
-}
-body.dark-mode .border-gray-200 {
-    border-color: #404040 !important;
-}
 .gradient-bg {
     background: linear-gradient(180deg, #000000 0%, #BB2528 100%);
+}
+.dark .gradient-bg {
+    background: linear-gradient(180deg, #0a0a0a 0%, #7a1a1c 100%);
 }
 .glass-effect {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
+}
+.dark .glass-effect {
+    background: rgba(40, 40, 40, 0.95);
+    color: #e0e0e0;
 }
 .nav-button {
     transition: all 0.3s ease;

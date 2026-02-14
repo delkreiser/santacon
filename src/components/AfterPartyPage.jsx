@@ -16,7 +16,7 @@ const AfterPartyPage = React.memo(() => {
             </div>
 
             <div className="glass-effect rounded-lg shadow-xl p-6">
-                <p className="text-gray-700 text-center mb-6">
+                <p className="text-gray-700 dark:text-gray-300 text-center mb-6">
                     {ap.blurb}
                 </p>
 
@@ -28,39 +28,39 @@ const AfterPartyPage = React.memo(() => {
                     <div className="flex items-start">
                         <i className="fas fa-map-marker-alt text-red-600 text-xl mr-4 mt-1"></i>
                         <div>
-                            <div className="font-bold text-gray-800">Location</div>
-                            <div className="text-gray-700">{ap.venue}</div>
+                            <div className="font-bold text-gray-800 dark:text-gray-100">Location</div>
+                            <div className="text-gray-700 dark:text-gray-300">{ap.venue}</div>
                         </div>
                     </div>
 
                     <div className="flex items-start">
                         <i className="fas fa-clock text-red-600 text-xl mr-4 mt-1"></i>
                         <div>
-                            <div className="font-bold text-gray-800">Time</div>
-                            <div className="text-gray-700">{ap.time}</div>
+                            <div className="font-bold text-gray-800 dark:text-gray-100">Time</div>
+                            <div className="text-gray-700 dark:text-gray-300">{ap.time}</div>
                         </div>
                     </div>
 
                     <div className="flex items-start">
                         <i className="fas fa-music text-red-600 text-xl mr-4 mt-1"></i>
                         <div>
-                            <div className="font-bold text-gray-800">Entertainment</div>
-                            <div className="text-gray-700">DJs: {ap.djs.join(', ')}!</div>
-                            <div className="text-gray-700">{ap.extras}</div>
+                            <div className="font-bold text-gray-800 dark:text-gray-100">Entertainment</div>
+                            <div className="text-gray-700 dark:text-gray-300">DJs: {ap.djs.join(', ')}!</div>
+                            <div className="text-gray-700 dark:text-gray-300">{ap.extras}</div>
                         </div>
                     </div>
 
                     <div className="flex items-start">
                         <i className="fas fa-ticket-alt text-red-600 text-xl mr-4 mt-1"></i>
                         <div>
-                            <div className="font-bold text-gray-800">Tickets</div>
-                            <div className="text-gray-700">{ap.price}</div>
+                            <div className="font-bold text-gray-800 dark:text-gray-100">Tickets</div>
+                            <div className="text-gray-700 dark:text-gray-300">{ap.price}</div>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
-                    <p className="text-sm text-gray-700">
+                <div className="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4 mb-6">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
                         {ap.fundingNote}
                     </p>
                 </div>

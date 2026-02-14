@@ -17,7 +17,7 @@ const BadgePopup = ({ badgePopupQueue, onClose }) => {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
              style={{animation: 'fadeIn 0.3s ease-in'}}>
-            <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-8 text-center"
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl max-w-md w-full p-8 text-center"
                  style={{animation: 'scaleIn 0.3s ease-out'}}>
                 <div className="text-6xl mb-4 animate-bounce">
                     🎉 🎉 🎉
@@ -28,10 +28,10 @@ const BadgePopup = ({ badgePopupQueue, onClose }) => {
                 <div className="text-7xl mb-4">
                     {badge.emoji}
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
                     {badge.title}
                 </h3>
-                <p className="text-gray-700 mb-6 leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
                     {badge.message}
                 </p>
                 <button
@@ -48,15 +48,15 @@ const BadgePopup = ({ badgePopupQueue, onClose }) => {
 export const MajorAwardModal = ({ onClose, setActiveTab }) => (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
          style={{animation: 'fadeIn 0.3s ease-in'}}>
-        <div className="bg-white rounded-lg shadow-2xl max-w-md w-full p-8 text-center"
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl max-w-md w-full p-8 text-center"
              style={{animation: 'scaleIn 0.3s ease-out'}}>
             <div className="text-4xl mb-4">✨✨✨</div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">CONGRATULATIONS!</h2>
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">CONGRATULATIONS!</h2>
             <div className="text-5xl my-6">🏆</div>
             <h3 className="text-xl font-bold text-red-700 mb-2">🏆 MAJOR AWARD 🏆</h3>
             <h3 className="text-xl font-bold text-red-700 mb-4">UNLOCKED!</h3>
-            <p className="text-xl text-gray-700 mb-2">You've completed ALL 6 badges!</p>
-            <p className="text-lg text-gray-600 mb-6">You've earned something... Fra-gee-lay!</p>
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-2">You've completed ALL 6 badges!</p>
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">You've earned something... Fra-gee-lay!</p>
             <button
                 onClick={() => {
                     onClose();

@@ -42,7 +42,7 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                     <i className="fas fa-trophy mr-2"></i>
                     Santa's Side Quests
                 </h1>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                     Ready to level up your SantaCon? Complete Santa's Side Quests and earn badges!
                 </p>
             </div>
@@ -73,13 +73,13 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
             <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
                 <button
                     onClick={() => setBadgeLegendExpanded(!badgeLegendExpanded)}
-                    className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
+                    className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                     <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-xl font-bold text-gray-800">
+                        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
                             🏆 Your Badges ({badgeCount}/{Object.keys(EVENT_CONFIG.badges).length})
                         </h2>
-                        <i className={`fas fa-chevron-down text-gray-400 text-xl ${badgeLegendExpanded ? 'rotate-180' : ''}`} style={{transition: 'transform 0.3s'}}></i>
+                        <i className={`fas fa-chevron-down text-gray-400 dark:text-gray-500 text-xl ${badgeLegendExpanded ? 'rotate-180' : ''}`} style={{transition: 'transform 0.3s'}}></i>
                     </div>
 
                     <div className="flex justify-center gap-4 mb-2 text-4xl">
@@ -88,23 +88,23 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                         ))}
                     </div>
 
-                    <p className="text-center text-sm text-gray-600">
+                    <p className="text-center text-sm text-gray-600 dark:text-gray-400">
                         Badge details <i className={`fas fa-chevron-down text-xs ${badgeLegendExpanded ? 'rotate-180' : ''}`} style={{transition: 'transform 0.3s'}}></i>
                     </p>
                 </button>
 
                 {badgeLegendExpanded && (
-                    <div className="px-6 pb-6 pt-4 border-t-2 border-gray-200">
-                        <p className="text-gray-700 mb-4">
+                    <div className="px-6 pb-6 pt-4 border-t-2 border-gray-200 dark:border-gray-600">
+                        <p className="text-gray-700 dark:text-gray-300 mb-4">
                             Unlock badges by completing challenges and side quests throughout the night:
                         </p>
                         <div className="space-y-3 text-sm">
                             {Object.entries(EVENT_CONFIG.badges).map(([key, b]) => (
                                 <div key={key}>
-                                    <div className="font-semibold text-gray-800">
+                                    <div className="font-semibold text-gray-800 dark:text-gray-100">
                                         {b.emoji} {b.title} {badges[key] && '- ✅ UNLOCKED'}
                                     </div>
-                                    <div className="text-gray-600 ml-6">{b.shortDescription}</div>
+                                    <div className="text-gray-600 dark:text-gray-400 ml-6">{b.shortDescription}</div>
                                 </div>
                             ))}
                         </div>
@@ -118,7 +118,7 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                     <i className="fas fa-map-marker-alt mr-2"></i>
                     VENUE QUESTS ({venueQuestCount}/{EVENT_CONFIG.venueQuests.length})
                 </h2>
-                <p className="text-sm text-gray-600 mb-4">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                     Are you looking for more adventure? Try these side quests to add more fun to your SantaCon experience! Nearby venues unlock throughout the night, complete them to earn extra badges.
                 </p>
 
@@ -126,7 +126,7 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                     <div className="space-y-3 mb-4">
                         <div className="text-sm font-bold text-green-700">✨ Available Now!</div>
                         {unlockedQuests.map(quest => (
-                            <div key={quest.id} className="border-2 border-green-500 rounded-lg p-4 bg-green-50">
+                            <div key={quest.id} className="border-2 border-green-500 rounded-lg p-4 bg-green-50 dark:bg-green-900/30">
                                 <div className="flex items-start">
                                     <input
                                         type="checkbox"
@@ -135,12 +135,12 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                                         className="mt-1 mr-3 w-5 h-5"
                                     />
                                     <div className="flex-1">
-                                        <div className="font-bold text-gray-800">{quest.name}</div>
-                                        <div className="text-sm text-gray-700">{quest.quest}</div>
-                                        <div className="text-xs text-gray-600 mt-1">
+                                        <div className="font-bold text-gray-800 dark:text-gray-100">{quest.name}</div>
+                                        <div className="text-sm text-gray-700 dark:text-gray-300">{quest.quest}</div>
+                                        <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                                             📍 {quest.distance}
                                         </div>
-                                        <div className="text-xs text-gray-600">
+                                        <div className="text-xs text-gray-600 dark:text-gray-400">
                                             ⏰ Available: {formatTime(quest.unlockTime)} - {formatTime(quest.availableUntil)}
                                         </div>
                                     </div>
@@ -162,11 +162,11 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                                 : formatTime(time);
 
                             return (
-                                <div key={unlockTime} className="bg-gray-100 border-2 border-gray-300 rounded-lg p-3">
-                                    <div className="text-sm font-bold text-gray-700 mb-1">
+                                <div key={unlockTime} className="bg-gray-100 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3">
+                                    <div className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">
                                         🔒 Unlocks at {timeText}
                                     </div>
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-sm text-gray-600 dark:text-gray-400">
                                         {teaserText}
                                     </div>
                                 </div>
@@ -184,22 +184,22 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                 </h2>
 
                 {!areChallengesUnlocked ? (
-                    <div className="bg-gray-100 border-2 border-gray-300 rounded-lg p-3">
-                        <div className="text-sm font-bold text-gray-700 mb-1">
+                    <div className="bg-gray-100 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3">
+                        <div className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">
                             🔒 Unlocks at 5:00pm{(!isEventDay(now) && !isAfterEventDay(now)) ? ' on Black Friday' : ''}
                         </div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
                             The fun's about to begin! Complete challenges as you crawl through Boulder to earn badges and legendary Santa status!
                         </div>
                     </div>
                 ) : (
                     <>
-                        <p className="text-sm text-gray-600 mb-4">
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                             Complete these challenges throughout the night to earn badges and show off your Santa spirit!
                         </p>
                         <div className="space-y-2">
                             {EVENT_CONFIG.challenges.map(ch => (
-                                <label key={ch.id} className="flex items-start cursor-pointer hover:bg-gray-50 p-2 rounded">
+                                <label key={ch.id} className="flex items-start cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded">
                                     <input
                                         type="checkbox"
                                         checked={challenges[ch.id]}

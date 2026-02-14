@@ -136,14 +136,15 @@ Important improvements for UX, performance, and code quality.
 ---
 
 ### 9. Improve dark mode implementation
-`[ ]`
+`[x]` — Done. Replaced `body.dark-mode` + `!important` CSS overrides with Tailwind v4 `dark:` variants.
 
-Current approach uses `body.dark-mode` class with `!important` overrides on Tailwind utility classes (lines 40-64). This is brittle and fights Tailwind's specificity.
-
-- Switch to Tailwind's built-in `dark:` variant (`darkMode: 'class'` in Tailwind config)
-- Remove all `!important` dark mode overrides from custom CSS
-- Use `dark:bg-gray-900`, `dark:text-gray-100`, etc. directly in JSX
-- Persist dark mode preference in localStorage (may already be happening via the body class toggle)
+- Added `@custom-variant dark (&:where(.dark, .dark *));` to `styles.css` for class-based dark mode
+- Removed all 8 `body.dark-mode .text-gray-*` / `.bg-white` / `.border-gray-*` `!important` overrides
+- Dark mode now toggled via `.dark` class on `<html>` (was `.dark-mode` on `<body>`)
+- Added `dark:` variant classes to all 10 component files (Navigation, HomePage, CarolsPage, QuestsPage, ScheduleStop, AboutPage, MailingListPage, BadgePopup, AfterPartyPage, MajorAwardPage)
+- Custom classes (`glass-effect`, `gradient-bg`) use `.dark` parent selector in CSS
+- Dark mode preference persisted in `localStorage` (`santacon_dark_mode`) and restored on load
+- CSS grew ~3KB (28→31KB) from added dark variant selectors — no JS size change
 
 ---
 

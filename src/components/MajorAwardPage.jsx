@@ -7,8 +7,8 @@ const MajorAwardPage = ({ setActiveTab }) => (
             <h1 className="text-2xl font-bold text-red-700 mb-4">
                 🏆 MAJOR AWARD! 🏆
             </h1>
-            <p className="text-3xl font-bold text-gray-800 mb-2">FRAGILE</p>
-            <p className="text-xl text-gray-600 mb-6">(Fra-gee-lay... must be Italian!)</p>
+            <p className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">FRAGILE</p>
+            <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">(Fra-gee-lay... must be Italian!)</p>
 
             <div className="mb-6">
                 <OptimizedImage
@@ -20,10 +20,10 @@ const MajorAwardPage = ({ setActiveTab }) => (
             </div>
 
             <div className="glass-effect rounded-lg p-6 mb-6">
-                <p className="text-xl font-bold text-gray-800 mb-4">
+                <p className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
                     You won it! Mind power, Santa!
                 </p>
-                <p className="text-lg text-gray-700">
+                <p className="text-lg text-gray-700 dark:text-gray-300">
                     Nothing could drag you away from this soft glow of electric achievement gleaming in all its glory.
                 </p>
             </div>

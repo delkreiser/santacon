@@ -5,8 +5,8 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
         className={`rounded-lg border-2 overflow-hidden relative ${
             isCurrentStop && isLeavingSoon ? 'border-4 border-orange-400 shadow-2xl' :
             isCurrentStop ? 'border-4 border-yellow-400 shadow-2xl' :
-            isPast ? 'border-gray-300' :
-            stop.isAfterParty ? 'border-red-500' : 'border-gray-200'
+            isPast ? 'border-gray-300 dark:border-gray-600' :
+            stop.isAfterParty ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'
         }`}
     >
         {isCurrentStop && (
@@ -22,10 +22,10 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
             className={`w-full p-4 text-left transition-colors ${
                 isCurrentStop && isLeavingSoon ? 'bg-gradient-to-r from-orange-100 via-orange-200 to-orange-100' :
                 isCurrentStop ? 'bg-gradient-to-r from-yellow-100 via-yellow-200 to-yellow-100' :
-                isPast ? 'bg-gray-100' :
+                isPast ? 'bg-gray-100 dark:bg-gray-800' :
                 stop.isAfterParty
-                    ? 'bg-gradient-to-r from-red-100 to-green-100'
-                    : 'bg-white hover:bg-gray-50'
+                    ? 'bg-gradient-to-r from-red-100 to-green-100 dark:from-red-900/40 dark:to-green-900/40'
+                    : 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700'
             }`}
         >
             <div className="flex justify-between items-center">
@@ -33,7 +33,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                     <div className={`font-bold text-lg flex items-center ${
                         isPast ? 'text-gray-500' :
                         isCurrentStop && isLeavingSoon ? 'text-orange-700' :
-                        isCurrentStop ? 'text-red-700' : 'text-gray-800'
+                        isCurrentStop ? 'text-red-700' : 'text-gray-800 dark:text-gray-100'
                     }`}>
                         {isPast && <i className="fas fa-check-circle text-green-600 mr-2"></i>}
                         {stop.time}
@@ -44,7 +44,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                                 isPast ? 'text-gray-500' :
                                 isCurrentStop && isLeavingSoon ? 'text-orange-600 font-semibold' :
                                 isCurrentStop ? 'text-red-600 font-semibold' :
-                                stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-700 font-semibold'
+                                stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-700 dark:text-gray-300 font-semibold'
                             } mt-1`}>
                                 {stop.title}
                             </div>
@@ -52,7 +52,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                                 isPast ? 'text-gray-500' :
                                 isCurrentStop && isLeavingSoon ? 'text-orange-600' :
                                 isCurrentStop ? 'text-red-600' :
-                                stop.isAfterParty ? 'text-red-700' : 'text-gray-600'
+                                stop.isAfterParty ? 'text-red-700' : 'text-gray-600 dark:text-gray-400'
                             } text-sm`}>
                                 {stop.venue}
                             </div>
@@ -62,7 +62,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                             isPast ? 'text-gray-500' :
                             isCurrentStop && isLeavingSoon ? 'text-orange-600 font-semibold' :
                             isCurrentStop ? 'text-red-600 font-semibold' :
-                            stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-600'
+                            stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-600 dark:text-gray-400'
                         } mt-1`}>
                             {stop.venue}
                         </div>
@@ -73,21 +73,21 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                         </div>
                     )}
                 </div>
-                <i className={`fas fa-chevron-${expandedStop === index ? 'up' : 'down'} ${isPast ? 'text-gray-400' : 'text-gray-400'} ml-2`}></i>
+                <i className={`fas fa-chevron-${expandedStop === index ? 'up' : 'down'} text-gray-400 dark:text-gray-500 ml-2`}></i>
             </div>
         </button>
 
         {expandedStop === index && (
-            <div className="p-4 bg-gray-50 border-t-2 border-gray-200">
+            <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border-t-2 border-gray-200 dark:border-gray-600">
                 {stop.text && (
-                    <div className="mb-4 text-gray-700">
+                    <div className="mb-4 text-gray-700 dark:text-gray-300">
                         <p>{stop.text}</p>
                     </div>
                 )}
                 {stop.drinkSpecials && (
-                    <div className="bg-blue-50 border-l-4 border-blue-400 p-3 mb-4">
+                    <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-400 p-3 mb-4">
                         <p className="text-sm font-bold text-blue-800 mb-1">Drink Specials:</p>
-                        <div className="text-sm text-gray-700">
+                        <div className="text-sm text-gray-700 dark:text-gray-300">
                             {stop.drinkSpecials.split(' | ').map((drink, idx) => {
                                 const [name, ingredients] = drink.split(': ');
                                 return (
@@ -101,14 +101,14 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                     </div>
                 )}
                 {stop.music && (
-                    <div className="bg-purple-50 border-l-4 border-purple-400 p-3 mb-4">
+                    <div className="bg-purple-50 dark:bg-purple-900/30 border-l-4 border-purple-400 p-3 mb-4">
                         <p className="text-sm font-bold text-purple-800 mb-1">Music:</p>
-                        <p className="text-sm text-gray-700">{stop.music}</p>
+                        <p className="text-sm text-gray-700 dark:text-gray-300">{stop.music}</p>
                     </div>
                 )}
                 {stop.notes && (
-                    <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4">
-                        <p className="text-sm text-gray-700">{stop.notes}</p>
+                    <div className="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-3 mb-4">
+                        <p className="text-sm text-gray-700 dark:text-gray-300">{stop.notes}</p>
                     </div>
                 )}
                 {stop.mapEmbed && (

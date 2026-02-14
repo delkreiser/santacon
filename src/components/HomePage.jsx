@@ -75,7 +75,7 @@ END:VCALENDAR`;
                 <i className="fas fa-calendar-alt mr-3"></i>
                 Santa's Schedule
             </h2>
-            <p className="text-gray-700 mb-2">
+            <p className="text-gray-700 dark:text-gray-300 mb-2">
                 {EVENT_CONFIG.displayDate}
             </p>
             <button

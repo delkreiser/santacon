@@ -86,7 +86,10 @@ function App() {
     const [selectedCarol, setSelectedCarol] = useState(null);
     const [subscribeStatus, setSubscribeStatus] = useState('');
     const [lyricsFontSize, setLyricsFontSize] = useState(1.1);
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => {
+        try { return localStorage.getItem('santacon_dark_mode') === 'true'; }
+        catch { return false; }
+    });
     const [expandedStop, setExpandedStop] = useState(null);
     const [currentStop, setCurrentStop] = useState(null);
     const [expandedAbout, setExpandedAbout] = useState(null);
@@ -256,22 +259,20 @@ function App() {
         document.body.appendChild(script);
     };
 
+    // Sync dark mode class on <html> and persist preference
     useEffect(() => {
-        if (darkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
+        document.documentElement.classList.toggle('dark', darkMode);
+        localStorage.setItem('santacon_dark_mode', darkMode);
     }, [darkMode]);
 
     return (
-        <div className="min-h-screen gradient-bg">
+        <div className="min-h-screen gradient-bg dark:bg-gray-950">
             <Snowflakes />
 
             {/* Dark Mode Toggle */}
             <button
                 onClick={() => setDarkMode(!darkMode)}
-                className="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 text-gray-800 dark:text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+                className="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 w-10 h-10 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
                 title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
                 <i className={`fas fa-${darkMode ? 'sun' : 'moon'} text-lg`}></i>
