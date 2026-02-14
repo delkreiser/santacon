@@ -79,6 +79,7 @@ const Snowflakes = () => {
                 ctx.translate(f.x, f.y);
                 ctx.rotate((f.rotation * Math.PI) / 180);
                 ctx.globalAlpha = f.opacity;
+                ctx.fillStyle = 'white';
                 ctx.font = `${f.size}px sans-serif`;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
