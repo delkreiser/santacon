@@ -73,6 +73,7 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
             <div className="glass-effect rounded-lg shadow-xl overflow-hidden">
                 <button
                     onClick={() => setBadgeLegendExpanded(!badgeLegendExpanded)}
+                    aria-expanded={badgeLegendExpanded}
                     className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                     <div className="flex items-center justify-between mb-4">

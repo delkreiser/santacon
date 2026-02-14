@@ -267,19 +267,22 @@ function App() {
 
     return (
         <div className="min-h-screen gradient-bg dark:bg-gray-950">
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:bg-white focus:text-gray-900 focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:font-semibold">
+                Skip to content
+            </a>
             <Snowflakes />
 
             {/* Dark Mode Toggle */}
             <button
                 onClick={() => setDarkMode(!darkMode)}
                 className="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 w-10 h-10 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
-                title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
                 <i className={`fas fa-${darkMode ? 'sun' : 'moon'} text-lg`}></i>
             </button>
 
             {/* Main Content */}
-            <div className="max-w-2xl mx-auto px-4 py-6 pb-24">
+            <main id="main-content" className="max-w-2xl mx-auto px-4 py-6 pb-24">
                 {activeTab === 'home' && <HomePage scheduleData={scheduleData} currentStop={currentStop} expandedStop={expandedStop} setExpandedStop={setExpandedStop} setActiveTab={setActiveTab} />}
                 {activeTab === 'carols' && <CarolsPage carolType={carolType} setCarolType={setCarolType} selectedCarol={selectedCarol} setSelectedCarol={setSelectedCarol} lyricsFontSize={lyricsFontSize} setLyricsFontSize={setLyricsFontSize} />}
                 {activeTab === 'quests' && <QuestsPage badges={quest.badges} venueQuests={quest.venueQuests} setVenueQuests={(v) => questDispatch({ type: 'SET_VENUE_QUESTS', payload: v })} challenges={quest.challenges} setChallenges={(c) => questDispatch({ type: 'SET_CHALLENGES', payload: c })} setActiveTab={setActiveTab} badgeLegendExpanded={badgeLegendExpanded} setBadgeLegendExpanded={setBadgeLegendExpanded} />}
@@ -287,7 +290,7 @@ function App() {
                 {activeTab === 'mailing' && <MailingListPage subscribeStatus={subscribeStatus} handleSubscribe={handleSubscribe} />}
                 {activeTab === 'afterparty' && <AfterPartyPage />}
                 {activeTab === 'major-award' && <MajorAwardPage setActiveTab={setActiveTab} />}
-            </div>
+            </main>
 
             {/* Badge Unlock Popup */}
             {quest.showingBadgePopup && quest.badgePopupQueue.length > 0 && (

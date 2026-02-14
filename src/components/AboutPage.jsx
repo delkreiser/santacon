@@ -71,7 +71,7 @@ const AboutPage = ({ expandedAbout, setExpandedAbout }) => {
             {/* Data-driven sections (What, History, Boulder) */}
             {aboutSections.map((section) => (
                 <div key={section.id} id={`section-${section.id}`} className="glass-effect rounded-lg shadow-xl overflow-hidden">
-                    <button onClick={() => toggleSection(section.id)} className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <button onClick={() => toggleSection(section.id)} aria-expanded={expandedAbout === section.id} className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <div className="flex justify-between items-center">
                             <div className="flex-1">
                                 <h2 className={`text-2xl font-bold ${TITLE_COLORS[section.titleColor] || 'text-red-700'} mb-2`}>
@@ -95,7 +95,7 @@ const AboutPage = ({ expandedAbout, setExpandedAbout }) => {
 
             {/* Santa's Rules — driven by EVENT_CONFIG.rules */}
             <div id="section-rules" className="glass-effect rounded-lg shadow-xl overflow-hidden">
-                <button onClick={() => toggleSection('rules')} className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <button onClick={() => toggleSection('rules')} aria-expanded={expandedAbout === 'rules'} className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                     <div className="flex justify-between items-center">
                         <div className="flex-1">
                             <h2 className="text-2xl font-bold text-green-700 mb-2">
@@ -134,7 +134,7 @@ const AboutPage = ({ expandedAbout, setExpandedAbout }) => {
 
             {/* What to Bring — driven by EVENT_CONFIG.whatToBring */}
             <div id="section-bring" className="glass-effect rounded-lg shadow-xl overflow-hidden">
-                <button onClick={() => toggleSection('bring')} className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <button onClick={() => toggleSection('bring')} aria-expanded={expandedAbout === 'bring'} className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                     <div className="flex justify-between items-center">
                         <div className="flex-1">
                             <h2 className="text-2xl font-bold text-red-700 mb-2">

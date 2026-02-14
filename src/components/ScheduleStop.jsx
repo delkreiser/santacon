@@ -19,6 +19,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
         )}
         <button
             onClick={() => setExpandedStop(expandedStop === index ? null : index)}
+            aria-expanded={expandedStop === index}
             className={`w-full p-4 text-left transition-colors ${
                 isCurrentStop && isLeavingSoon ? 'bg-gradient-to-r from-orange-100 via-orange-200 to-orange-100' :
                 isCurrentStop ? 'bg-gradient-to-r from-yellow-100 via-yellow-200 to-yellow-100' :
@@ -31,7 +32,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
             <div className="flex justify-between items-center">
                 <div className="flex-1">
                     <div className={`font-bold text-lg flex items-center ${
-                        isPast ? 'text-gray-500' :
+                        isPast ? 'text-gray-600 dark:text-gray-400' :
                         isCurrentStop && isLeavingSoon ? 'text-orange-700' :
                         isCurrentStop ? 'text-red-700' : 'text-gray-800 dark:text-gray-100'
                     }`}>
@@ -41,7 +42,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                     {stop.title ? (
                         <>
                             <div className={`${
-                                isPast ? 'text-gray-500' :
+                                isPast ? 'text-gray-600 dark:text-gray-400' :
                                 isCurrentStop && isLeavingSoon ? 'text-orange-600 font-semibold' :
                                 isCurrentStop ? 'text-red-600 font-semibold' :
                                 stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-700 dark:text-gray-300 font-semibold'
@@ -49,7 +50,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                                 {stop.title}
                             </div>
                             <div className={`${
-                                isPast ? 'text-gray-500' :
+                                isPast ? 'text-gray-600 dark:text-gray-400' :
                                 isCurrentStop && isLeavingSoon ? 'text-orange-600' :
                                 isCurrentStop ? 'text-red-600' :
                                 stop.isAfterParty ? 'text-red-700' : 'text-gray-600 dark:text-gray-400'
@@ -59,7 +60,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                         </>
                     ) : (
                         <div className={`${
-                            isPast ? 'text-gray-500' :
+                            isPast ? 'text-gray-600 dark:text-gray-400' :
                             isCurrentStop && isLeavingSoon ? 'text-orange-600 font-semibold' :
                             isCurrentStop ? 'text-red-600 font-semibold' :
                             stop.isAfterParty ? 'text-red-700 font-semibold' : 'text-gray-600 dark:text-gray-400'

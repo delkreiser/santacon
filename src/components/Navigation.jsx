@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Navigation = ({ activeTab, setActiveTab }) => (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t-2 border-gray-200 dark:border-gray-700 shadow-lg">
+    <nav aria-label="Main navigation" className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t-2 border-gray-200 dark:border-gray-700 shadow-lg">
         <div className="max-w-2xl mx-auto px-4">
             <div className="flex justify-around py-2">
                 <button

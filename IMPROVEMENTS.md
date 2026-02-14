@@ -158,14 +158,14 @@ Important improvements for UX, performance, and code quality.
 Nice-to-have improvements for polish and accessibility.
 
 ### 11. Accessibility improvements
-`[ ]`
+`[x]` — Done. All 6 items implemented across 7 files.
 
-- Bottom nav: add `role="navigation"` and `aria-label="Main navigation"`
-- Carol font size buttons: add `aria-label` (e.g., "Increase font size", "Decrease font size")
-- Badge popup modals: add `role="dialog"`, `aria-modal="true"`, focus trapping, and Escape key to close
-- Schedule stops: ensure accordion pattern uses `aria-expanded`
-- Color contrast: verify gray-on-gray text for past stops meets WCAG AA (4.5:1 ratio)
-- Add skip-to-content link for keyboard navigation
+- ~~Bottom nav: add `aria-label="Main navigation"`~~ ✅ Added to `<nav>` in Navigation.jsx
+- ~~Carol font size buttons: add `aria-label`~~ ✅ "Decrease font size" / "Increase font size" in CarolsPage.jsx; also added `aria-label` to dark mode toggle in App.jsx
+- ~~Badge popup modals: add `role="dialog"`, `aria-modal="true"`, focus trapping, and Escape key~~ ✅ Created `useDialogA11y` hook in BadgePopup.jsx — auto-focuses first button, traps Tab cycle, closes on Escape. Applied to both BadgePopup and MajorAwardModal.
+- ~~Schedule stops: accordion uses `aria-expanded`~~ ✅ Added to ScheduleStop.jsx, all 3 AboutPage.jsx sections (data-driven + rules + bring), and QuestsPage.jsx badge legend
+- ~~Color contrast for past stops meets WCAG AA~~ ✅ Changed `text-gray-500` → `text-gray-600 dark:text-gray-400` (was 4.39:1 on bg-gray-100, now 6.87:1 light / 5.78:1 dark)
+- ~~Skip-to-content link for keyboard navigation~~ ✅ Added `sr-only` link at top of App.jsx, visible on focus. Changed main content wrapper from `<div>` to `<main id="main-content">`.
 
 ---
 

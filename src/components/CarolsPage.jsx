@@ -65,14 +65,14 @@ const CarolsPage = ({ carolType, setCarolType, selectedCarol, setSelectedCarol, 
                         <button
                             onClick={() => setLyricsFontSize(Math.max(0.8, lyricsFontSize - 0.1))}
                             className="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 w-10 h-10 rounded-full flex items-center justify-center transition text-sm font-bold"
-                            title="Decrease text size"
+                            aria-label="Decrease font size"
                         >
                             Aa
                         </button>
                         <button
                             onClick={() => setLyricsFontSize(Math.min(2.0, lyricsFontSize + 0.1))}
                             className="bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition text-lg font-bold"
-                            title="Increase text size"
+                            aria-label="Increase font size"
                         >
                             Aa
                         </button>
