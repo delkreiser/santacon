@@ -149,14 +149,7 @@ Important improvements for UX, performance, and code quality.
 ---
 
 ### 10. Add hash-based routing for bookmarkable URLs
-`[ ]`
-
-Currently all navigation is via `activeTab` state — there are no URLs. This means:
-- Users can't bookmark or share a direct link to the Carols or Quests page
-- Browser back button doesn't work between tabs
-- Refreshing always returns to the Home tab
-
-Implement simple hash routing (`#carols`, `#quests`, `#about`, etc.) or use a lightweight router.
+`[—]` — Skipped. The app is designed to feel like a native mobile app during the live event, not a traditional website. Tab-based navigation without URL routing reinforces that experience.
 
 ---
 
@@ -177,13 +170,14 @@ Nice-to-have improvements for polish and accessibility.
 ---
 
 ### 12. Optimize snowflake animation
-`[ ]`
+`[x]` — Done. Replaced 20 fixed-position DOM elements with a single `<canvas>` element.
 
-20 fixed-position elements with CSS animation run continuously on every page:
-- Add `will-change: transform` to reduce paint costs
-- Consider pausing animation when tab is not visible (`document.visibilitychange`)
-- Alternative: replace with a single `<canvas>` element for better performance on mobile
-- Reduce count on mobile devices (check `window.innerWidth`)
+- ~~Add `will-change: transform` to reduce paint costs~~ ✅ Applied on the canvas element
+- ~~Consider pausing animation when tab is not visible (`document.visibilitychange`)~~ ✅ Page Visibility API pauses the rAF loop when the tab is hidden
+- ~~Replace with a single `<canvas>` element for better performance on mobile~~ ✅ Replaced all 20 DOM snowflakes with a single canvas using `requestAnimationFrame`
+- ~~Reduce count on mobile devices (`window.innerWidth`)~~ ✅ 10 flakes on screens < 640px, 20 on desktop; recalculated on resize
+- Removed `.snowflake` CSS class and `@keyframes snowfall` (no longer needed)
+- CSS dropped slightly (30.85 KB vs 31 KB) from removing unused snowflake rules
 
 ---
 

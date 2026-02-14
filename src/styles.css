@@ -44,24 +44,7 @@ body {
         line-height: 1.6;
     }
 }
-.snowflake {
-    position: fixed;
-    top: -10px;
-    z-index: 9999;
-    user-select: none;
-    cursor: default;
-    animation: snowfall linear infinite;
-    color: white;
-    opacity: 0.8;
-}
-@keyframes snowfall {
-    0% {
-        transform: translateY(0vh) rotate(0deg);
-    }
-    100% {
-        transform: translateY(100vh) rotate(360deg);
-    }
-}
+/* Snowflake animation moved to canvas — see Snowflakes.jsx */
 @keyframes fadeIn {
     from {
         opacity: 0;
