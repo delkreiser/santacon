@@ -43,19 +43,24 @@ Current bugs and inconsistencies to resolve:
 ---
 
 ### 3. Split the monolith into separate files
-`[ ]`
+`[x]` — Done. Split 2,328-line monolith into 16 focused files under `src/`.
 
-Break `index.html` (2,328 lines) into a proper project structure:
+Final project structure:
 
 ```
 santacon/
-├── index.html                  # Minimal HTML shell
-├── css/
-│   └── styles.css              # All custom styles (snowflake, glass-effect, dark mode, etc.)
-├── js/
-│   ├── App.jsx                 # Root component, state management, routing
+├── index.html                  # Minimal HTML shell (Vite entry)
+├── index-legacy.html           # Archived original monolith
+├── package.json                # Vite project config
+├── vite.config.js              # Vite + React + Tailwind v4 plugins
+├── src/
+│   ├── main.jsx                # Entry point (createRoot API)
+│   ├── App.jsx                 # Root component, state management
+│   ├── styles.css              # All custom styles (Tailwind v4 @import)
 │   ├── config/
-│   │   └── event.js            # All event-specific data (see #1)
+│   │   └── event.js            # All event-specific data (ES module)
+│   ├── data/
+│   │   └── carols.js           # Carol lyrics (nice & naughty)
 │   ├── components/
 │   │   ├── Snowflakes.jsx
 │   │   ├── Navigation.jsx
@@ -69,31 +74,31 @@ santacon/
 │   │   ├── ScheduleStop.jsx
 │   │   └── BadgePopup.jsx
 │   └── utils/
-│       ├── localStorage.js     # localStorage read/write helpers
 │       └── dateUtils.js        # Date formatting, countdown, current stop logic
-└── img/                        # (existing assets)
+├── public/
+│   └── img/                    # Static image assets
+└── config/
+    └── event.js                # Legacy config (used by index-legacy.html)
 ```
 
 ---
 
 ### 4. Add a build system (Vite + React)
-`[ ]`
+`[x]` — Done. Replaced CDN React + Babel Standalone with Vite build system. Production bundle: 253KB JS + 28KB CSS (down from ~800KB+ Babel alone).
 
-Replace CDN-loaded React + in-browser Babel compilation with a proper build:
-
-- **Babel Standalone** (~800KB) currently compiles JSX in the browser on every page load — this is a significant performance hit
-- Use Vite with `@vitejs/plugin-react`
-- Enables ES module imports between the split files
+- Vite v7 with `@vitejs/plugin-react` and `@tailwindcss/vite` (Tailwind v4)
+- ES module imports between all split files
 - Production builds are minified and tree-shaken
-- Hot module replacement (HMR) during development
-- Add `package.json`, `.gitignore` updates for `node_modules/` and `dist/`
+- HMR during development (`npm run dev`)
+- Dev server starts in ~170ms
+- Added `package.json`, updated `.gitignore` for `node_modules/` and `dist/`
 
 ---
 
 ### 5. Modernize React patterns
-`[ ]`
+`[~]` — Partially done. `createRoot()` API migration completed as part of #3/#4. Remaining: useReducer consolidation and countdown isolation.
 
-- Replace deprecated `ReactDOM.render()` (line 2325) with `createRoot()` API (React 18)
+- ~~Replace deprecated `ReactDOM.render()` with `createRoot()` API~~ ✅ Done in `src/main.jsx`
 - Consolidate 12+ `useState` calls in `App` into `useReducer` or a context provider
 - The countdown `setInterval` triggers re-renders of the entire app every 60 seconds — isolate countdown state into its own component to prevent unnecessary re-renders of all child components
 
