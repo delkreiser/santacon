@@ -1,4 +1,3 @@
-import React from 'react';
 import EVENT_CONFIG from '../config/event.js';
 import { isEventDay, isAfterEventDay, formatTime } from '../utils/dateUtils.js';
 
@@ -127,26 +126,24 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                     <div className="space-y-3 mb-4">
                         <div className="text-sm font-bold text-green-700">✨ Available Now!</div>
                         {unlockedQuests.map(quest => (
-                            <div key={quest.id} className="border-2 border-green-500 rounded-lg p-4 bg-green-50 dark:bg-green-900/30">
-                                <div className="flex items-start">
-                                    <input
-                                        type="checkbox"
-                                        checked={venueQuests[quest.id]}
-                                        onChange={(e) => setVenueQuests({...venueQuests, [quest.id]: e.target.checked})}
-                                        className="mt-1 mr-3 w-5 h-5"
-                                    />
-                                    <div className="flex-1">
-                                        <div className="font-bold text-gray-800 dark:text-gray-100">{quest.name}</div>
-                                        <div className="text-sm text-gray-700 dark:text-gray-300">{quest.quest}</div>
-                                        <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                                            📍 {quest.distance}
-                                        </div>
-                                        <div className="text-xs text-gray-600 dark:text-gray-400">
-                                            ⏰ Available: {formatTime(quest.unlockTime)} - {formatTime(quest.availableUntil)}
-                                        </div>
+                            <label key={quest.id} className="border-2 border-green-500 rounded-lg p-4 bg-green-50 dark:bg-green-900/30 flex items-start cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    checked={venueQuests[quest.id]}
+                                    onChange={(e) => setVenueQuests({...venueQuests, [quest.id]: e.target.checked})}
+                                    className="mt-1 mr-3 w-5 h-5"
+                                />
+                                <div className="flex-1">
+                                    <div className="font-bold text-gray-800 dark:text-gray-100">{quest.name}</div>
+                                    <div className="text-sm text-gray-700 dark:text-gray-300">{quest.quest}</div>
+                                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                                        📍 {quest.distance}
+                                    </div>
+                                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                                        ⏰ Available: {formatTime(quest.unlockTime)} - {formatTime(quest.availableUntil)}
                                     </div>
                                 </div>
-                            </div>
+                            </label>
                         ))}
                     </div>
                 )}
@@ -187,7 +184,7 @@ const QuestsPage = ({ badges, venueQuests, setVenueQuests, challenges, setChalle
                 {!areChallengesUnlocked ? (
                     <div className="bg-gray-100 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-lg p-3">
                         <div className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">
-                            🔒 Unlocks at 5:00pm{(!isEventDay(now) && !isAfterEventDay(now)) ? ' on Black Friday' : ''}
+                            🔒 Unlocks at {formatTime(challengesUnlockTime)}{(!isEventDay(now) && !isAfterEventDay(now)) ? ' on Black Friday' : ''}
                         </div>
                         <div className="text-sm text-gray-600 dark:text-gray-400">
                             The fun's about to begin! Complete challenges as you crawl through Boulder to earn badges and legendary Santa status!

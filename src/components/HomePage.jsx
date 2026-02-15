@@ -1,4 +1,3 @@
-import React from 'react';
 import EVENT_CONFIG from '../config/event.js';
 import ScheduleStop from './ScheduleStop.jsx';
 import OptimizedImage from './OptimizedImage.jsx';
@@ -41,8 +40,8 @@ PRODID:-//Boulder SantaCon//EN
 BEGIN:VEVENT
 UID:${cal.uid}
 DTSTAMP:${cal.dtstamp}
-DTSTART:${cal.dtstart}
-DTEND:${cal.dtend}
+DTSTART;TZID=America/Denver:${cal.dtstart}
+DTEND;TZID=America/Denver:${cal.dtend}
 SUMMARY:${cal.summary}
 DESCRIPTION:${cal.description}
 LOCATION:${cal.location}
@@ -110,11 +109,7 @@ END:VCALENDAR`;
         </div>
 
         {/* Side Quests Promo Card */}
-        <div className="rounded-lg shadow-xl p-6 overflow-hidden"
-             style={{
-                 background: 'linear-gradient(to right, #fef3c7, #fde68a)',
-                 border: '3px solid #d97706'
-             }}>
+        <div className="rounded-lg shadow-xl p-6 overflow-hidden bg-gradient-to-r from-amber-100 to-amber-200 dark:from-amber-900/40 dark:to-amber-800/40 border-[3px] border-amber-600 dark:border-amber-500">
             <div className="text-center">
                 <h2 className="text-2xl font-bold text-amber-600 mb-3">
                     Santa's Side Quests!
@@ -142,7 +137,7 @@ END:VCALENDAR`;
                     className="absolute top-0 left-0 w-full h-full rounded-lg"
                     src={EVENT_CONFIG.social.youtubeEmbed}
                     title="Boulder SantaCon Song"
-                    frameBorder="0"
+                    style={{ border: 0 }}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                 ></iframe>

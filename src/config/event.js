@@ -29,7 +29,7 @@ const EVENT_CONFIG = {
     social: {
         instagram: "https://www.instagram.com/bouldersantacon",
         facebookEvent: "https://www.facebook.com/events/1458481705240919",  // UPDATE each year
-        youtubeEmbed: "https://www.youtube.com/embed/-QGoHJ2Izwo?origin=https://boulder-santacon.com",
+        youtubeEmbed: "https://www.youtube.com/embed/-QGoHJ2Izwo?origin=https://santarchy.app",
     },
 
     // -------------------------------------------------------------------------
@@ -66,7 +66,6 @@ const EVENT_CONFIG = {
             text: "Meet Santa on the roof top lounge.",
             drinkSpecials: "Mule Tide: (Gin, Pomegranate liqueur, Allspice Dram, cinnamon hibiscus, rosemary, lime, ginger beer.) | Spiked Eggnog: (Bacardi Spiced, Amaro, eggnog)",
             mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1964.7278793680014!2d-105.27691744636638!3d40.0178103639815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bed2929560fbd%3A0xbe3c1820b8797eee!2sAvanti%20Food%20and%20Beverage%20Boulder!5e1!3m2!1sen!2sus!4v1762220992124!5m2!1sen!2sus",
-            mapLink: "https://maps.app.goo.gl/uXvk9P3sDBJoXFJVA",
             notes: "When Santa is ready to leave, exit using the stairwell on the outdoor patio. We will gather the Santas and then head to \"Santa's Alley.\"",
             startMinutes: 17 * 60,
             endMinutes: 18 * 60 + 30,
@@ -77,7 +76,6 @@ const EVENT_CONFIG = {
             venue: "Caroling and Group Photo",
             text: "After Santa's Alley, head east down the alley to 15th Street and loop around back onto Pearl St. by Illegal Pete's. We will continue to the Court House for a Group photo op and then sing a few carols.",
             mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1118.6936876331285!2d-105.2780970909969!3d40.01849507885064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bed6384ffa061%3A0x12051a85a97cca48!2sBoulder%20County%20Historic%20Court%20House!5e1!3m2!1sen!2sus!4v1762221010590!5m2!1sen!2sus",
-            mapLink: "https://maps.app.goo.gl/2EEgyuTTbZWFPHFS6",
             notes: null,
             startMinutes: 18 * 60 + 30,
             endMinutes: 19 * 60,
@@ -89,7 +87,6 @@ const EVENT_CONFIG = {
             text: "We haven't been to The James in a few years so we thought it's time to pay them a visit.",
             drinkSpecials: "Labatt draft + pickle shot for $8!",
             mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3795.6656851569173!2d-105.2837285588913!3d40.01670627162523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bedbf881c8319%3A0x6ae46986776b8279!2sThe%20Spotted%20James!5e1!3m2!1sen!2sus!4v1762539907771!5m2!1sen!2sus",
-            mapLink: null,
             notes: "If you're hungry, The Rio, T|aco, and Rosetta Hall are nearby.",
             startMinutes: 19 * 60,
             endMinutes: 19 * 60 + 45,
@@ -101,7 +98,6 @@ const EVENT_CONFIG = {
             text: "This is Santa's favorite stop! The Julien won't say it publicly, but they LOVE when Santa visits them!",
             music: "David Lawrence and the Spoonful",
             mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7591.427428751109!2d-105.28521968514423!3d40.01584274961552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec26a391b9e9%3A0x86495a6b403f6317!2sSt%20Julien%20Hotel%20%26%20Spa!5e1!3m2!1sen!2sus!4v1762221047809!5m2!1sen!2sus",
-            mapLink: "https://maps.app.goo.gl/wQpMRekk78dy9B778",
             notes: "If the line for drinks is too long, head to Jill's around the corner to the left.",
             startMinutes: 19 * 60 + 45,
             endMinutes: 21 * 60,
@@ -112,7 +108,6 @@ const EVENT_CONFIG = {
             text: "This is our last stop and the official after party for SantaCon! Make sure to grab a ticket before it sells out!",
             isAfterParty: true,
             mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d474.47377773047225!2d-105.27881746029514!3d40.014467182362914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bec258e8bfb7f%3A0xbf27b5a8462b87a6!2sThe%20Riverside%20Private%20%26%20Public%20Event%20Venue!5e1!3m2!1sen!2sus!4v1762220959898!5m2!1sen!2sus",
-            mapLink: "https://maps.app.goo.gl/M6BUwhF2ZvT6ZQ9A8",
             notes: null,
             startMinutes: 21 * 60,
             endMinutes: 25 * 60,
@@ -233,7 +228,7 @@ const EVENT_CONFIG = {
         marathonSanta: {
             emoji: "\ud83c\udfc3",
             title: "MARATHON SANTA",
-            shortDescription: "Complete all 4 official stops",
+            shortDescription: "Complete all 5 official stops",
             popupMessage: "You conquered all 5 stops! Your liver is a champion, and you need help! Legend status: achieved.",
             popupButton: "You're #1! \ud83e\udd47",
             autoUnlockMinutes: 20 * 60 + 15,
@@ -241,7 +236,7 @@ const EVENT_CONFIG = {
         superSanta: {
             emoji: "\ud83d\udcaa\ud83c\udffb",
             title: "SUPER SANTA",
-            shortDescription: "Crush 3+ side quests",
+            shortDescription: "Complete 1+ venue quest & 5+ challenges",
             popupMessage: "Most people stick to the main route. You? You're an overachiever. We're impressed. Your mom is proud.",
             popupButton: "Flex! \ud83d\udcaa",
             requireVenueQuests: 1,

@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Image dimensions lookup to prevent layout shift (CLS)
 const IMAGE_DIMS = {
     'img/header.jpg': { w: 1200, h: 630 },
@@ -13,7 +11,6 @@ const IMAGE_DIMS = {
     'img/santaball.jpg': { w: 300, h: 300 },
     'img/santaballheader.jpg': { w: 940, h: 470 },
     'img/leglamp.jpg': { w: 1024, h: 1024 },
-    'img/mohawk.jpg': { w: 1000, h: 1309 },
 };
 
 // Images where WebP conversion resulted in smaller files
@@ -21,6 +18,7 @@ const HAS_WEBP = new Set([
     'img/header.jpg', 'img/sfsantacon.jpg', 'img/hanging.jpg',
     'img/first-santacon.jpg', 'img/believe.jpg', 'img/lineup.jpg',
     'img/santaball.jpg', 'img/santaballheader.jpg', 'img/leglamp.jpg',
+    'img/costumes.jpg',
 ]);
 
 const OptimizedImage = ({ src, alt, className, style, lazy = true }) => {

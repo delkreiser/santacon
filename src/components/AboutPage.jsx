@@ -1,4 +1,3 @@
-import React from 'react';
 import EVENT_CONFIG from '../config/event.js';
 import aboutSections from '../data/about.js';
 import OptimizedImage from './OptimizedImage.jsx';

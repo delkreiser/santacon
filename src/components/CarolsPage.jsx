@@ -1,4 +1,3 @@
-import React from 'react';
 import carolsData from '../data/carols.js';
 
 const CarolsPage = ({ carolType, setCarolType, selectedCarol, setSelectedCarol, lyricsFontSize, setLyricsFontSize }) => (
@@ -22,7 +21,7 @@ const CarolsPage = ({ carolType, setCarolType, selectedCarol, setSelectedCarol, 
                                 : 'bg-white dark:bg-gray-800 text-green-600 border-2 border-green-600'
                         }`}
                     >
-                        <i className="fas fa-angel mr-2"></i>
+                        <i className="fas fa-face-smile mr-2"></i>
                         Nice Songs
                     </button>
                     <button

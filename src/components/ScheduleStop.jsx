@@ -87,7 +87,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                 )}
                 {stop.drinkSpecials && (
                     <div className="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-400 p-3 mb-4">
-                        <p className="text-sm font-bold text-blue-800 mb-1">Drink Specials:</p>
+                        <p className="text-sm font-bold text-blue-800 dark:text-blue-300 mb-1">Drink Specials:</p>
                         <div className="text-sm text-gray-700 dark:text-gray-300">
                             {stop.drinkSpecials.split(' | ').map((drink, idx) => {
                                 const [name, ingredients] = drink.split(': ');
@@ -103,7 +103,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                 )}
                 {stop.music && (
                     <div className="bg-purple-50 dark:bg-purple-900/30 border-l-4 border-purple-400 p-3 mb-4">
-                        <p className="text-sm font-bold text-purple-800 mb-1">Music:</p>
+                        <p className="text-sm font-bold text-purple-800 dark:text-purple-300 mb-1">Music:</p>
                         <p className="text-sm text-gray-700 dark:text-gray-300">{stop.music}</p>
                     </div>
                 )}

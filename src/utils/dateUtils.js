@@ -23,21 +23,6 @@ export const formatTime = (minutes) => {
     return `${displayHour}:${mins.toString().padStart(2, '0')}${period}`;
 };
 
-export const calculateCountdown = () => {
-    const eventDate = new Date(`${EVENT_CONFIG.date}T${EVENT_CONFIG.startTime}:00`);
-    const now = new Date();
-    const diff = eventDate - now;
-
-    if (diff < 0) return 'Event is happening NOW! 🎉';
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-    if (days > 0) return `In ${days} day${days !== 1 ? 's' : ''}`;
-    if (hours > 0) return `Starting in ${hours} hour${hours !== 1 ? 's' : ''}!`;
-    return 'Starting soon!';
-};
-
 export const getCurrentStop = (scheduleData) => {
     const now = new Date();
     if (!isEventDay(now)) return null;
