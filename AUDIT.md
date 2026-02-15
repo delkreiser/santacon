@@ -38,7 +38,7 @@ Post-improvements audit of the Boulder SantaCon web app.
 | 18 | Unnecessary `import React` in 9 files (React 19 JSX transform) | various | `[x]` Fixed — removed from `main.jsx`, `AboutPage`, `CarolsPage`, `MajorAwardPage`, `Navigation`, `OptimizedImage`, `HomePage`, `MailingListPage`, `QuestsPage` |
 | 19 | Major Award card is `div` with `onClick` — not keyboard accessible | `src/components/QuestsPage.jsx:53` | `[—]` Skipped — intentionally undiscoverable until all badges earned |
 | 20 | Venue quest checkboxes not wrapped in `<label>` | `src/components/QuestsPage.jsx:132` | `[x]` Fixed — card `div` converted to `<label>` |
-| 21 | Google Maps iframes missing `title` for screen readers | `src/components/ScheduleStop.jsx` | `[ ]` |
+| 21 | Google Maps iframes missing `title` for screen readers | `src/components/ScheduleStop.jsx` | `[x]` Fixed — `title={`Map of ${stop.venue}`}` |
 | 22 | Hardcoded `"5:00pm"` instead of using config | `src/components/QuestsPage.jsx:190` | `[x]` Fixed — `formatTime(challengesUnlockTime)` |
 | 23 | `frameBorder="0"` deprecated — use `style={{ border: 0 }}` | `src/components/HomePage.jsx` | `[x]` Fixed — replaced with `style={{ border: 0 }}` |
 | 24 | `.DS_Store` committed in `public/` | `public/.DS_Store` | `[x]` Fixed — removed root `.DS_Store` from git index; added `**/.DS_Store` to `.gitignore` |

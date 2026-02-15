@@ -116,6 +116,7 @@ const ScheduleStop = React.memo(({ stop, index, expandedStop, setExpandedStop, s
                     <div className="mb-4 rounded-lg overflow-hidden" style={{ height: '300px' }}>
                         <iframe
                             src={stop.mapEmbed}
+                            title={`Map of ${stop.venue}`}
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
